@@ -1,3 +1,4 @@
+#include <fstream>
 #include "Game.h"
 #define testMode 1
 #define playMode 2
@@ -25,12 +26,60 @@ void Game::loadMoveFile(string moveFile)
 
 }
 
-// Intent: load game data
+// Intent: load game data, number of pokemons, number of moves, name of moves,
 // Pre: file name
 // Post: load game data
 void Game::loadGameFile(string gameFile)
 {
+    ifstream iFile("../GameData.txt");
+    if(!iFile.is_open())
+    {
+        cout << "open GameData.txt failed\n";
+        return;
+    }
 
+    int numOfPokemons_Player = 0;
+    int numOfPokemons_Comp = 0;
+    int numOfplayerPokemonMove = 0;
+    int numOfCompPokemonMove = 0;
+    string pokemonMove;
+    string pokemonName;
+
+    iFile >> numOfPokemons_Player;
+    human.resizePokemons(numOfPokemons_Player);
+
+    for (int var = 0; var < numOfPokemons_Player; ++var) {
+        iFile >> pokemonName;
+        iFile >> numOfplayerPokemonMove;
+        human.getPokemons()[var].setName(pokemonName);
+
+        for (int i = 0; i < numOfplayerPokemonMove; ++i) {
+            iFile >> pokemonMove;
+            Move curMove;
+            curMove.setName(pokemonMove);
+            human.getPokemons()[var].appendMoves(curMove);
+        }
+
+    }
+
+    iFile >> numOfPokemons_Comp;
+    computer.resizePokemons(numOfPokemons_Comp);
+
+    for (int var = 0; var < numOfPokemons_Comp; ++var) {
+        iFile >> pokemonName;
+        iFile >> numOfCompPokemonMove;
+        computer.getPokemons()[var].setName(pokemonName);
+
+        for (int i = 0; i < numOfCompPokemonMove; ++i) {
+            iFile >> pokemonMove;
+            Move curMove;
+            curMove.setName(pokemonMove);
+            computer.getPokemons()[var].appendMoves(curMove);
+        }
+
+    }
+
+    iFile.close();
 }
 
 
