@@ -20,7 +20,7 @@ HEADERS += \
     Game.h \
     Move.h \
     Player.h \
-    Pokemo.h \
+    Pokemon.h \
     mainwindow.h
 
 FORMS += \

@@ -1,4 +1,4 @@
-#include "Pokemo.h"
+#include "Pokemon.h"
 
 void Pokemon::setName(string input)
 {

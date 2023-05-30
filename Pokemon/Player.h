@@ -3,7 +3,7 @@
 #define PLAYER_H
 #include <iostream>
 #include <vector>
-#include "Pokemo.h"
+#include "Pokemon.h"
 #include "Move.h"
 
 using namespace std;

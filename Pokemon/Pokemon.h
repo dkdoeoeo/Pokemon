@@ -1,6 +1,6 @@
 
-#ifndef POKEMO_H
-#define POKEMO_H
+#ifndef POKEMON_H
+#define POKEMON_H
 #include <iostream>
 #include <vector>
 #include "Move.h"
@@ -44,4 +44,4 @@ public:
     string getCon();
 };
 
-#endif // POKEMO_H
+#endif // POKEMON_H
