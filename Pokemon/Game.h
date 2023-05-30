@@ -16,9 +16,12 @@ public:
     void loadMoveFile(string moveFile);//load move file
     void loadGameFile(string gameFile);//load game file
     void ExecuteCommandFile(string testFile);//implement test case
-    void Battle(string humanMove, string computerMove);
-    void Bag(string potion);
-    void
+    void Battle(string humanMove, string computerMove);//Battle command
+    void Bag(string potion, string ownPokemon, string computerMove);//Bag command
+    void pokemon(string ownPokemon, string computerMove);//Pokemon command
+    void status();//Status command
+    void check();//Check command
+    void run();//Run command
 };
 
 #endif // GAME_H
