@@ -1,5 +1,9 @@
 #include "Player.h"
 
+vector<Pokemon>& Player::getPokemons()
+{
+    return pokemons;
+}
 void Player::setSeletPokemon(int input)
 {
     seletPokemon = input;
