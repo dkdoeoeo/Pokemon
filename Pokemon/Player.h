@@ -19,6 +19,7 @@ private:
     int maxPotion;
 
 public:
+    vector<Pokemon>& getPokemons();
     void setSeletPokemon(int input);
     void resizePokemons(int input);
     void appendPokemons(Pokemon input);
