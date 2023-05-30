@@ -13,12 +13,22 @@ class Player
 private:
     int seletPokemon;//current pokemon index
     vector<Pokemon> pokemons;
+    int potion;
+    int superPotion;
+    int hyperPotion;
+    int maxPotion;
+
 public:
     void setSeletPokemon(int input);
     void resizePokemons(int input);
     void appendPokemons(Pokemon input);
     void resizePokemonMove(int input);
     void appendPokemonMove(Pokemon input);
+    void setAllPotion(int input);//set amount of each Potion
+    void usePotion();
+    void useSuperPotion();
+    void useHyperPotion();
+    void useMaxPotion();
 };
 
 #endif // PLAYER_H

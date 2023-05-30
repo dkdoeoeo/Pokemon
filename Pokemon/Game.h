@@ -16,8 +16,8 @@ public:
     void loadMoveFile(string moveFile);//load move file
     void loadGameFile(string gameFile);//load game file
     void ExecuteCommandFile(string testFile);//implement test case
-    void Battle(string humanMove, string computerMove);//Battle command
-    void Bag(string potion, string ownPokemon, string computerMove);//Bag command
+    void Battle(string humanMove, string computerMove, int playType);//Battle command
+    void Bag(string potion, string ownPokemon, string computerMove, int playType);//Bag command
     void pokemon(string ownPokemon, string computerMove);//Pokemon command
     void status();//Status command
     void check();//Check command

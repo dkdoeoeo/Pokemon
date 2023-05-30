@@ -24,3 +24,28 @@ void Player::appendPokemonMove(Pokemon input)
 {
 
 }
+
+void Player::setAllPotion(int input)
+{
+
+}
+
+void Player::usePotion()
+{
+
+}
+
+void Player::useSuperPotion()
+{
+
+}
+
+void Player::useHyperPotion()
+{
+
+}
+
+void Player::useMaxPotion()
+{
+
+}
