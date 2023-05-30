@@ -1,4 +1,12 @@
 #include "Game.h"
+// Intent: Execute test mode
+// Pre: file name
+// Post: Execute test mode
+void Game::ExecuteCommandFile(string testFile)
+{
+
+}
+
 // Intent: load pokemon library
 // Pre: file name
 // Post: load pokemon library
@@ -23,13 +31,6 @@ void Game::loadGameFile(string gameFile)
 
 }
 
-// Intent: Execute test mode
-// Pre: file name
-// Post: Execute test mode
-void Game::ExecuteCommandFile(string testFile)
-{
-
-}
 
 // Intent: Battle command
 // Pre: player’s Pokémon move and opponent’s
