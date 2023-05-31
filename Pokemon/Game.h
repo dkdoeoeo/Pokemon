@@ -2,6 +2,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <iostream>
+#include <map>
 #include "Player.h"
 
 using namespace std;
@@ -11,6 +12,7 @@ class Game
 private:
     Player human;
     Player computer;
+    map<string, vector<string>> allMoves;
 public:
     void loadPokemonFile(string pokemonFile);//load pokemon file
     void loadMoveFile(string moveFile);//load move file
