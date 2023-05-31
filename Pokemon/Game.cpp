@@ -155,7 +155,7 @@ void Game::loadGameFile(string gameFile)
         human.getPokemons()[var].setSpDef(iterPokemon->second.getSpDef());
         human.getPokemons()[var].setSpeed(iterPokemon->second.getSpeed());
 
-        //assign pokemons' move attributes
+        //assign pokemons' moves attributes
         for (int i = 0; i < numOfplayerPokemonMove; ++i) {
             iFile >> pokemonMove;
             Move curMove;
@@ -196,7 +196,7 @@ void Game::loadGameFile(string gameFile)
         computer.getPokemons()[var].setSpDef(iterPokemon->second.getSpDef());
         computer.getPokemons()[var].setSpeed(iterPokemon->second.getSpeed());
 
-        //assign pokemons' move attributes
+        //assign pokemons' moves attributes
         for (int i = 0; i < numOfCompPokemonMove; ++i) {
             iFile >> pokemonMove;
             Move curMove;
@@ -264,17 +264,51 @@ void Game::pokemon(string ownPokemon, string computerMove)
 // Intent: Status command
 // Pre: no
 // Post: output both sides pokemon status
-void Game::status()
+void Game::status(ostream& oStream)
 {
+    //Pokémon hp PAR BRN PSN Pokémon hp PAR BRN PSN
+    Pokemon& humanSelectPokemon = human.getPokemons().at(human.getSelectPokemon());
+    Pokemon& computerSelectPokemon = computer.getPokemons().at(computer.getSelectPokemon());
 
+    oStream << humanSelectPokemon.getName() << ' ' << humanSelectPokemon.getHp();
+    if(!humanSelectPokemon.getCon().empty())
+    {
+        oStream << ' ' << humanSelectPokemon.getCon();
+    }
+
+    oStream << computerSelectPokemon.getName() << ' ' << computerSelectPokemon.getHp();
+    if(!computerSelectPokemon.getCon().empty())
+    {
+        oStream << ' ' << computerSelectPokemon.getCon();
+    }
+
+    oStream << endl;
 }
 
 // Intent: Check command
 // Pre: no
 // Post: output current pokemon moves and PP
-void Game::check()
+void Game::check(ostream& oStream)
 {
+    //number of moves of the selected pokemon
+    int numOfMoves = human.getPokemons().at(human.getSelectPokemon()).getMoves().size();
 
+    //selected pokemon
+    Pokemon& humanSelectPokemon = human.getPokemons().at(human.getSelectPokemon());
+
+    //iterate through the moves, then output pokemon moves and pp
+    for (int var = 0; var < numOfMoves; ++var) {
+
+        oStream << humanSelectPokemon.getMoves().at(var).getName()
+                << ' ' << humanSelectPokemon.getMoves().at(var).getPP();
+
+        if(var != numOfMoves - 1)
+        {
+            oStream << ' ';
+        }
+    }
+
+    oStream << endl;
 }
 
 // Intent: Run command

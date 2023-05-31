@@ -23,8 +23,8 @@ public:
     void Battle(string humanMove, string computerMove, int playType);//Battle command
     void Bag(string potion, string ownPokemon, string computerMove, int playType);//Bag command
     void pokemon(string ownPokemon, string computerMove);//Pokemon command
-    void status();//Status command
-    void check();//Check command
+    void status(ostream& oStream);//Status command
+    void check(ostream& oStream);//Check command
     void run();//Run command
 };
 
