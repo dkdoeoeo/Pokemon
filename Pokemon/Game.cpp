@@ -9,6 +9,13 @@
 // Post: Execute test mode
 void Game::ExecuteCommandFile(string testFile)
 {
+    ifstream iFile;
+    iFile.open(testFile.c_str());
+    if(!iFile.is_open())
+    {
+        cout << "open " << testFile << " failed\n";
+        return;
+    }
 
 }
 
@@ -17,10 +24,10 @@ void Game::ExecuteCommandFile(string testFile)
 // Post: load pokemon library
 void Game::loadPokemonFile(string pokemonFile)
 {
-    ifstream iFile("../PokemonLib.txt");
+    ifstream iFile(pokemonFile.c_str());
     if(!iFile.is_open())
     {
-        cout << "open PokemonLib.txt failed\n";
+        cout << "open " << pokemonFile << " failed\n";
         return;
     }
 
@@ -81,10 +88,10 @@ void Game::loadPokemonFile(string pokemonFile)
 // Post: load move library
 void Game::loadMoveFile(string moveFile)
 {
-    ifstream iFile("../MoveLib.txt");
+    ifstream iFile(moveFile.c_str());
     if(!iFile.is_open())
     {
-        cout << "open MoveLib.txt failed\n";
+        cout << "open " << moveFile << " failed\n";
         return;
     }
 
@@ -120,10 +127,10 @@ void Game::loadMoveFile(string moveFile)
 // Post: load game data
 void Game::loadGameFile(string gameFile)
 {
-    ifstream iFile("../GameData.txt");
+    ifstream iFile(gameFile.c_str());
     if(!iFile.is_open())
     {
-        cout << "open GameData.txt failed\n";
+        cout << "open " << gameFile << " failed\n";
         return;
     }
 
