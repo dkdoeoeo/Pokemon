@@ -55,50 +55,6 @@ void Game::loadMoveFile(string moveFile)
         //append the moves into std::map allMoves
         allMoves.insert(allMoves.end(),{moveName, moveAttributes});
     }
-
-    std::map<string, vector<string>>::iterator iter; //allMoves map iterator
-
-    //for human
-    //assign the attributes to moves of the pokemons
-    for (int var = 0; var < human.getPokemons().size(); ++var) {
-        for (int i = 0; i < human.getPokemons().at(var).getMoves().size(); ++i) {
-            moveName = human.getPokemons().at(var).getMoves()[i].getName();
-            iter = allMoves.find(moveName);
-
-            human.getPokemons().at(var).getMoves()[i].setType(iter->second.at(0));
-            human.getPokemons().at(var).getMoves()[i].setPS(iter->second.at(1));
-            human.getPokemons().at(var).getMoves()[i].setPower(stoi(iter->second.at(2)));
-            human.getPokemons().at(var).getMoves()[i].setAccuracy(stoi(iter->second.at(3)));
-            human.getPokemons().at(var).getMoves()[i].setPP(stoi(iter->second.at(4)));
-
-            //if 6 attributes, the move has addtional effect. Assign if true;
-            if(iter->second.size() == 6)
-            {
-                human.getPokemons().at(var).getMoves()[i].setCon(iter->second.at(5));
-            }
-        }
-    }
-
-    //for computer
-    //assign the attributes to moves of the pokemons
-    for (int var = 0; var < computer.getPokemons().size(); ++var) {
-        for (int i = 0; i < computer.getPokemons().at(var).getMoves().size(); ++i) {
-            moveName = computer.getPokemons().at(var).getMoves()[i].getName();
-            iter = allMoves.find(moveName);
-
-            computer.getPokemons().at(var).getMoves()[i].setType(iter->second.at(0));
-            computer.getPokemons().at(var).getMoves()[i].setPS(iter->second.at(1));
-            computer.getPokemons().at(var).getMoves()[i].setPower(stoi(iter->second.at(2)));
-            computer.getPokemons().at(var).getMoves()[i].setAccuracy(stoi(iter->second.at(3)));
-            computer.getPokemons().at(var).getMoves()[i].setPP(stoi(iter->second.at(4)));
-
-            //if 6 attributes, the move has addtional effect. Assign if true;
-            if(iter->second.size() == 6)
-            {
-                computer.getPokemons().at(var).getMoves()[i].setCon(iter->second.at(5));
-            }
-        }
-    }
 }
 
 // Intent: load game data, number of pokemons, number of moves, name of moves,
@@ -121,8 +77,11 @@ void Game::loadGameFile(string gameFile)
     string pokemonName;
 
     //input player's (i.e human) game data
+    //assign the attributes to moves of the pokemons
     iFile >> numOfPokemons_Player;
     human.resizePokemons(numOfPokemons_Player);
+
+    std::map<string, vector<string>>::iterator iter; //allMoves map iterator
 
     for (int var = 0; var < numOfPokemons_Player; ++var) {
         iFile >> pokemonName;
@@ -134,11 +93,25 @@ void Game::loadGameFile(string gameFile)
             Move curMove;
             curMove.setName(pokemonMove);
             human.getPokemons()[var].appendMoves(curMove);
+            iter = allMoves.find(pokemonMove);
+
+            human.getPokemons().at(var).getMoves()[i].setType(iter->second.at(0));
+            human.getPokemons().at(var).getMoves()[i].setPS(iter->second.at(1));
+            human.getPokemons().at(var).getMoves()[i].setPower(stoi(iter->second.at(2)));
+            human.getPokemons().at(var).getMoves()[i].setAccuracy(stoi(iter->second.at(3)));
+            human.getPokemons().at(var).getMoves()[i].setPP(stoi(iter->second.at(4)));
+
+            //if 6 attributes, the move has addtional effect. Assign if true;
+            if(iter->second.size() == 6)
+            {
+                human.getPokemons().at(var).getMoves()[i].setCon(iter->second.at(5));
+            }
         }
 
     }
 
     //input computer's game data
+    //assign the attributes to moves of the pokemons
     iFile >> numOfPokemons_Comp;
     computer.resizePokemons(numOfPokemons_Comp);
 
@@ -152,6 +125,19 @@ void Game::loadGameFile(string gameFile)
             Move curMove;
             curMove.setName(pokemonMove);
             computer.getPokemons()[var].appendMoves(curMove);
+
+            iter = allMoves.find(pokemonMove);
+            computer.getPokemons().at(var).getMoves()[i].setType(iter->second.at(0));
+            computer.getPokemons().at(var).getMoves()[i].setPS(iter->second.at(1));
+            computer.getPokemons().at(var).getMoves()[i].setPower(stoi(iter->second.at(2)));
+            computer.getPokemons().at(var).getMoves()[i].setAccuracy(stoi(iter->second.at(3)));
+            computer.getPokemons().at(var).getMoves()[i].setPP(stoi(iter->second.at(4)));
+
+            //if 6 attributes, the move has addtional effect. Assign if true;
+            if(iter->second.size() == 6)
+            {
+                computer.getPokemons().at(var).getMoves()[i].setCon(iter->second.at(5));
+            }
         }
 
     }
