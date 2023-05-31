@@ -11,7 +11,7 @@ using namespace std;
 class Player
 {
 private:
-    int seletPokemon;//current pokemon index
+    int selectPokemon;//current pokemon index
     vector<Pokemon> pokemons;
     int potion;
     int superPotion;
@@ -20,7 +20,8 @@ private:
 
 public:
     vector<Pokemon>& getPokemons();
-    void setSeletPokemon(int input);
+    int getSelectPokemon();
+    void setSelectPokemon(int input);
     void resizePokemons(int input);
     void appendPokemons(Pokemon input);
     void resizePokemonMove(int input);

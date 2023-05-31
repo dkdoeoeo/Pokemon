@@ -4,9 +4,14 @@ vector<Pokemon>& Player::getPokemons()
 {
     return pokemons;
 }
-void Player::setSeletPokemon(int input)
+
+int Player::getSelectPokemon()
 {
-    seletPokemon = input;
+    return selectPokemon;
+}
+void Player::setSelectPokemon(int input)
+{
+    selectPokemon = input;
 }
 
 void Player::resizePokemons(int input)
