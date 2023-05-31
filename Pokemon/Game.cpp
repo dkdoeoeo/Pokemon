@@ -45,6 +45,7 @@ void Game::loadGameFile(string gameFile)
     string pokemonMove;
     string pokemonName;
 
+    //input player's (i.e human) game data
     iFile >> numOfPokemons_Player;
     human.resizePokemons(numOfPokemons_Player);
 
@@ -62,6 +63,7 @@ void Game::loadGameFile(string gameFile)
 
     }
 
+    //input computer's game data
     iFile >> numOfPokemons_Comp;
     computer.resizePokemons(numOfPokemons_Comp);
 
