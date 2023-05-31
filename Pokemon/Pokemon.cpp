@@ -65,7 +65,7 @@ vector<string> Pokemon::getTypes()
     return types;
 }
 
-vector<Move> Pokemon::getMoves()
+vector<Move>& Pokemon::getMoves()
 {
     return moves;
 }
