@@ -34,7 +34,7 @@ public:
     void appendMoves(Move input);
     string getName();
     vector<string> getTypes();
-    vector<Move> getMoves();
+    vector<Move>& getMoves();
     int getHp();
     int getAtk();
     int getDef();
