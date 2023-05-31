@@ -1,4 +1,6 @@
 #include <fstream>
+#include <string>
+#include <sstream>
 #include "Game.h"
 #define testMode 1
 #define playMode 2
@@ -18,12 +20,85 @@ void Game::loadPokemonFile(string pokemonFile)
 
 }
 
-// Intent: load move library
+// Intent: load move library, also set move attributes to pokemons moves
 // Pre: file name
 // Post: load move library
 void Game::loadMoveFile(string moveFile)
 {
+    ifstream iFile("../MoveLib.txt");
+    if(!iFile.is_open())
+    {
+        cout << "open MoveLib.txt failed\n";
+        return;
+    }
 
+    string moveName; //name of move
+    vector<string> moveAttributes; //vector that stores all the attributes
+    string tempAttribute; //temporary attribute
+    string lineOfAttributes; //store all of the attributes of a move, including all the white space
+    stringstream ss; //string stream to parse lineOfAttributes
+
+    //read in all the moves into std::map allMoves
+    while (iFile >> moveName) { //read in move name
+
+        //get all the line of attributes into lineOfAttributes
+        getline(iFile, lineOfAttributes);
+        iFile.ignore(1,'\n');
+
+        moveAttributes.clear();
+        ss.str(lineOfAttributes);
+        while(ss >> tempAttribute) // parse lineOfAttributes
+        {
+            moveAttributes.push_back(tempAttribute);
+        }
+
+        //append the moves into std::map allMoves
+        allMoves.insert(allMoves.end(),{moveName, moveAttributes});
+    }
+
+    std::map<string, vector<string>>::iterator iter; //allMoves map iterator
+
+    //for human
+    //assign the attributes to moves of the pokemons
+    for (int var = 0; var < human.getPokemons().size(); ++var) {
+        for (int i = 0; i < human.getPokemons().at(var).getMoves().size(); ++i) {
+            moveName = human.getPokemons().at(var).getMoves()[i].getName();
+            iter = allMoves.find(moveName);
+
+            human.getPokemons().at(var).getMoves()[i].setType(iter->second.at(0));
+            human.getPokemons().at(var).getMoves()[i].setPS(iter->second.at(1));
+            human.getPokemons().at(var).getMoves()[i].setPower(stoi(iter->second.at(2)));
+            human.getPokemons().at(var).getMoves()[i].setAccuracy(stoi(iter->second.at(3)));
+            human.getPokemons().at(var).getMoves()[i].setPP(stoi(iter->second.at(4)));
+
+            //if 6 attributes, the move has addtional effect. Assign if true;
+            if(iter->second.size() == 6)
+            {
+                human.getPokemons().at(var).getMoves()[i].setCon(iter->second.at(5));
+            }
+        }
+    }
+
+    //for computer
+    //assign the attributes to moves of the pokemons
+    for (int var = 0; var < computer.getPokemons().size(); ++var) {
+        for (int i = 0; i < computer.getPokemons().at(var).getMoves().size(); ++i) {
+            moveName = computer.getPokemons().at(var).getMoves()[i].getName();
+            iter = allMoves.find(moveName);
+
+            computer.getPokemons().at(var).getMoves()[i].setType(iter->second.at(0));
+            computer.getPokemons().at(var).getMoves()[i].setPS(iter->second.at(1));
+            computer.getPokemons().at(var).getMoves()[i].setPower(stoi(iter->second.at(2)));
+            computer.getPokemons().at(var).getMoves()[i].setAccuracy(stoi(iter->second.at(3)));
+            computer.getPokemons().at(var).getMoves()[i].setPP(stoi(iter->second.at(4)));
+
+            //if 6 attributes, the move has addtional effect. Assign if true;
+            if(iter->second.size() == 6)
+            {
+                computer.getPokemons().at(var).getMoves()[i].setCon(iter->second.at(5));
+            }
+        }
+    }
 }
 
 // Intent: load game data, number of pokemons, number of moves, name of moves,
