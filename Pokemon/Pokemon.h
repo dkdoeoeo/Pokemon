@@ -20,6 +20,7 @@ private:
     int spDef;
     int speed;
     string con;
+    const int level = 50;
 public:
     void setName(string input);
     void setHp(int input);
@@ -42,6 +43,7 @@ public:
     int getSpDef();
     int getSpeed();
     string getCon();
+    const int getLevel();
 };
 
 #endif // POKEMON_H

@@ -55,6 +55,11 @@ void Pokemon::appendMoves(Move input)
     moves.push_back(input);
 }
 
+void Pokemon::setCon(int index, int input)
+{
+    con[index] = input;
+}
+
 string Pokemon::getName()
 {
     return name;
@@ -103,4 +108,9 @@ int Pokemon::getSpeed()
 string Pokemon::getCon()
 {
     return con;
+}
+
+const int Pokemon::getLevel()
+{
+    return level;
 }

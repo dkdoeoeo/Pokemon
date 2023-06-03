@@ -17,6 +17,53 @@ void Game::ExecuteCommandFile(string testFile)
         return;
     }
 
+    string command;
+
+    while(iFile >> command)
+    {
+        if(command == "PokemonLib.txt")
+        {
+            loadPokemonFile(command);
+        }
+        else if(command == "MoveLib.txt")
+        {
+            loadMoveFile(command);
+        }
+        else if(command == "GameData.txt")
+        {
+            loadGameFile(command);
+        }
+        else if(command == "Battle")
+        {
+            string humanMove, computerMove;
+            iFile >> humanMove >> computerMove;
+            Battle(humanMove, computerMove, testMode);
+        }
+        else if(command == "Bag")
+        {
+            string potion, ownPokemon, computerMove;
+            iFile >> potion >> ownPokemon >> computerMove;
+            Bag(potion, ownPokemon, computerMove, testMode);
+        }
+        else if(command == "Pokemon")
+        {
+            string ownPokemon, computerMove;
+            iFile >> ownPokemon >> computerMove;
+            pokemon(ownPokemon, computerMove);
+        }
+        else if(command == "Status")
+        {
+            status();
+        }
+        else if(command == "Check")
+        {
+            check();
+        }
+        else if(command == "Run")
+        {
+            run();
+        }
+    }
 }
 
 // Intent: load pokemon library
