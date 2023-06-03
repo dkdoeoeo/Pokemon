@@ -17,6 +17,27 @@ void Game::ExecuteCommandFile(string testFile)
         return;
     }
 
+    string fileName;
+
+    iFile >> fileName;
+    loadPokemonFile(fileName);
+    iFile >> fileName;
+    loadMoveFile(fileName);
+    iFile >> fileName;
+    loadGameFile(fileName);
+
+    string command;
+
+    iFile >> command;
+
+    if(command == "Test")
+    {
+        while (iFile >> command) {
+
+        }
+    }
+
+    iFile.close();
 }
 
 // Intent: load pokemon library
