@@ -26,7 +26,7 @@ public:
     void ExecuteCommandFile(string testFile);//implement test case
     void Battle(string humanMove, string computerMove, int playType);//Battle command
     void Bag(string potion, string ownPokemon, string computerMove, int playType);//Bag command
-    void pokemon(string ownPokemon, string computerMove);//Pokemon command
+    void pokemon(string ownPokemon, string computerMove, int playType);//Pokemon command
     void attackPokemon(string move, string target,int playType);
     void status(ostream& oStream = cout);//Status command
     void check(ostream& oStream = cout);//Check command

@@ -434,9 +434,42 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
 // Intent: Pokemon command
 // Pre: player’s Pokémon and opponent’s move
 // Post: switch pokemon
-void Game::pokemon(string ownPokemon, string computerMove)
+void Game::pokemon(string ownPokemon, string computerMove, int playType)
 {
+    if(ifGameOver)
+    {
+        return;
+    }
 
+    //pokemon to swap to
+    int pokemonToSwapIndex = -1;
+    for (int var = 0; var < human.getPokemons().size(); ++var) {
+        if(human.getPokemons().at(var).getName() == ownPokemon)
+        {
+            pokemonToSwapIndex = var;
+        }
+    }
+    Pokemon& pokemonToSwap = human.getPokemons().at(pokemonToSwapIndex);
+
+    //check if pokemonToSwap fainted or the same pokemon
+    if(pokemonToSwap.getIfFainted() || pokemonToSwapIndex == human.getSelectPokemon())
+    {
+        return;
+    }
+    else
+    {
+        //<Pokémon>, switch out!
+        //Come back!
+        //Go! <Pokémon>!
+        cout << human.getPokemons().at(human.getSelectPokemon()).getName() << " switch out!" << endl;
+        cout << "Come back!" << endl;
+        cout << "Go! " << pokemonToSwap.getName() << endl;
+        human.setSelectPokemon(pokemonToSwapIndex);
+    }
+
+    attackPokemon(computerMove, "human", playType);
+
+    bAndP();
 }
 
 // Intent: Status command
