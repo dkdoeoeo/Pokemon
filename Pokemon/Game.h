@@ -16,6 +16,7 @@ private:
     map<string, vector<string>> allMoves;
     map<string, Pokemon> allPokemons;
     vector<std::vector<double>> typeEffectiveness;
+    bool ifGameOver = false;
 public:
     Game();
     void executeComputerMove(string computerMove, int playType);
@@ -31,6 +32,7 @@ public:
     void check(ostream& oStream = cout);//Check command
     void run();//Run command
     double getTypeEffectiveness(string atkType, string defType);
+    bool getifGameOver();
 };
 
 #endif // GAME_H

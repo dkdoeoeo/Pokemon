@@ -690,4 +690,7 @@ void Game::attackPokemon(string move, string target,int playType)
             computerSelectedPokemon.setHp(computerSelectedPokemon.getHp() - damage);
         }
     }
+bool Game::getifGameOver()
+{
+    return ifGameOver;
 }
