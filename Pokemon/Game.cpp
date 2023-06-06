@@ -326,14 +326,115 @@ void Game::Battle(string humanMove, string computerMove, int playType)
 // Post: heal pokemon
 void Game::Bag(string potion, string ownPokemon, string computerMove, int playType)
 {
+
     if(playType == testMode)
     {
+        Pokemon& selectedPokemon = *std::find_if(human.getPokemons().begin(),
+                                                      human.getPokemons().end(),
+                                                       [&](Pokemon *temp){return temp->getName() == ownPokemon;});
+        int pokemonMaxHp = (allPokemons.find(ownPokemon)->second.getHp());
 
+        if(potion == "potion")
+        {
+            cout << "You used a Potion!" << endl;
+            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            if(selectedPokemon.getHp() + 20 > pokemonMaxHp)
+            {
+                selectedPokemon.setHp(pokemonMaxHp);
+            }
+            else// selectedPokemon.getHp() + 20 <= pokemonMaxHp
+            {
+                selectedPokemon.setHp(selectedPokemon.getHp() + 20);
+            }
+        }
+        else if(potion == "SuperPotion")
+        {
+            cout << "You used a Super Potion!" << endl;
+            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            if(selectedPokemon.getHp() + 60 > pokemonMaxHp)
+            {
+                selectedPokemon.setHp(pokemonMaxHp);
+            }
+            else// selectedPokemon.getHp() + 60 <= pokemonMaxHp
+            {
+                selectedPokemon.setHp(selectedPokemon.getHp() + 60);
+            }
+        }
+        else if(potion == "HyperPotion")
+        {
+            cout << "You used a Hyper Potion!" << endl;
+            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            if(selectedPokemon.getHp() + 120 > pokemonMaxHp)
+            {
+                selectedPokemon.setHp(pokemonMaxHp);
+            }
+            else// selectedPokemon.getHp() + 120 <= pokemonMaxHp
+            {
+                selectedPokemon.setHp(selectedPokemon.getHp() + 120);
+            }
+        }
+        else // potion == "MaxPotion"
+        {
+            cout << "You used a Max Potion!" << endl;
+            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            selectedPokemon.setHp(pokemonMaxHp);
+        }
     }
     else if(playType == playMode)
     {
+        Pokemon& selectedPokemon = *std::find_if(human.getPokemons().begin(),
+                                                 human.getPokemons().end(),
+                                                 [&](Pokemon *temp){return temp->getName() == ownPokemon;});
+        int pokemonMaxHp = (allPokemons.find(ownPokemon)->second.getHp());
 
+        if(potion == "potion")
+        {
+            cout << "You used a Potion!" << endl;
+            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            if(selectedPokemon.getHp() + 20 > pokemonMaxHp)
+            {
+                selectedPokemon.setHp(pokemonMaxHp);
+            }
+            else// selectedPokemon.getHp() + 20 <= pokemonMaxHp
+            {
+                selectedPokemon.setHp(selectedPokemon.getHp() + 20);
+            }
+        }
+        else if(potion == "SuperPotion")
+        {
+            cout << "You used a Super Potion!" << endl;
+            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            if(selectedPokemon.getHp() + 60 > pokemonMaxHp)
+            {
+                selectedPokemon.setHp(pokemonMaxHp);
+            }
+            else// selectedPokemon.getHp() + 60 <= pokemonMaxHp
+            {
+                selectedPokemon.setHp(selectedPokemon.getHp() + 60);
+            }
+        }
+        else if(potion == "HyperPotion")
+        {
+            cout << "You used a Hyper Potion!" << endl;
+            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            if(selectedPokemon.getHp() + 120 > pokemonMaxHp)
+            {
+                selectedPokemon.setHp(pokemonMaxHp);
+            }
+            else// selectedPokemon.getHp() + 120 <= pokemonMaxHp
+            {
+                selectedPokemon.setHp(selectedPokemon.getHp() + 120);
+            }
+        }
+        else // potion == "MaxPotion"
+        {
+            cout << "You used a Max Potion!" << endl;
+            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            selectedPokemon.setHp(pokemonMaxHp);
+        }
     }
+
+    attackPokemon(computerMove, "human", playType);
 }
 
 // Intent: Pokemon command
@@ -436,13 +537,14 @@ double Game::getTypeEffectiveness(string atkType, string defType)
 // Post: decrease pokemon's hp by damage, and check if fainted
 void Game::attackPokemon(string move, string target,int playType)
 {
+
     Pokemon& humanSelectedPokemon = human.getPokemons().at(human.getSelectPokemon());
     Pokemon& computerSelectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
 
-    cout << computerSelectedPokemon.getName() << " used " << move << '!' << endl;
-
+    //for attacking human
     if(target == "human")
     {
+        cout << computerSelectedPokemon.getName() << " used " << move << '!' << endl;
         int damage = 0; //total damage
         bool ifCritical = rand() % 2; //if critical
         double critical = 1; // critical damage
@@ -505,14 +607,11 @@ void Game::attackPokemon(string move, string target,int playType)
 
         damage = ((110/250) * selectedMove.getPower() * atkDefRatio + 2) * critical * stab * totalTypeEffectiveness;
 
-
+        //check if fainted
         if(humanSelectedPokemon.getHp() - damage <= 0)
         {
             cout << humanSelectedPokemon.getName() << " has fainted!" << endl;
             humanSelectedPokemon.setHp(0);
-            //----------------------
-            //Insert GUI call
-            //----------------------
         }
         else
         {
@@ -520,8 +619,9 @@ void Game::attackPokemon(string move, string target,int playType)
         }
 
     }
-    else if(target == "computer")
+    else if(target == "computer") // for attacking computer
     {
+        cout << humanSelectedPokemon.getName() << " used " << move << '!' << endl;
         int damage = 0; //total damage
         bool ifCritical = rand() % 2; //if critical
         double critical = 1; // critical damage
@@ -584,14 +684,12 @@ void Game::attackPokemon(string move, string target,int playType)
 
         damage = ((110/250) * selectedMove.getPower() * atkDefRatio + 2) * critical * stab * totalTypeEffectiveness;
 
-
+        //check if fainted
         if(computerSelectedPokemon.getHp() - damage <= 0)
         {
             cout << computerSelectedPokemon.getName() << " has fainted!" << endl;
             computerSelectedPokemon.setHp(0);
-            //----------------------
-            //Insert GUI call
-            //----------------------
+
         }
         else
         {
