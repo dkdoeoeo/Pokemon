@@ -31,6 +31,7 @@ public:
     void useSuperPotion();
     void useHyperPotion();
     void useMaxPotion();
+    bool ifHavePotion(string input);
 };
 
 #endif // PLAYER_H
