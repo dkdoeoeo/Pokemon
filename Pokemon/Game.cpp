@@ -33,6 +33,8 @@ Game::Game()
             {1,	2,	1,	(1/2),	1,	1,	1,	1,	(1/2),	(1/2),	1,	1,	1,	1,	1,	2,	2,	1}
         };
 }
+
+
 // Intent: Execute test mode
 // Pre: file name
 // Post: Execute test mode
@@ -559,12 +561,12 @@ void Game::check(ostream& oStream)
     oStream << endl;
 }
 
+
 // Intent: Run command
 // Pre: no
 // Post: quit game
 void Game::run()
 {
-
     exit(0);
 }
 
