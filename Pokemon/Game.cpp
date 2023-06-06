@@ -698,23 +698,81 @@ void Game::attackPokemon(string move, string target,int playType)
                 critical = 1.5;
             }
         }
+void Game::bAndP()
+{
+    vector<string> statuses = {"BRN", "PSN", "PAR"};
+    int computerPokemonMaxHp = allPokemons.find(computer.getPokemons().at(computer.getSelectPokemon()).getName())->second.getHp();
+    int humanPokemonMaxHp = allPokemons.find(human.getPokemons().at(human.getSelectPokemon()).getName())->second.getHp();
+    Pokemon& humanSelectedPokemon = human.getPokemons().at(human.getSelectPokemon());
+    Pokemon& computerSelectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
+    int damage = 0;
 
-        //determine stab
-        for (int var = 0; var < humanSelectedPokemon.getTypes().size(); ++var) {
-            if(selectedMove.getType() == humanSelectedPokemon.getTypes()[var])
+    //human
+    //burn
+    if(human.getPokemons().at(human.getSelectPokemon()).getCon("BRN") > 0)
+    {
+        humanSelectedPokemon.setCon("BRN",humanSelectedPokemon.getCon("BRN") - 1);
+        damage = humanPokemonMaxHp / 16;
+        cout << humanSelectedPokemon.getName() << " is hurt by its burn!" << endl;
+        if(humanSelectedPokemon.getHp() - damage <= 0)
+        {
+            cout << humanSelectedPokemon.getName() << " has fainted!" << endl;
+            humanSelectedPokemon.setHp(0);
+            if(checkIfAllFainted())
             {
-                stab = 1.5;
-                break;
+                return;
             }
+
         }
+        else
+        {
+            humanSelectedPokemon.setHp(humanSelectedPokemon.getHp() - damage);
+        }
+    }
+    //Poison
+    if(human.getPokemons().at(human.getSelectPokemon()).getCon("PSN") > 0)
+    {
+        humanSelectedPokemon.setCon("PSN",humanSelectedPokemon.getCon("PSN") - 1);
+        damage = humanPokemonMaxHp / 16;
+        cout << humanSelectedPokemon.getName() << " is hurt by its poison!" << endl;
+        if(humanSelectedPokemon.getHp() - damage <= 0)
+        {
+            cout << humanSelectedPokemon.getName() << " has fainted!" << endl;
+            humanSelectedPokemon.setHp(0);
+            if(checkIfAllFainted())
+            {
+                return;
+            }
+
+        }
+        else
+        {
+            humanSelectedPokemon.setHp(humanSelectedPokemon.getHp() - damage);
+        }
+    }
+    //Paralysis
+    if(human.getPokemons().at(human.getSelectPokemon()).getCon("PAR") > 0)
+    {
+
+        humanSelectedPokemon.setCon("PSN",humanSelectedPokemon.getCon("PSN") - 1);
+        if(humanSelectedPokemon.getCon("PSN") == 0)
+        {
+            int originalSpeed = allPokemons.find(human.getPokemons().at(human.getSelectPokemon()).getName())->second.getSpeed();
+            humanSelectedPokemon.setSpeed(originalSpeed);
+        }
+    }
 
 
-        damage = ((110/250) * selectedMove.getPower() * atkDefRatio + 2) * critical * stab * totalTypeEffectiveness;
-
-        //check if fainted
+    //computer
+    //BURN
+    if(computer.getPokemons().at(computer.getSelectPokemon()).getCon("BRN") > 0)
+    {
+        computerSelectedPokemon.setCon("BRN",computerSelectedPokemon.getCon("BRN") - 1);
+        damage = computerPokemonMaxHp / 16;
+        cout << "Opposing " << computerSelectedPokemon.getName() << " is hurt by its burn!" << endl;
         if(computerSelectedPokemon.getHp() - damage <= 0)
         {
-            cout << computerSelectedPokemon.getName() << " has fainted!" << endl;
+            cout << "Opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
             computerSelectedPokemon.setHp(0);
 
         }
@@ -723,6 +781,37 @@ void Game::attackPokemon(string move, string target,int playType)
             computerSelectedPokemon.setHp(computerSelectedPokemon.getHp() - damage);
         }
     }
+    //Poison
+    if(computer.getPokemons().at(computer.getSelectPokemon()).getCon("PSN") > 0)
+    {
+        computerSelectedPokemon.setCon("PSN",computerSelectedPokemon.getCon("PSN") - 1);
+        damage = computerPokemonMaxHp / 16;
+        cout << "Opposing " << computerSelectedPokemon.getName() << " is hurt by its poison!" << endl;
+        if(computerSelectedPokemon.getHp() - damage <= 0)
+        {
+            cout << "Opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
+            computerSelectedPokemon.setHp(0);
+
+        }
+        else
+        {
+            computerSelectedPokemon.setHp(computerSelectedPokemon.getHp() - damage);
+        }
+    }
+    //Paralysis
+    if(computer.getPokemons().at(computer.getSelectPokemon()).getCon("PAR") > 0)
+    {
+        computerSelectedPokemon.setCon("PSN",computerSelectedPokemon.getCon("PSN") - 1);
+        if(computerSelectedPokemon.getCon("PSN") == 0)
+        {
+            int originalSpeed = allPokemons.find(computer.getPokemons().at(computer.getSelectPokemon()).getName())->second.getSpeed();
+            computerSelectedPokemon.setSpeed(originalSpeed);
+        }
+    }
+
+
+}
+
 // Intent: check if all fainted
 // Pre: none
 // Post: gameOver if all fainted

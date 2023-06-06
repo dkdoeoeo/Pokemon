@@ -19,6 +19,7 @@ private:
     bool ifGameOver = false;
 public:
     Game();
+    void bAndP();
     void executeComputerMove(string computerMove, int playType);
     void loadPokemonFile(string pokemonFile);//load pokemon file
     void loadMoveFile(string moveFile);//load move file
