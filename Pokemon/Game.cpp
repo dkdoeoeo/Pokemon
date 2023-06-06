@@ -690,6 +690,50 @@ void Game::attackPokemon(string move, string target,int playType)
             computerSelectedPokemon.setHp(computerSelectedPokemon.getHp() - damage);
         }
     }
+// Intent: check if all fainted
+// Pre: none
+// Post: gameOver if all fainted
+bool Game::checkIfAllFainted()
+{
+    bool ifAllFainted = true;
+    for (Pokemon& iter : human.getPokemons()) {
+        if(!iter.getIfFainted())
+        {
+            ifAllFainted = false;
+            break;
+        }
+    }
+
+    if(ifAllFainted)
+    {
+        cout << "You Lose!" << endl;
+        ifGameOver = true;
+        return true;
+    }
+
+    ifAllFainted = true;
+
+    for (Pokemon& iter : computer.getPokemons()) {
+        if(!iter.getIfFainted())
+        {
+            ifAllFainted = false;
+            break;
+        }
+    }
+
+    if(ifAllFainted)
+    {
+        cout << "You Win!" << endl;
+        ifGameOver = true;
+        return true;
+    }
+
+    return false;
+}
+
+// Intent: get if game over
+// Pre: none
+// Post: return if game over
 bool Game::getifGameOver()
 {
     return ifGameOver;

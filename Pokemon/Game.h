@@ -30,6 +30,7 @@ public:
     void attackPokemon(string move, string target,int playType);
     void status(ostream& oStream = cout);//Status command
     void check(ostream& oStream = cout);//Check command
+    bool checkIfAllFainted();//check if all fainted, also used for if game ended
     void run();//Run command
     double getTypeEffectiveness(string atkType, string defType);
     bool getifGameOver();
