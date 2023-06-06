@@ -26,25 +26,49 @@ void Player::appendPokemons(Pokemon input)
 
 void Player::setAllPotion(int input)
 {
-
+    potion = input;
+    superPotion = input;
+    hyperPotion = input;
+    maxPotion = input;
 }
 
 void Player::usePotion()
 {
-
+    potion--;
 }
 
 void Player::useSuperPotion()
 {
-
+    superPotion--;
 }
 
 void Player::useHyperPotion()
 {
-
+    hyperPotion--;
 }
 
 void Player::useMaxPotion()
 {
+    maxPotion--;
+}
 
+bool Player::ifHavePotion(string input)
+{
+    if(input == "Potion" && potion > 0)
+    {
+        return true;
+    }
+    else if(input == "SuperPotion" && superPotion > 0)
+    {
+        return true;
+    }
+    else if(input == "HyperPotion" && hyperPotion > 0)
+    {
+        return true;
+    }
+    else if(input == "MaxPotion" && maxPotion> 0)
+    {
+        return true;
+    }
+    return false;
 }
