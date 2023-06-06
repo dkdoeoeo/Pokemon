@@ -4,7 +4,6 @@
 #include <iostream>
 #include <vector>
 #include "Pokemon.h"
-#include "Move.h"
 
 using namespace std;
 
@@ -24,8 +23,6 @@ public:
     void setSelectPokemon(int input);
     void resizePokemons(int input);
     void appendPokemons(Pokemon input);
-    void resizePokemonMove(int input);
-    void appendPokemonMove(Pokemon input);
     void setAllPotion(int input);//set amount of each Potion
     void usePotion();
     void useSuperPotion();
