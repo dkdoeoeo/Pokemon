@@ -325,20 +325,30 @@ void Game::Battle(string humanMove, string computerMove, int playType)
 }
 
 // Intent: Battle command
-// Pre: name of the potion, player’s Pokémon and opponent’s move
+// Pre: name of the potion, player’s Pokémon and opponent’s move, pokemon not fainted
 // Post: heal pokemon
 void Game::Bag(string potion, string ownPokemon, string computerMove, int playType)
 {
+
+    if(ifGameOver)
+    {
+        return;
+    }
 
     if(playType == testMode)
     {
         Pokemon& selectedPokemon = *std::find_if(human.getPokemons().begin(),
                                                       human.getPokemons().end(),
-                                                       [&](Pokemon *temp){return temp->getName() == ownPokemon;});
+                                                       [&](Pokemon& temp){return temp.getName() == ownPokemon;});
+        if(selectedPokemon.getIfFainted())
+        {
+            return;
+        }
         int pokemonMaxHp = (allPokemons.find(ownPokemon)->second.getHp());
 
-        if(potion == "potion")
+        if(potion == "Potion" && human.ifHavePotion("Potion"))
         {
+            human.usePotion();
             cout << "You used a Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             if(selectedPokemon.getHp() + 20 > pokemonMaxHp)
@@ -350,8 +360,9 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
                 selectedPokemon.setHp(selectedPokemon.getHp() + 20);
             }
         }
-        else if(potion == "SuperPotion")
+        else if(potion == "SuperPotion" && human.ifHavePotion("SuperPotion"))
         {
+            human.useSuperPotion();
             cout << "You used a Super Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             if(selectedPokemon.getHp() + 60 > pokemonMaxHp)
@@ -363,8 +374,9 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
                 selectedPokemon.setHp(selectedPokemon.getHp() + 60);
             }
         }
-        else if(potion == "HyperPotion")
+        else if(potion == "HyperPotion" && human.ifHavePotion("HyperPotion"))
         {
+            human.useHyperPotion();
             cout << "You used a Hyper Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             if(selectedPokemon.getHp() + 120 > pokemonMaxHp)
@@ -376,8 +388,9 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
                 selectedPokemon.setHp(selectedPokemon.getHp() + 120);
             }
         }
-        else // potion == "MaxPotion"
+        else if(potion == "MaxPotion" && human.ifHavePotion("MaxPotion"))
         {
+            human.useMaxPotion();
             cout << "You used a Max Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             selectedPokemon.setHp(pokemonMaxHp);
@@ -387,11 +400,16 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
     {
         Pokemon& selectedPokemon = *std::find_if(human.getPokemons().begin(),
                                                  human.getPokemons().end(),
-                                                 [&](Pokemon *temp){return temp->getName() == ownPokemon;});
+                                                 [&](Pokemon& temp){return temp.getName() == ownPokemon;});
+        if(selectedPokemon.getIfFainted())
+        {
+            return;
+        }
         int pokemonMaxHp = (allPokemons.find(ownPokemon)->second.getHp());
 
-        if(potion == "potion")
+        if(potion == "Potion" && human.ifHavePotion("Potion"))
         {
+            human.usePotion();
             cout << "You used a Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             if(selectedPokemon.getHp() + 20 > pokemonMaxHp)
@@ -403,8 +421,9 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
                 selectedPokemon.setHp(selectedPokemon.getHp() + 20);
             }
         }
-        else if(potion == "SuperPotion")
+        else if(potion == "SuperPotion" && human.ifHavePotion("SuperPotion"))
         {
+            human.useSuperPotion();
             cout << "You used a Super Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             if(selectedPokemon.getHp() + 60 > pokemonMaxHp)
@@ -416,8 +435,9 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
                 selectedPokemon.setHp(selectedPokemon.getHp() + 60);
             }
         }
-        else if(potion == "HyperPotion")
+        else if(potion == "HyperPotion" && human.ifHavePotion("HyperPotion"))
         {
+            human.useHyperPotion();
             cout << "You used a Hyper Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             if(selectedPokemon.getHp() + 120 > pokemonMaxHp)
@@ -429,15 +449,19 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
                 selectedPokemon.setHp(selectedPokemon.getHp() + 120);
             }
         }
-        else // potion == "MaxPotion"
+        else if(potion == "MaxPotion" && human.ifHavePotion("MaxPotion"))
         {
+            human.useMaxPotion();
             cout << "You used a Max Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             selectedPokemon.setHp(pokemonMaxHp);
         }
     }
 
+
     attackPokemon(computerMove, "human", playType);
+
+    bAndP();
 }
 
 // Intent: Pokemon command
