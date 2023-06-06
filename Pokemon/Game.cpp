@@ -1,9 +1,38 @@
 #include <fstream>
 #include <string>
+#include <random>
 #include <sstream>
+#include <algorithm>
 #include "Game.h"
 #define testMode 1
 #define playMode 2
+// Intent: Game Contructor
+// Pre: none
+// Post: init the type effecteiveness chart
+Game::Game()
+{
+    typeEffectiveness =
+        {
+            {1,	1,	1,	1,	1,	(1/2),	1,	0,	(1/2),	1,	1,	1,	1,	1,	1,	1,	1,	1},
+            {2,	1,	(1/2),	(1/2),	1,	2,	(1/2),	0,	2,	1,	1,	1,	1,	(1/2),	2,	1,	2,	(1/2)},
+            {1,	2,	1,	1,	1,	(1/2),	2,	1,	(1/2),	1,	1,	2,	(1/2),	1,	1,	1,	1,	1},
+            {1,	1,	1,	(1/2),	(1/2),	(1/2),	1,	(1/2),	0,	1,	1,	2,	1,	1,	1,	1,	1,	2},
+            {1,	1,	0,	2,	1,	2,	(1/2),	1,	2,	2,	1,	(1/2),	2,	1,	1,	1,	1,	1},
+            {1,	(1/2),	2,	1,	(1/2),	1,	2,	1,	(1/2),	2,	1,	1,	1,	1,	2,	1,	1,	1},
+            {1,	(1/2),	(1/2),	(1/2),	1,	1,	1,	(1/2),	(1/2),	(1/2),	1,	2,	1,	2,	1,	1,	2,	(1/2)},
+            {0,	1,	1,	1,	1,	1,	1,	2,	1,	1,	1,	1,	1,	2,	1,	1,	(1/2),	1},
+            {1,	1,	1,	1,	1,	2,	1,	1,	(1/2),	(1/2),	(1/2),	1,	(1/2),	1,	2,	1,	1,	2},
+            {1,	1,	1,	1,	1,	(1/2),	2,	1,	2,	(1/2),	(1/2),	2,	1,	1,	2,	(1/2),	1,	1},
+            {1,	1,	1,	1,	2,	2,	1,	1,	1,	2,	(1/2),	(1/2),	1,	1,	1,	(1/2),	1,	1},
+            { 1,	1,	(1/2),	(1/2),	2,	2,	(1/2),	1,	(1/2),	(1/2),	2,	(1/2),	1,	1,	1,	(1/2),	1,	1},
+            {1,	1,	2,	1,	0,	1,	1,	1,	1,	1,	2,	(1/2),	(1/2),	1,	1,	(1/2),	1,	1},
+            {1,	2,	1,	2,	1,	1,	1,	1,	(1/2),	1,	1,	1,	1,	(1/2),	1,	1,	0,	1},
+            {1,	1,	2,	1,	2,	1,	1,	1,	(1/2),	(1/2),	(1/2),	2,	1,	1,	(1/2),	2,	1,	1},
+            { 1,	1,	1,	1,	1,	1,	1,	1,	(1/2),	1,	1,	1,	1,	1,	1,	2,	1,	0},
+            {1,	(1/2),	1,	1,	1,	1,	1,	2,	1,	1,	1,	1,	1,	2,	1,	1,	(1/2),	(1/2)},
+            {1,	2,	1,	(1/2),	1,	1,	1,	1,	(1/2),	(1/2),	1,	1,	1,	1,	1,	2,	2,	1}
+        };
+}
 // Intent: Execute test mode
 // Pre: file name
 // Post: Execute test mode
@@ -373,3 +402,77 @@ void Game::run()
 
 }
 
+// Intent: execute Computer move
+// Pre: computerMove
+// Post: execute computer move
+void Game::executeComputerMove(string computerMove, int playType)
+{
+}
+// Intent: get damage bonus corresponding to the types
+// Pre: Types exist
+// Post: returns the damage bonus
+double Game::getTypeEffectiveness(string atkType, string defType)
+{
+    vector<string> types = {
+        "Normal", "Fighting", "Flying", "Poison", "Ground", "Rock",
+        "Bug", "Ghost", "Steel", "Fire", "Water", "Grass",
+        "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy"
+    };
+    int row = 0;
+    int col = 0;
+
+    for (int var = 0; var < types.size(); ++var) {
+        if(types[var] == atkType)
+        {
+            row = var;
+        }
+
+        if(types[var] == defType)
+        {
+            col = var;
+        }
+    }
+
+    return typeEffectiveness[row][col];
+
+}
+
+// Intent: attack current selected pokemon with specified damage
+// Pre: player: "human" or "computer"
+// Post: decrease pokemon's hp by damage, and check if fainted
+void Game::attackPokemon(int damage, string target)
+{
+    if(target == "human")
+    {
+        Pokemon& selectedPokemon = human.getPokemons().at(human.getSelectPokemon());
+        if(selectedPokemon.getHp() - damage <= 0)
+        {
+            cout << selectedPokemon.getName() << " has fainted!" << endl;
+            selectedPokemon.setHp(0);
+            //----------------------
+            //Insert GUI call
+            //----------------------
+        }
+        else
+        {
+            selectedPokemon.setHp(selectedPokemon.getHp() - damage);
+        }
+
+    }
+    else if(target == "computer")
+    {
+        Pokemon& selectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
+        if(selectedPokemon.getHp() - damage <= 0)
+        {
+            cout << "Opposing " << selectedPokemon.getName() << " has fainted!" << endl;
+            selectedPokemon.setHp(0);
+            //----------------------
+            //Insert GUI call
+            //----------------------
+        }
+        else
+        {
+            selectedPokemon.setHp(selectedPokemon.getHp() - damage);
+        }
+    }
+}

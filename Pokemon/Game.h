@@ -15,7 +15,10 @@ private:
     Player computer;
     map<string, vector<string>> allMoves;
     map<string, Pokemon> allPokemons;
+    vector<std::vector<double>> typeEffectiveness;
 public:
+    Game();
+    void executeComputerMove(string computerMove, int playType);
     void loadPokemonFile(string pokemonFile);//load pokemon file
     void loadMoveFile(string moveFile);//load move file
     void loadGameFile(string gameFile);//load game file
@@ -23,9 +26,11 @@ public:
     void Battle(string humanMove, string computerMove, int playType);//Battle command
     void Bag(string potion, string ownPokemon, string computerMove, int playType);//Bag command
     void pokemon(string ownPokemon, string computerMove);//Pokemon command
+    void attackPokemon(int damage, string target);
     void status(ostream& oStream = cout);//Status command
     void check(ostream& oStream = cout);//Check command
     void run();//Run command
+    double getTypeEffectiveness(string atkType, string defType);
 };
 
 #endif // GAME_H
