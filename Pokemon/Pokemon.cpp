@@ -60,9 +60,21 @@ void Pokemon::appendMoves(Move input)
     moves.push_back(input);
 }
 
-void Pokemon::setCon(int index, int input)
+void Pokemon::setCon(string con, int input)
 {
-    con[index] = input;
+    if(con == "PAR")
+    {
+        con[0] += input;
+    }
+    else if(con == "BRN")
+    {
+        con[1] += input;
+    }
+    else if(con == "PSN")
+    {
+        con[2] += input;
+    }
+
 }
 
 string Pokemon::getName()
@@ -110,9 +122,22 @@ int Pokemon::getSpeed()
     return speed;
 }
 
-string Pokemon::getCon()
+int Pokemon::getCon(string con)
 {
-    return con;
+    if(con == "PAR")
+    {
+        return con[0];
+    }
+    else if(con == "BRN")
+    {
+        return con[1];
+    }
+    else if(con == "PSN")
+    {
+        return con[2];
+    }
+
+    return -1;
 }
 
 int Pokemon::getIfFainted()
