@@ -402,12 +402,6 @@ void Game::run()
 
 }
 
-// Intent: execute Computer move
-// Pre: computerMove
-// Post: execute computer move
-void Game::executeComputerMove(string computerMove, int playType)
-{
-}
 // Intent: get damage bonus corresponding to the types
 // Pre: Types exist
 // Post: returns the damage bonus
@@ -437,42 +431,171 @@ double Game::getTypeEffectiveness(string atkType, string defType)
 
 }
 
-// Intent: attack current selected pokemon with specified damage
-// Pre: player: "human" or "computer"
+// Intent: attack current selected pokemon with specified move
+// Pre: target: "human" or "computer"
 // Post: decrease pokemon's hp by damage, and check if fainted
-void Game::attackPokemon(int damage, string target)
+void Game::attackPokemon(string move, string target,int playType)
 {
+    Pokemon& humanSelectedPokemon = human.getPokemons().at(human.getSelectPokemon());
+    Pokemon& computerSelectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
+
+    cout << computerSelectedPokemon.getName() << " used " << move << '!' << endl;
+
     if(target == "human")
     {
-        Pokemon& selectedPokemon = human.getPokemons().at(human.getSelectPokemon());
-        if(selectedPokemon.getHp() - damage <= 0)
+        int damage = 0; //total damage
+        bool ifCritical = rand() % 2; //if critical
+        double critical = 1; // critical damage
+        double atkDefRatio = 0; // attack defense ratio
+        double stab = 1; //STAB
+        double totalTypeEffectiveness = 0; //total type effectiveness
+        Move& selectedMove = *std::find_if(computerSelectedPokemon.getMoves().begin(),
+                                           computerSelectedPokemon.getMoves().end(),
+                                           [&](Move& tempCompMove){ return tempCompMove.getName() == move;});
+
+        //calculate type Effectiveness
+        for (int var = 0; var < humanSelectedPokemon.getTypes().size(); ++var) {
+            totalTypeEffectiveness *= getTypeEffectiveness(selectedMove.getType(),humanSelectedPokemon.getTypes()[var]);
+        }
+        //output how effective
+        if(totalTypeEffectiveness >= 2)
         {
-            cout << selectedPokemon.getName() << " has fainted!" << endl;
-            selectedPokemon.setHp(0);
+            cout << "It's super effective!" << endl;
+        }
+        else if(totalTypeEffectiveness >= 1/2 && totalTypeEffectiveness > 0)
+        {
+            cout << "It's not very effective..." << endl;
+        }
+        else // if (totalTypeEffectiveness <= 0)
+        {
+            cout << "It's not effective!" << endl;
+        }
+
+        //calculate attack/defense ratio
+        if(selectedMove.getPS() == "Special")
+        {
+            atkDefRatio = (double)computerSelectedPokemon.getSpAtk() / humanSelectedPokemon.getSpDef();
+        }
+        else // if(selectedMove.getPS() == "Physical")
+        {
+            atkDefRatio = (double)computerSelectedPokemon.getAtk() / humanSelectedPokemon.getDef();
+        }
+
+        //determine critical rate
+        if(ifCritical){
+            if(playType == testMode)
+            {
+                critical = 1;
+            }
+            else if(playType == playMode)
+            {
+                critical = 1.5;
+            }
+        }
+
+        //determine stab
+        for (int var = 0; var < computerSelectedPokemon.getTypes().size(); ++var) {
+            if(selectedMove.getType() == computerSelectedPokemon.getTypes()[var])
+            {
+                stab = 1.5;
+                break;
+            }
+        }
+
+
+        damage = ((110/250) * selectedMove.getPower() * atkDefRatio + 2) * critical * stab * totalTypeEffectiveness;
+
+
+        if(humanSelectedPokemon.getHp() - damage <= 0)
+        {
+            cout << humanSelectedPokemon.getName() << " has fainted!" << endl;
+            humanSelectedPokemon.setHp(0);
             //----------------------
             //Insert GUI call
             //----------------------
         }
         else
         {
-            selectedPokemon.setHp(selectedPokemon.getHp() - damage);
+            humanSelectedPokemon.setHp(humanSelectedPokemon.getHp() - damage);
         }
 
     }
     else if(target == "computer")
     {
-        Pokemon& selectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
-        if(selectedPokemon.getHp() - damage <= 0)
+        int damage = 0; //total damage
+        bool ifCritical = rand() % 2; //if critical
+        double critical = 1; // critical damage
+        double atkDefRatio = 0; // attack defense ratio
+        double stab = 1; //STAB
+        double totalTypeEffectiveness = 0; //total type effectiveness
+        Move& selectedMove = *std::find_if(humanSelectedPokemon.getMoves().begin(),
+                                           humanSelectedPokemon.getMoves().end(),
+                                           [&](Move& tempCompMove){ return tempCompMove.getName() == move;});
+
+        //calculate type Effectiveness
+        for (int var = 0; var < computerSelectedPokemon.getTypes().size(); ++var) {
+            totalTypeEffectiveness *= getTypeEffectiveness(selectedMove.getType(),computerSelectedPokemon.getTypes()[var]);
+        }
+        //output how effective
+        if(totalTypeEffectiveness >= 2)
         {
-            cout << "Opposing " << selectedPokemon.getName() << " has fainted!" << endl;
-            selectedPokemon.setHp(0);
+            cout << "It's super effective!" << endl;
+        }
+        else if(totalTypeEffectiveness >= 1/2 && totalTypeEffectiveness > 0)
+        {
+            cout << "It's not very effective..." << endl;
+        }
+        else // if (totalTypeEffectiveness <= 0)
+        {
+            cout << "It's not effective!" << endl;
+        }
+
+        //calculate attack/defense ratio
+        if(selectedMove.getPS() == "Special")
+        {
+            atkDefRatio = (double)humanSelectedPokemon.getSpAtk() / computerSelectedPokemon.getSpDef();
+        }
+        else // if(selectedMove.getPS() == "Physical")
+        {
+            atkDefRatio = (double)humanSelectedPokemon.getAtk() / computerSelectedPokemon.getDef();
+        }
+
+        //determine critical rate
+        if(ifCritical){
+            if(playType == testMode)
+            {
+                critical = 1;
+            }
+            else if(playType == playMode)
+            {
+                critical = 1.5;
+            }
+        }
+
+        //determine stab
+        for (int var = 0; var < humanSelectedPokemon.getTypes().size(); ++var) {
+            if(selectedMove.getType() == humanSelectedPokemon.getTypes()[var])
+            {
+                stab = 1.5;
+                break;
+            }
+        }
+
+
+        damage = ((110/250) * selectedMove.getPower() * atkDefRatio + 2) * critical * stab * totalTypeEffectiveness;
+
+
+        if(computerSelectedPokemon.getHp() - damage <= 0)
+        {
+            cout << computerSelectedPokemon.getName() << " has fainted!" << endl;
+            computerSelectedPokemon.setHp(0);
             //----------------------
             //Insert GUI call
             //----------------------
         }
         else
         {
-            selectedPokemon.setHp(selectedPokemon.getHp() - damage);
+            computerSelectedPokemon.setHp(computerSelectedPokemon.getHp() - damage);
         }
     }
 }
