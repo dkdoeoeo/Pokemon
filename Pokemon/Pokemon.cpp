@@ -35,6 +35,11 @@ void Pokemon::setSpeed(int input)
     speed = input;
 }
 
+void Pokemon::setIfFainted(bool input)
+{
+    ifFainted = input;
+}
+
 void Pokemon::resizeTypes(int input)
 {
     types.resize(input);
@@ -108,6 +113,11 @@ int Pokemon::getSpeed()
 string Pokemon::getCon()
 {
     return con;
+}
+
+int Pokemon::getIfFainted()
+{
+    return ifFainted;
 }
 
 const int Pokemon::getLevel()

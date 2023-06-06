@@ -19,6 +19,7 @@ private:
     int spAtk;
     int spDef;
     int speed;
+    bool ifFainted = false;
     string con;
     const int level = 50;
 public:
@@ -29,6 +30,7 @@ public:
     void setSpAtk(int input);
     void setSpDef(int input);
     void setSpeed(int input);
+    void setIfFainted(bool input);
     void resizeTypes(int input);
     void resizeMoves(int input);
     void appendTypes(string input);
@@ -43,6 +45,7 @@ public:
     int getSpDef();
     int getSpeed();
     string getCon();
+    int getIfFainted();
     const int getLevel();
 };
 
