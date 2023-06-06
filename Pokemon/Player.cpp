@@ -24,16 +24,6 @@ void Player::appendPokemons(Pokemon input)
     pokemons.push_back(input);
 }
 
-void Player::resizePokemonMove(int input)
-{
-
-}
-
-void Player::appendPokemonMove(Pokemon input)
-{
-
-}
-
 void Player::setAllPotion(int input)
 {
 
