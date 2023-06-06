@@ -78,7 +78,7 @@ void Game::ExecuteCommandFile(string testFile)
         {
             string ownPokemon, computerMove;
             iFile >> ownPokemon >> computerMove;
-            pokemon(ownPokemon, computerMove);
+            pokemon(ownPokemon, computerMove, testMode);
         }
         else if(command == "Status")
         {
@@ -513,17 +513,21 @@ void Game::status(ostream& oStream)
     //Pokémon hp PAR BRN PSN Pokémon hp PAR BRN PSN
     Pokemon& humanSelectPokemon = human.getPokemons().at(human.getSelectPokemon());
     Pokemon& computerSelectPokemon = computer.getPokemons().at(computer.getSelectPokemon());
-
+    vector<string> statuses = {"PAR","BRN","PSN"};
     oStream << humanSelectPokemon.getName() << ' ' << humanSelectPokemon.getHp();
-    if(!humanSelectPokemon.getCon().empty())
-    {
-        oStream << ' ' << humanSelectPokemon.getCon();
+    for (int var = 0; var < 3; ++var) {
+        if(humanSelectPokemon.getCon(statuses[var]) > 0)
+        {
+            cout << ' ' << statuses[var];
+        }
     }
 
-    oStream << computerSelectPokemon.getName() << ' ' << computerSelectPokemon.getHp();
-    if(!computerSelectPokemon.getCon().empty())
-    {
-        oStream << ' ' << computerSelectPokemon.getCon();
+    oStream << ' ' << computerSelectPokemon.getName() << ' ' << computerSelectPokemon.getHp();
+    for (int var = 0; var < 3; ++var) {
+        if(computerSelectPokemon.getCon(statuses[var]) > 0)
+        {
+            cout << ' ' << statuses[var];
+        }
     }
 
     oStream << endl;
