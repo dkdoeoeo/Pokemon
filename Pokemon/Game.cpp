@@ -311,14 +311,8 @@ void Game::loadGameFile(string gameFile)
 // Post: Execute Battle command
 void Game::Battle(string humanMove, string computerMove, int playType)
 {
-    if(playType == testMode)
-    {
-
-    }
-    else if(playType == playMode)
-    {
-
-    }
+    attackPokemon(humanMove,"computer",playType);
+    attackPokemon(computerMove, "human",playType);
 }
 
 // Intent: Battle command
