@@ -561,6 +561,7 @@ void Game::check(ostream& oStream)
 void Game::run()
 {
 
+    exit(0);
 }
 
 // Intent: get damage bonus corresponding to the types
