@@ -36,6 +36,8 @@ public:
 
     string getComputeRandomMove();
 
+    void chooseHealPokemon();
+
 private slots:
     void on_Battle_clicked();
 
