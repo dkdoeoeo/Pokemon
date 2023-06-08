@@ -6,7 +6,6 @@
 #include "Game.h"
 #define testMode 1
 #define playMode 2
-
 // Intent: Game Contructor
 // Pre: none
 // Post: init the type effecteiveness chart
@@ -41,8 +40,7 @@ Game::Game()
 void Game::ExecuteCommandFile(string testFile)
 {
     ifstream iFile;
-    iFile.open(testFile);
-
+    iFile.open(testFile.c_str());
     if(!iFile.is_open())
     {
         cout << "open " << testFile << " failed\n";
@@ -103,7 +101,7 @@ void Game::ExecuteCommandFile(string testFile)
 // Post: load pokemon library
 void Game::loadPokemonFile(string pokemonFile)
 {
-    ifstream iFile(pokemonFile);
+    ifstream iFile(pokemonFile.c_str());
 
     if(!iFile.is_open())
     {
@@ -116,8 +114,7 @@ void Game::loadPokemonFile(string pokemonFile)
     string pokemonType; //pokemon type
     int numOfType = 0; //number of types
 
-    while (iFile >> pokemonName)
-    {
+    while (iFile >> pokemonName) {
 
         //read in name
         Pokemon tempPokemon;
@@ -125,19 +122,16 @@ void Game::loadPokemonFile(string pokemonFile)
 
         //read in type
         iFile >> numOfType;
-
         for (int var = 0; var < numOfType; ++var) {
             iFile >> pokemonType;
             tempPokemon.appendTypes(pokemonType);
         }
 
         //read in leftover attributes
-        for (int var = 0; var < 6; ++var)
-        {
+        for (int var = 0; var < 6; ++var) {
             iFile >> pokemonAttribute;
 
-            switch (var)
-            {
+            switch (var) {
             case 0:
                 tempPokemon.setHp(pokemonAttribute);
                 break;
@@ -171,7 +165,7 @@ void Game::loadPokemonFile(string pokemonFile)
 // Post: load move library
 void Game::loadMoveFile(string moveFile)
 {
-    ifstream iFile(moveFile);
+    ifstream iFile(moveFile.c_str());
 
     if(!iFile.is_open())
     {
@@ -184,17 +178,16 @@ void Game::loadMoveFile(string moveFile)
     string tempAttribute; //temporary attribute
     string lineOfAttributes; //store all of the attributes of a move, including all the white space
     stringstream ss; //string stream to parse lineOfAttributes
-    moveAttributes.clear();
 
     //read in all the moves into std::map allMoves
-    while (iFile >> moveName)
-    { //read in move name
+    while (iFile >> moveName) { //read in move name
 
         //get all the line of attributes into lineOfAttributes
         getline(iFile, lineOfAttributes);
+
+        moveAttributes.clear();
         ss.str(lineOfAttributes);
         ss.clear();
-
         while(ss >> tempAttribute) // parse lineOfAttributes
         {
             moveAttributes.push_back(tempAttribute);
@@ -230,7 +223,7 @@ void Game::loadGameFile(string gameFile)
     //input player's (i.e human) game data
     //assign the attributes to pokemons and the moves of the pokemons
     iFile >> numOfPokemons_Player;
-    human.clearPokemons();
+    human.resizePokemons(numOfPokemons_Player);
 
     std::map<string, vector<string>>::iterator iterMove; //allMoves map iterator
     std::map<string, Pokemon>::iterator iterPokemon; //allMoves map iterator
@@ -280,7 +273,7 @@ void Game::loadGameFile(string gameFile)
     //input computer's game data
     //assign the attributes to pokemons and the moves of the pokemons
     iFile >> numOfPokemons_Comp;
-    computer.clearPokemons();
+    computer.resizePokemons(numOfPokemons_Comp);
 
     for (int var = 0; var < numOfPokemons_Comp; ++var)
     {
@@ -1181,19 +1174,4 @@ bool Game::checkIfAllFainted()
 bool Game::getifGameOver()
 {
     return ifGameOver;
-}
-
-// Intent: get row and col
-// Pre: input string array, Qstring
-// Post: split Qstring
-void Game::split(string Words[], QString Name)
-{
-    string strName = Name.toStdString();
-    stringstream ss(strName);
-    string temp;
-    int N = 0;
-    while (getline(ss, temp, ' ')) {
-        Words[N] = temp;
-        N++;
-    }
 }
