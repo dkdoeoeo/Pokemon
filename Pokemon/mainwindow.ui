@@ -17,8 +17,8 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>250</y>
+      <x>250</x>
+      <y>240</y>
       <width>211</width>
       <height>191</height>
      </rect>
@@ -36,7 +36,7 @@
    <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>340</x>
       <y>10</y>
       <width>201</width>
       <height>201</height>
@@ -55,7 +55,7 @@
    <widget class="QProgressBar" name="playerHp">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>30</x>
       <y>330</y>
       <width>118</width>
       <height>23</height>
@@ -68,7 +68,7 @@
    <widget class="QProgressBar" name="computerHp">
     <property name="geometry">
      <rect>
-      <x>660</x>
+      <x>560</x>
       <y>100</y>
       <width>118</width>
       <height>23</height>
@@ -81,15 +81,20 @@
    <widget class="QWidget" name="verticalLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>370</y>
+      <x>170</x>
+      <y>380</y>
       <width>65</width>
       <height>61</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="playerCONDisplay">
+    <layout class="QVBoxLayout" name="playerPARisplay">
      <item>
-      <widget class="QLabel" name="playerCON">
+      <widget class="QLabel" name="playerPAR">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -100,15 +105,20 @@
    <widget class="QWidget" name="verticalLayoutWidget_4">
     <property name="geometry">
      <rect>
-      <x>680</x>
+      <x>550</x>
       <y>140</y>
       <width>65</width>
       <height>61</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="computerCONDisplay">
+    <layout class="QVBoxLayout" name="computerPSNDisplay">
      <item>
-      <widget class="QLabel" name="computerCON">
+      <widget class="QLabel" name="computerPSN">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -119,8 +129,8 @@
    <widget class="QLabel" name="playerName">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>260</y>
+      <x>80</x>
+      <y>250</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -132,7 +142,7 @@
    <widget class="QLabel" name="computerName">
     <property name="geometry">
      <rect>
-      <x>630</x>
+      <x>580</x>
       <y>30</y>
       <width>141</width>
       <height>41</height>
@@ -213,6 +223,128 @@
     <property name="text">
      <string>Run</string>
     </property>
+   </widget>
+   <widget class="QLabel" name="computerHpText">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>90</y>
+      <width>81</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="playerHpText">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>320</y>
+      <width>81</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_5">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>380</y>
+      <width>65</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="playerBRNDisplay">
+     <item>
+      <widget class="QLabel" name="playerBRN">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_6">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>380</y>
+      <width>65</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="playerPSNDisplay">
+     <item>
+      <widget class="QLabel" name="playerPSN">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_7">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>140</y>
+      <width>65</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="computerBRNDisplay">
+     <item>
+      <widget class="QLabel" name="computerBRN">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_8">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>140</y>
+      <width>65</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="computerPARDisplay">
+     <item>
+      <widget class="QLabel" name="computerPAR">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

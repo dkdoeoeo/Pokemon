@@ -5,6 +5,8 @@
 #include "Pokemon.h"
 #include <map>
 #include "Player.h"
+#define testMode 1
+#define playMode 2
 
 using namespace std;
 

@@ -6,6 +6,8 @@
 #include <QPalette>
 #include <QSoundEffect>
 #include <QtWidgets>
+#include <QFont>
+#include "Game.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -32,6 +34,17 @@ public:
 
     void update();//update
 
+    string getComputeRandomMove();
+
+private slots:
+    void on_Battle_clicked();
+
+    void on_Pokemon_clicked();
+
+    void on_Bag_clicked();
+
+    void on_Run_clicked();
+
 private:
     Ui::MainWindow *ui;
     QPixmap *iconBlastoise;//Blastoise icon
@@ -57,8 +70,15 @@ private:
     QLabel *computerName;
     QLabel *playerPokemon;
     QLabel *computerPokemon;
-    QLabel *playerCON;
-    QLabel *computerCON;
+    QLabel *playerHpText;
+    QLabel *computerHpText;
+    QLabel *playerPSN;
+    QLabel *playerBRN;
+    QLabel *playerPAR;
+    QLabel *computerPSN;
+    QLabel *computerBRN;
+    QLabel *computerPAR;
+
 };
 
 #endif // MAINWINDOW_H

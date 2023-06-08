@@ -4,8 +4,7 @@
 #include <sstream>
 #include <algorithm>
 #include "Game.h"
-#define testMode 1
-#define playMode 2
+
 // Intent: Game Contructor
 // Pre: none
 // Post: init the type effecteiveness chart
