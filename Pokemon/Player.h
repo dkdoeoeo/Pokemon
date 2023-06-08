@@ -12,10 +12,10 @@ class Player
 private:
     int selectPokemon = 0;//current pokemon index
     vector<Pokemon> pokemons;
-    int potion;
-    int superPotion = 3;
-    int hyperPotion = 3;
-    int maxPotion = 3;
+    int potion = 300000;
+    int superPotion = 300000;
+    int hyperPotion = 300000;
+    int maxPotion = 300000;
 
 public:
     vector<Pokemon>& getPokemons();
