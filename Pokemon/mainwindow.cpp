@@ -54,12 +54,6 @@ void MainWindow::initIcon()
     *iconPAR = iconPAR->scaled(60,60);
     *iconBRN = iconBRN->scaled(60,60);
     *iconPSN = iconPSN->scaled(60,60);
-    this->setStyleSheet("QWidget {"
-                         "background-image: url(./images/Background.png);"
-                         "background-repeat: no-repeat;"
-                         "background-position: center;"
-                         "}");
-    this->setFixedSize(800, 500);
 }
 
 void MainWindow::initSound()

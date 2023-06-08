@@ -56,7 +56,7 @@ private:
     QPixmap *iconSuperPotion;//SuperPotion icon
     QPixmap *iconHyperPotion;//HyperPotion icon
     QPixmap *iconMaxPotion;//MaxPotion icon
-    QPixmap *iconBackground;//Background icon
+    QPixmap iconBackground{"./images/Background.png"};//Background icon
     QPixmap *iconPAR;//PAR icon
     QPixmap *iconBRN;//BRN icon
     QPixmap *iconPSN;//PSN icon
@@ -87,7 +87,11 @@ private:
     QLabel *computerPSN;
     QLabel *computerBRN;
     QLabel *computerPAR;
-
+protected:
+    void paintEvent(QPaintEvent *event) override {
+        QPainter painter(this);
+        painter.drawPixmap(rect(), iconBackground.scaled(size()));
+    }
 };
 
 #endif // MAINWINDOW_H
