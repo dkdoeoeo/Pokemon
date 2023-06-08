@@ -10,12 +10,12 @@ using namespace std;
 class Player
 {
 private:
-    int selectPokemon;//current pokemon index
+    int selectPokemon = 0;//current pokemon index
     vector<Pokemon> pokemons;
     int potion;
-    int superPotion;
-    int hyperPotion;
-    int maxPotion;
+    int superPotion = 3;
+    int hyperPotion = 3;
+    int maxPotion = 3;
 
 public:
     vector<Pokemon>& getPokemons();
