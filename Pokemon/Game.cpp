@@ -223,7 +223,7 @@ void Game::loadGameFile(string gameFile)
     //input player's (i.e human) game data
     //assign the attributes to pokemons and the moves of the pokemons
     iFile >> numOfPokemons_Player;
-    human.clearPokemons();
+    human.resizePokemons(numOfPokemons_Player);
 
     std::map<string, vector<string>>::iterator iterMove; //allMoves map iterator
     std::map<string, Pokemon>::iterator iterPokemon; //allMoves map iterator
@@ -273,7 +273,7 @@ void Game::loadGameFile(string gameFile)
     //input computer's game data
     //assign the attributes to pokemons and the moves of the pokemons
     iFile >> numOfPokemons_Comp;
-    computer.clearPokemons();
+    computer.resizePokemons(numOfPokemons_Comp);
 
     for (int var = 0; var < numOfPokemons_Comp; ++var)
     {
@@ -322,7 +322,7 @@ void Game::loadGameFile(string gameFile)
 
 
 // Intent: Battle command
-// Pre: player’s Pokémon move and opponent’s
+// Pre: player’s Pokemon move and opponent’s
 // Post: Execute Battle command
 void Game::Battle(string humanMove, string computerMove, int playType)
 {
@@ -340,7 +340,7 @@ void Game::Battle(string humanMove, string computerMove, int playType)
 }
 
 // Intent: Battle command
-// Pre: name of the potion, player’s Pokémon and opponent’s move, pokemon not fainted
+// Pre: name of the potion, player’s Pokemon and opponent’s move, pokemon not fainted
 // Post: heal pokemon
 void Game::Bag(string potion, string ownPokemon, string computerMove, int playType)
 {
@@ -353,8 +353,8 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
     if(playType == testMode)
     {
         Pokemon& selectedPokemon = *std::find_if(human.getPokemons().begin(),
-                                                      human.getPokemons().end(),
-                                                       [&](Pokemon& temp){return temp.getName() == ownPokemon;});
+                                                 human.getPokemons().end(),
+                                                 [&](Pokemon& temp){return temp.getName() == ownPokemon;});
         if(selectedPokemon.getIfFainted())
         {
             return;
@@ -477,7 +477,7 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
 }
 
 // Intent: Pokemon command
-// Pre: player’s Pokémon and opponent’s move
+// Pre: player’s Pokemon and opponent’s move
 // Post: switch pokemon
 void Game::pokemon(string ownPokemon, string computerMove, int playType)
 {
@@ -506,9 +506,9 @@ void Game::pokemon(string ownPokemon, string computerMove, int playType)
     }
     else
     {
-        //<Pokémon>, switch out!
+        //<Pokemon>, switch out!
         //Come back!
-        //Go! <Pokémon>!
+        //Go! <Pokemon>!
         cout << human.getPokemons().at(human.getSelectPokemon()).getName() << " switch out!" << endl;
         cout << "Come back!" << endl;
         cout << "Go! " << pokemonToSwap.getName() << endl;
@@ -525,7 +525,7 @@ void Game::pokemon(string ownPokemon, string computerMove, int playType)
 // Post: output both sides pokemon status
 void Game::status(ostream& oStream)
 {
-    //Pokémon hp PAR BRN PSN Pokémon hp PAR BRN PSN
+    //Pokemon hp PAR BRN PSN Pokemon hp PAR BRN PSN
     Pokemon& humanSelectPokemon = human.getPokemons().at(human.getSelectPokemon());
     Pokemon& computerSelectPokemon = computer.getPokemons().at(computer.getSelectPokemon());
     vector<string> statuses = {"PAR","BRN","PSN"};
@@ -593,11 +593,11 @@ void Game::run()
 double Game::getTypeEffectiveness(string atkType, string defType)
 {
     vector<string> types =
-    {
-        "Normal", "Fighting", "Flying", "Poison", "Ground", "Rock",
-        "Bug", "Ghost", "Steel", "Fire", "Water", "Grass",
-        "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy"
-    };
+        {
+            "Normal", "Fighting", "Flying", "Poison", "Ground", "Rock",
+            "Bug", "Ghost", "Steel", "Fire", "Water", "Grass",
+            "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy"
+        };
 
     int row = 0;
     int col = 0;

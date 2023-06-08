@@ -5,7 +5,6 @@
 #include "Pokemon.h"
 #include <map>
 #include "Player.h"
-#include <QString>
 
 using namespace std;
 

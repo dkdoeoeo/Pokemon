@@ -21,7 +21,7 @@ public:
     vector<Pokemon>& getPokemons();
     int getSelectPokemon();
     void setSelectPokemon(int input);
-    void clearPokemons();
+    void resizePokemons(int input);
     void appendPokemons(Pokemon input);
     void setAllPotion(int input);//set amount of each Potion
     void usePotion();

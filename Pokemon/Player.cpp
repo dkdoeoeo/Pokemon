@@ -14,9 +14,9 @@ void Player::setSelectPokemon(int input)
     selectPokemon = input;
 }
 
-void Player::clearPokemons()
+void Player::resizePokemons(int input)
 {
-    pokemons.clear();
+    pokemons.resize(input);
 }
 
 void Player::appendPokemons(Pokemon input)
