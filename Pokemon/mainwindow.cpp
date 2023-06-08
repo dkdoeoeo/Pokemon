@@ -704,7 +704,8 @@ void MainWindow::chooseHealPokemon(string type)
 
 void MainWindow::on_Run_clicked()
 {
-
+    clickSound->play();
+    qApp->quit();
 }
 
 string MainWindow::getComputeRandomMove()
