@@ -5,7 +5,7 @@
 #include "Pokemon.h"
 #include <map>
 #include "Player.h"
-
+#include <QString>
 using namespace std;
 
 class Game
@@ -35,6 +35,7 @@ public:
     void run();//Run command
     double getTypeEffectiveness(string atkType, string defType);
     bool getifGameOver();
+    void split(string Words[], QString Name);//to split Qbject name
 };
 
 #endif // GAME_H
