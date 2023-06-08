@@ -37,9 +37,9 @@ int main(int argc, char *argv[])
 void RunCommandFile(string testFile, string outputFileName)
 {
     Game game;//create new game
-//    ofstream outputFile;
-//    outputFile.open(outputFileName);//create output file
-//    cout.rdbuf(outputFile.rdbuf());//write cout things into output file
+    ofstream outputFile;
+    outputFile.open(outputFileName);//create output file
+    cout.rdbuf(outputFile.rdbuf());//write cout things into output file
     game.ExecuteCommandFile(testFile);//execute commandFile
-//    outputFile.close();//close file
+    outputFile.close();//close file
 }
