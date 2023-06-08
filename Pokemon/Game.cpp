@@ -34,7 +34,6 @@ Game::Game()
         };
 }
 
-
 // Intent: Execute test mode
 // Pre: file name
 // Post: Execute test mode
@@ -103,6 +102,7 @@ void Game::ExecuteCommandFile(string testFile)
 void Game::loadPokemonFile(string pokemonFile)
 {
     ifstream iFile(pokemonFile.c_str());
+
     if(!iFile.is_open())
     {
         cout << "open " << pokemonFile << " failed\n";
@@ -123,6 +123,7 @@ void Game::loadPokemonFile(string pokemonFile)
         //read in type
         iFile >> numOfType;
         tempPokemon.resizeTypes(numOfType);
+
         for (int var = 0; var < numOfType; ++var) {
             iFile >> pokemonType;
             tempPokemon.appendTypes(pokemonType);
@@ -167,6 +168,7 @@ void Game::loadPokemonFile(string pokemonFile)
 void Game::loadMoveFile(string moveFile)
 {
     ifstream iFile(moveFile.c_str());
+
     if(!iFile.is_open())
     {
         cout << "open " << moveFile << " failed\n";
@@ -188,6 +190,7 @@ void Game::loadMoveFile(string moveFile)
 
         moveAttributes.clear();
         ss.str(lineOfAttributes);
+
         while(ss >> tempAttribute) // parse lineOfAttributes
         {
             moveAttributes.push_back(tempAttribute);
@@ -206,6 +209,7 @@ void Game::loadMoveFile(string moveFile)
 void Game::loadGameFile(string gameFile)
 {
     ifstream iFile(gameFile.c_str());
+
     if(!iFile.is_open())
     {
         cout << "open " << gameFile << " failed\n";
@@ -227,7 +231,8 @@ void Game::loadGameFile(string gameFile)
     std::map<string, vector<string>>::iterator iterMove; //allMoves map iterator
     std::map<string, Pokemon>::iterator iterPokemon; //allMoves map iterator
 
-    for (int var = 0; var < numOfPokemons_Player; ++var) {
+    for (int var = 0; var < numOfPokemons_Player; ++var)
+    {
         iFile >> pokemonName;
         iFile >> numOfplayerPokemonMove;
         //assign pokemon attributes
@@ -241,7 +246,8 @@ void Game::loadGameFile(string gameFile)
         human.getPokemons()[var].setSpeed(iterPokemon->second.getSpeed());
 
         //assign pokemons' moves attributes
-        for (int i = 0; i < numOfplayerPokemonMove; ++i) {
+        for (int i = 0; i < numOfplayerPokemonMove; ++i)
+        {
             iFile >> pokemonMove;
             Move curMove;
             curMove.setName(pokemonMove);
@@ -268,7 +274,8 @@ void Game::loadGameFile(string gameFile)
     iFile >> numOfPokemons_Comp;
     computer.resizePokemons(numOfPokemons_Comp);
 
-    for (int var = 0; var < numOfPokemons_Comp; ++var) {
+    for (int var = 0; var < numOfPokemons_Comp; ++var)
+    {
         iFile >> pokemonName;
         iFile >> numOfCompPokemonMove;
         //assign pokemon attributes
@@ -282,7 +289,8 @@ void Game::loadGameFile(string gameFile)
         computer.getPokemons()[var].setSpeed(iterPokemon->second.getSpeed());
 
         //assign pokemons' moves attributes
-        for (int i = 0; i < numOfCompPokemonMove; ++i) {
+        for (int i = 0; i < numOfCompPokemonMove; ++i)
+        {
             iFile >> pokemonMove;
             Move curMove;
             curMove.setName(pokemonMove);
@@ -346,6 +354,7 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
         {
             return;
         }
+
         int pokemonMaxHp = (allPokemons.find(ownPokemon)->second.getHp());
 
         if(potion == "Potion" && human.ifHavePotion("Potion"))
@@ -478,7 +487,9 @@ void Game::pokemon(string ownPokemon, string computerMove, int playType)
 
     //pokemon to swap to
     int pokemonToSwapIndex = -1;
-    for (int var = 0; var < human.getPokemons().size(); ++var) {
+
+    for (int var = 0; var < human.getPokemons().size(); ++var)
+    {
         if(human.getPokemons().at(var).getName() == ownPokemon)
         {
             pokemonToSwapIndex = var;
@@ -517,7 +528,9 @@ void Game::status(ostream& oStream)
     Pokemon& computerSelectPokemon = computer.getPokemons().at(computer.getSelectPokemon());
     vector<string> statuses = {"PAR","BRN","PSN"};
     oStream << humanSelectPokemon.getName() << ' ' << humanSelectPokemon.getHp();
-    for (int var = 0; var < 3; ++var) {
+
+    for (int var = 0; var < 3; ++var)
+    {
         if(humanSelectPokemon.getCon(statuses[var]) > 0)
         {
             cout << ' ' << statuses[var];
@@ -525,7 +538,9 @@ void Game::status(ostream& oStream)
     }
 
     oStream << ' ' << computerSelectPokemon.getName() << ' ' << computerSelectPokemon.getHp();
-    for (int var = 0; var < 3; ++var) {
+
+    for (int var = 0; var < 3; ++var)
+    {
         if(computerSelectPokemon.getCon(statuses[var]) > 0)
         {
             cout << ' ' << statuses[var];
@@ -547,8 +562,8 @@ void Game::check(ostream& oStream)
     Pokemon& humanSelectPokemon = human.getPokemons().at(human.getSelectPokemon());
 
     //iterate through the moves, then output pokemon moves and pp
-    for (int var = 0; var < numOfMoves; ++var) {
-
+    for (int var = 0; var < numOfMoves; ++var)
+    {
         oStream << humanSelectPokemon.getMoves().at(var).getName()
                 << ' ' << humanSelectPokemon.getMoves().at(var).getPP();
 
@@ -575,15 +590,18 @@ void Game::run()
 // Post: returns the damage bonus
 double Game::getTypeEffectiveness(string atkType, string defType)
 {
-    vector<string> types = {
+    vector<string> types =
+    {
         "Normal", "Fighting", "Flying", "Poison", "Ground", "Rock",
         "Bug", "Ghost", "Steel", "Fire", "Water", "Grass",
         "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy"
     };
+
     int row = 0;
     int col = 0;
 
-    for (int var = 0; var < types.size(); ++var) {
+    for (int var = 0; var < types.size(); ++var)
+    {
         if(types[var] == atkType)
         {
             row = var;
@@ -612,10 +630,12 @@ void Game::attackPokemon(string move, string target,int playType)
     {
         //check if paralyzed
         bool ifPara = false;
+
         if(computerSelectedPokemon.getCon("PAR") > 0)
         {
             ifPara = rand() % 100 < 25;
         }
+
         if(ifPara)
         {
             cout << "Opposing " << computerSelectedPokemon.getName() << " is paralyzed!" << endl;
@@ -628,6 +648,7 @@ void Game::attackPokemon(string move, string target,int playType)
                                            [&](Move& tempCompMove){ return tempCompMove.getName() == move;});
         //if hit
         bool ifHit = false;
+
         if(playType == testMode)
         {
             ifHit = true;
@@ -637,7 +658,8 @@ void Game::attackPokemon(string move, string target,int playType)
             ifHit = rand() % 100 < selectedMove.getAccuracy();
         }
 
-        if(ifHit && selectedMove.getPP() > 0){
+        if(ifHit && selectedMove.getPP() > 0)
+        {
             selectedMove.setPP(selectedMove.getPP() - 1);
             cout << computerSelectedPokemon.getName() << " used " << move << '!' << endl;
             int damage = 0; //total damage
@@ -649,7 +671,8 @@ void Game::attackPokemon(string move, string target,int playType)
 
 
             //calculate type Effectiveness
-            for (int var = 0; var < humanSelectedPokemon.getTypes().size(); ++var) {
+            for (int var = 0; var < humanSelectedPokemon.getTypes().size(); ++var)
+            {
                 totalTypeEffectiveness *= getTypeEffectiveness(selectedMove.getType(),humanSelectedPokemon.getTypes()[var]);
             }
 
@@ -682,9 +705,11 @@ void Game::attackPokemon(string move, string target,int playType)
             {
                 ifCritical = false;
             }
+
             //determine critical damage
             if(ifCritical){
                 cout << "A critical hit!" << endl;
+
                 if(playType == testMode)
                 {
                     critical = 1;
@@ -696,7 +721,8 @@ void Game::attackPokemon(string move, string target,int playType)
             }
 
             //determine stab
-            for (int var = 0; var < computerSelectedPokemon.getTypes().size(); ++var) {
+            for (int var = 0; var < computerSelectedPokemon.getTypes().size(); ++var)
+            {
                 if(selectedMove.getType() == computerSelectedPokemon.getTypes()[var])
                 {
                     stab = 1.5;
