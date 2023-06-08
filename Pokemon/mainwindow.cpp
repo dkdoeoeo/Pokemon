@@ -37,6 +37,13 @@ void MainWindow::initIcon()
     iconPAR = new QPixmap("./images/PAR.png");
     iconBRN = new QPixmap("./images/BRN.png");
     iconPSN = new QPixmap("./images/PSN.png");
+    iconDragon = new QPixmap("./images/Dragon.png");
+    iconFire = new QPixmap("./images/Fire.png");
+    iconFlying = new QPixmap("./images/Flying.png");
+    iconSteel = new QPixmap("./images/Steel.png");
+    iconWater = new QPixmap("./images/Water.png");
+    iconPoison = new QPixmap("./images/Poison.png");
+    iconGrass = new QPixmap("./images/Grass.png");
     *iconBlastoise = iconBlastoise->scaled(150,150);
     *iconCharizard = iconCharizard->scaled(150,150);
     *iconVenusaur = iconVenusaur->scaled(150,150);
@@ -236,7 +243,239 @@ void MainWindow::update()
 
 void MainWindow::on_Battle_clicked()
 {
+    QDialog *dialog = new QDialog(this);
+    dialog->setWindowFlags(dialog->windowFlags() & ~Qt::WindowCloseButtonHint);
+    dialog->setWindowTitle("Battle");
+    QHBoxLayout *layout = new QHBoxLayout(dialog);
 
+    for(int i = 0; i < game.human.getPokemons()[game.human.selectPokemon].getMoves().size(); i++)
+    {
+        if(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getName() == "DragonClaw")
+        {
+            //set DragonClaw
+            QPushButton *buttonDragonClaw = new QPushButton("DragonClaw",dialog);
+            buttonDragonClaw->setIcon(QIcon(*iconDragon));
+            buttonDragonClaw->setIconSize(QSize(32, 32));
+
+            connect(buttonDragonClaw, &QPushButton::clicked, [=]()
+                    {
+                        dialog->close();//close window
+                        clickSound->play();
+                        game.Battle("DragonClaw",getComputeRandomMove(),playMode);
+                        update();
+                    });
+
+            layout->addWidget(buttonDragonClaw);
+        }
+        else if(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getName() == "Ember")
+        {
+            //set Ember
+            QPushButton *buttonEmber = new QPushButton("Ember",dialog);
+            buttonEmber->setIcon(QIcon(*iconFire));
+            buttonEmber->setIconSize(QSize(32, 32));
+
+            connect(buttonEmber, &QPushButton::clicked, [=]()
+                    {
+                        dialog->close();//close window
+                        clickSound->play();
+                        game.Battle("Ember",getComputeRandomMove(),playMode);
+                        update();
+                    });
+
+            layout->addWidget(buttonEmber);
+        }
+        else if(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getName() == "DragonBreath")
+        {
+            //set DragonBreath
+            QPushButton *buttonDragonBreath = new QPushButton("DragonBreath",dialog);
+            buttonDragonBreath->setIcon(QIcon(*iconDragon));
+            buttonDragonBreath->setIconSize(QSize(32, 32));
+
+            connect(buttonDragonBreath, &QPushButton::clicked, [=]()
+                    {
+                        dialog->close();//close window
+                        clickSound->play();
+                        game.Battle("DragonBreath",getComputeRandomMove(),playMode);
+                        update();
+                    });
+
+            layout->addWidget(buttonDragonBreath);
+        }
+        else if(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getName() == "AirSlash")
+        {
+            //set AirSlash
+            QPushButton *buttonAirSlash = new QPushButton("AirSlash",dialog);
+            buttonAirSlash->setIcon(QIcon(*iconFlying));
+            buttonAirSlash->setIconSize(QSize(32, 32));
+
+            connect(buttonAirSlash, &QPushButton::clicked, [=]()
+                    {
+                        dialog->close();//close window
+                        clickSound->play();
+                        game.Battle("AirSlash",getComputeRandomMove(),playMode);
+                        update();
+                    });
+
+            layout->addWidget(buttonAirSlash);
+        }
+        else if(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getName() == "Flamethrower")
+        {
+            //set Flamethrower
+            QPushButton *buttonFlamethrower = new QPushButton("Flamethrower",dialog);
+            buttonFlamethrower->setIcon(QIcon(*iconFlying));
+            buttonFlamethrower->setIconSize(QSize(32, 32));
+
+            connect(buttonFlamethrower, &QPushButton::clicked, [=]()
+                    {
+                        dialog->close();//close window
+                        clickSound->play();
+                        game.Battle("Flamethrower",getComputeRandomMove(),playMode);
+                        update();
+                    });
+
+            layout->addWidget(buttonFlamethrower);
+        }
+        else if(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getName() == "FlashCannon")
+        {
+            //set FlashCannon
+            QPushButton *buttonFlashCannon = new QPushButton("FlashCannon",dialog);
+            buttonFlashCannon->setIcon(QIcon(*iconSteel));
+            buttonFlashCannon->setIconSize(QSize(32, 32));
+
+            connect(buttonFlashCannon, &QPushButton::clicked, [=]()
+                    {
+                        dialog->close();//close window
+                        clickSound->play();
+                        game.Battle("FlashCannon",getComputeRandomMove(),playMode);
+                        update();
+                    });
+
+            layout->addWidget(buttonFlashCannon);
+        }
+        else if(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getName() == "WaterGun")
+        {
+            //set WaterGun
+            QPushButton *buttonWaterGun = new QPushButton("WaterGun",dialog);
+            buttonWaterGun->setIcon(QIcon(*iconWater));
+            buttonWaterGun->setIconSize(QSize(32, 32));
+
+            connect(buttonWaterGun, &QPushButton::clicked, [=]()
+                    {
+                        dialog->close();//close window
+                        clickSound->play();
+                        game.Battle("WaterGun",getComputeRandomMove(),playMode);
+                        update();
+                    });
+
+            layout->addWidget(buttonWaterGun);
+        }
+        else if(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getName() == "WaterPulse")
+        {
+            //set WaterPulse
+            QPushButton *buttonWaterPulse = new QPushButton("WaterPulse",dialog);
+            buttonWaterPulse->setIcon(QIcon(*iconWater));
+            buttonWaterPulse->setIconSize(QSize(32, 32));
+
+            connect(buttonWaterPulse, &QPushButton::clicked, [=]()
+                    {
+                        dialog->close();//close window
+                        clickSound->play();
+                        game.Battle("WaterPulse",getComputeRandomMove(),playMode);
+                        update();
+                    });
+
+            layout->addWidget(buttonWaterPulse);
+        }
+        else if(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getName() == "AquaTail")
+        {
+            //set AquaTail
+            QPushButton *buttonAquaTail = new QPushButton("AquaTail",dialog);
+            buttonAquaTail->setIcon(QIcon(*iconWater));
+            buttonAquaTail->setIconSize(QSize(32, 32));
+
+            connect(buttonAquaTail, &QPushButton::clicked, [=]()
+                    {
+                        dialog->close();//close window
+                        clickSound->play();
+                        game.Battle("AquaTail",getComputeRandomMove(),playMode);
+                        update();
+                    });
+
+            layout->addWidget(buttonAquaTail);
+        }
+        else if(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getName() == "PoisonPowder")
+        {
+            //set PoisonPowder
+            QPushButton *buttonPoisonPowder = new QPushButton("PoisonPowder",dialog);
+            buttonPoisonPowder->setIcon(QIcon(*iconPoison));
+            buttonPoisonPowder->setIconSize(QSize(32, 32));
+
+            connect(buttonPoisonPowder, &QPushButton::clicked, [=]()
+                    {
+                        dialog->close();//close window
+                        clickSound->play();
+                        game.Battle("PoisonPowder",getComputeRandomMove(),playMode);
+                        update();
+                    });
+
+            layout->addWidget(buttonPoisonPowder);
+        }
+        else if(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getName() == "SeedBomb")
+        {
+            //set SeedBomb
+            QPushButton *buttonSeedBomb = new QPushButton("SeedBomb",dialog);
+            buttonSeedBomb->setIcon(QIcon(*iconGrass));
+            buttonSeedBomb->setIconSize(QSize(32, 32));
+
+            connect(buttonSeedBomb, &QPushButton::clicked, [=]()
+                    {
+                        dialog->close();//close window
+                        clickSound->play();
+                        game.Battle("SeedBomb",getComputeRandomMove(),playMode);
+                        update();
+                    });
+
+            layout->addWidget(buttonSeedBomb);
+        }
+        else if(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getName() == "VineWhip")
+        {
+            //set VineWhip
+            QPushButton *buttonVineWhip = new QPushButton("VineWhip",dialog);
+            buttonVineWhip->setIcon(QIcon(*iconGrass));
+            buttonVineWhip->setIconSize(QSize(32, 32));
+
+            connect(buttonVineWhip, &QPushButton::clicked, [=]()
+                    {
+                        dialog->close();//close window
+                        clickSound->play();
+                        game.Battle("VineWhip",getComputeRandomMove(),playMode);
+                        update();
+                    });
+
+            layout->addWidget(buttonVineWhip);
+        }
+        else if(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getName() == "SolarBeam")
+        {
+            //set SolarBeam
+            QPushButton *buttonSolarBeam = new QPushButton("SolarBeam",dialog);
+            buttonSolarBeam->setIcon(QIcon(*iconGrass));
+            buttonSolarBeam->setIconSize(QSize(32, 32));
+
+            connect(buttonSolarBeam, &QPushButton::clicked, [=]()
+                    {
+                        dialog->close();//close window
+                        clickSound->play();
+                        game.Battle("SolarBeam",getComputeRandomMove(),playMode);
+                        update();
+                    });
+
+            layout->addWidget(buttonSolarBeam);
+        }
+    }
+
+    dialog->setLayout(layout);
+    dialog->resize(500, 200);
+    dialog->exec();//display
 }
 
 void MainWindow::on_Pokemon_clicked()

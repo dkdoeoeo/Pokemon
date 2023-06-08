@@ -60,6 +60,13 @@ private:
     QPixmap *iconPAR;//PAR icon
     QPixmap *iconBRN;//BRN icon
     QPixmap *iconPSN;//PSN icon
+    QPixmap *iconDragon;//Dragon icon
+    QPixmap *iconFire;//Fire icon
+    QPixmap *iconFlying;//Flying icon
+    QPixmap *iconSteel;//Steel icon
+    QPixmap *iconWater;//Water icon
+    QPixmap *iconPoison;//Poison icon
+    QPixmap *iconGrass;//Grass icon
     QSoundEffect *startSound;//BGM
     QSoundEffect *clickSound;//click sound
     QProgressBar *playerHp;
