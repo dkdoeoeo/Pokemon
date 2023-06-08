@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     initIcon();
     initSound();
+    setAvimation();
     initProgressBar();
     loadFiles();
     connectItem();
@@ -200,7 +201,8 @@ void MainWindow::update()
         cout << game.human.getPokemons()[game.human.selectPokemon].getCon("PAR")<<endl;
         cout << game.human.getPokemons()[game.human.selectPokemon].getCon("BRN")<<endl;
         cout << game.human.getPokemons()[game.human.selectPokemon].getCon("PSN")<<endl;
-        playerPAR->setPixmap(*iconPAR);}
+        playerPAR->setPixmap(*iconPAR);
+    }
     else
         playerPAR->clear();
 
@@ -257,6 +259,7 @@ void MainWindow::on_Battle_clicked()
                         clickSound->play();
                         game.Battle("DragonClaw",getComputeRandomMove(),playMode);
                         update();
+                        animation->start();
                     });
 
             layout->addWidget(buttonDragonClaw);
@@ -274,6 +277,7 @@ void MainWindow::on_Battle_clicked()
                         clickSound->play();
                         game.Battle("Ember",getComputeRandomMove(),playMode);
                         update();
+                        animation->start();
                     });
 
             layout->addWidget(buttonEmber);
@@ -291,6 +295,7 @@ void MainWindow::on_Battle_clicked()
                         clickSound->play();
                         game.Battle("DragonBreath",getComputeRandomMove(),playMode);
                         update();
+                        animation->start();
                     });
 
             layout->addWidget(buttonDragonBreath);
@@ -308,6 +313,7 @@ void MainWindow::on_Battle_clicked()
                         clickSound->play();
                         game.Battle("AirSlash",getComputeRandomMove(),playMode);
                         update();
+                        animation->start();
                     });
 
             layout->addWidget(buttonAirSlash);
@@ -325,6 +331,7 @@ void MainWindow::on_Battle_clicked()
                         clickSound->play();
                         game.Battle("Flamethrower",getComputeRandomMove(),playMode);
                         update();
+                        animation->start();
                     });
 
             layout->addWidget(buttonFlamethrower);
@@ -342,6 +349,7 @@ void MainWindow::on_Battle_clicked()
                         clickSound->play();
                         game.Battle("FlashCannon",getComputeRandomMove(),playMode);
                         update();
+                        animation->start();
                     });
 
             layout->addWidget(buttonFlashCannon);
@@ -359,6 +367,7 @@ void MainWindow::on_Battle_clicked()
                         clickSound->play();
                         game.Battle("WaterGun",getComputeRandomMove(),playMode);
                         update();
+                        animation->start();
                     });
 
             layout->addWidget(buttonWaterGun);
@@ -376,6 +385,7 @@ void MainWindow::on_Battle_clicked()
                         clickSound->play();
                         game.Battle("WaterPulse",getComputeRandomMove(),playMode);
                         update();
+                        animation->start();
                     });
 
             layout->addWidget(buttonWaterPulse);
@@ -393,6 +403,7 @@ void MainWindow::on_Battle_clicked()
                         clickSound->play();
                         game.Battle("AquaTail",getComputeRandomMove(),playMode);
                         update();
+                        animation->start();
                     });
 
             layout->addWidget(buttonAquaTail);
@@ -410,6 +421,7 @@ void MainWindow::on_Battle_clicked()
                         clickSound->play();
                         game.Battle("PoisonPowder",getComputeRandomMove(),playMode);
                         update();
+                        animation->start();
                     });
 
             layout->addWidget(buttonPoisonPowder);
@@ -427,6 +439,7 @@ void MainWindow::on_Battle_clicked()
                         clickSound->play();
                         game.Battle("SeedBomb",getComputeRandomMove(),playMode);
                         update();
+                        animation->start();
                     });
 
             layout->addWidget(buttonSeedBomb);
@@ -444,6 +457,7 @@ void MainWindow::on_Battle_clicked()
                         clickSound->play();
                         game.Battle("VineWhip",getComputeRandomMove(),playMode);
                         update();
+                        animation->start();
                     });
 
             layout->addWidget(buttonVineWhip);
@@ -461,6 +475,7 @@ void MainWindow::on_Battle_clicked()
                         clickSound->play();
                         game.Battle("SolarBeam",getComputeRandomMove(),playMode);
                         update();
+                        animation->start();
                     });
 
             layout->addWidget(buttonSolarBeam);
@@ -490,6 +505,7 @@ void MainWindow::on_Pokemon_clicked()
             clickSound->play();
             game.pokemon("Venusaur",getComputeRandomMove(),playMode);
             update();
+            animation->start();
         }
     });
 
@@ -499,15 +515,16 @@ void MainWindow::on_Pokemon_clicked()
     QPushButton *buttonCharizard = new QPushButton(dialog);
 
     connect(buttonCharizard, &QPushButton::clicked, [=]()
-            {
-                if(game.human.getPokemons()[1].getIfFainted() == 0)
-                {
-                    dialog->close();//close window
-                    clickSound->play();
-                    game.pokemon("Charizard",getComputeRandomMove(),playMode);
-                    update();
-                }
-            });
+    {
+        if(game.human.getPokemons()[1].getIfFainted() == 0)
+        {
+            dialog->close();//close window
+            clickSound->play();
+            game.pokemon("Charizard",getComputeRandomMove(),playMode);
+            update();
+            animation->start();
+        }
+    });
 
     layout->addWidget(buttonCharizard);
 
@@ -515,15 +532,16 @@ void MainWindow::on_Pokemon_clicked()
     QPushButton *buttonBlastoise = new QPushButton(dialog);
 
     connect(buttonBlastoise, &QPushButton::clicked, [=]()
-            {
-                if(game.human.getPokemons()[2].getIfFainted() == 0)
-                {
-                    dialog->close();//close window
-                    clickSound->play();
-                    game.pokemon("Blastoise",getComputeRandomMove(),playMode);
-                    update();
-                }
-            });
+    {
+        if(game.human.getPokemons()[2].getIfFainted() == 0)
+        {
+            dialog->close();//close window
+            clickSound->play();
+            game.pokemon("Blastoise",getComputeRandomMove(),playMode);
+            update();
+            animation->start();
+        }
+    });
 
     layout->addWidget(buttonBlastoise);
 
@@ -637,15 +655,16 @@ void MainWindow::chooseHealPokemon(string type)
     QPushButton *buttonVenusaur = new QPushButton(dialog);
 
     connect(buttonVenusaur, &QPushButton::clicked, [=]()
-            {
-                if(game.human.getPokemons()[0].getIfFainted() == 0)
-                {
-                    dialog->close();//close window
-                    clickSound->play();
-                    game.Bag(type, "Venusaur", getComputeRandomMove(), playMode);
-                    update();
-                }
-            });
+    {
+        if(game.human.getPokemons()[0].getIfFainted() == 0)
+        {
+            dialog->close();//close window
+            clickSound->play();
+            game.Bag(type, "Venusaur", getComputeRandomMove(), playMode);
+            update();
+            animation->start();
+        }
+    });
 
     layout->addWidget(buttonVenusaur);
 
@@ -653,15 +672,16 @@ void MainWindow::chooseHealPokemon(string type)
     QPushButton *buttonCharizard = new QPushButton(dialog);
 
     connect(buttonCharizard, &QPushButton::clicked, [=]()
-            {
-                if(game.human.getPokemons()[1].getIfFainted() == 0)
-                {
-                    dialog->close();//close window
-                    clickSound->play();
-                    game.Bag(type, "Charizard", getComputeRandomMove(), playMode);
-                    update();
-                }
-            });
+    {
+        if(game.human.getPokemons()[1].getIfFainted() == 0)
+        {
+            dialog->close();//close window
+            clickSound->play();
+            game.Bag(type, "Charizard", getComputeRandomMove(), playMode);
+            update();
+            animation->start();
+        }
+    });
 
     layout->addWidget(buttonCharizard);
 
@@ -669,15 +689,16 @@ void MainWindow::chooseHealPokemon(string type)
     QPushButton *buttonBlastoise = new QPushButton(dialog);
 
     connect(buttonBlastoise, &QPushButton::clicked, [=]()
-            {
-                if(game.human.getPokemons()[2].getIfFainted() == 0)
-                {
-                    dialog->close();//close window
-                    clickSound->play();
-                    game.Bag(type, "Blastoise", getComputeRandomMove(), playMode);
-                    update();
-                }
-            });
+    {
+        if(game.human.getPokemons()[2].getIfFainted() == 0)
+        {
+            dialog->close();//close window
+            clickSound->play();
+            game.Bag(type, "Blastoise", getComputeRandomMove(), playMode);
+            update();
+            animation->start();
+        }
+    });
 
     layout->addWidget(buttonBlastoise);
 
@@ -707,4 +728,23 @@ string MainWindow::getComputeRandomMove()
     int Max = game.computer.getPokemons()[game.computer.selectPokemon].getMoves().size();
     int random = rand() % Max;
     return game.computer.getPokemons()[game.computer.selectPokemon].getMoves()[random].getName();
+}
+
+void MainWindow::setAvimation()
+{
+    //set up an animation for the player being attacked
+    animation = new QPropertyAnimation(ui->playerPokemon, "pos");
+    animation->setDuration(100); // 动画持续时间（毫秒）
+    animation->setLoopCount(3); // 动画重复次数
+    animation->setKeyValueAt(0, ui->playerPokemon->pos()); // 初始位置
+    animation->setKeyValueAt(0.1, ui->playerPokemon->pos() + QPoint(-10, -10)); // Frame 1
+    animation->setKeyValueAt(0.2, ui->playerPokemon->pos() + QPoint(10, 10)); // Frame 2
+    animation->setKeyValueAt(0.3, ui->playerPokemon->pos() + QPoint(-10, -10)); // Frame 3
+    animation->setKeyValueAt(0.4, ui->playerPokemon->pos() + QPoint(10, 10)); // Frame 4
+    animation->setKeyValueAt(0.5, ui->playerPokemon->pos() + QPoint(-10, -10)); // Frame 5
+    animation->setKeyValueAt(0.6, ui->playerPokemon->pos() + QPoint(10, 10)); // Frame 6
+    animation->setKeyValueAt(0.7, ui->playerPokemon->pos() + QPoint(-10, -10)); // Frame 7
+    animation->setKeyValueAt(0.8, ui->playerPokemon->pos() + QPoint(10, 10)); // Frame 8
+    animation->setKeyValueAt(0.9, ui->playerPokemon->pos() + QPoint(-10, -10)); // Frame 9
+    animation->setKeyValueAt(1, ui->playerPokemon->pos()); // Final frame
 }

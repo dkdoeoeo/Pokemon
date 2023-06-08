@@ -8,6 +8,7 @@
 #include <QtWidgets>
 #include <QFont>
 #include "Game.h"
+#include <QPropertyAnimation>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -37,6 +38,8 @@ public:
     string getComputeRandomMove();
 
     void chooseHealPokemon(string type);
+
+    void setAvimation();
 
 private slots:
     void on_Battle_clicked();
@@ -87,6 +90,7 @@ private:
     QLabel *computerPSN;
     QLabel *computerBRN;
     QLabel *computerPAR;
+    QPropertyAnimation *animation;
 protected:
     void paintEvent(QPaintEvent *event) override {
         QPainter painter(this);
