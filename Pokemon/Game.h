@@ -5,14 +5,12 @@
 #include "Pokemon.h"
 #include <map>
 #include "Player.h"
-#define testMode 1
-#define playMode 2
-
+#include <QString>
 using namespace std;
 
 class Game
 {
-public:
+private:
     Player human;
     Player computer;
     map<string, vector<string>> allMoves;
@@ -37,6 +35,7 @@ public:
     void run();//Run command
     double getTypeEffectiveness(string atkType, string defType);
     bool getifGameOver();
+    void split(string Words[], QString Name);//to split Qbject name
 };
 
 #endif // GAME_H

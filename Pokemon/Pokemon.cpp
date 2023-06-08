@@ -1,5 +1,10 @@
 #include "Pokemon.h"
 
+Pokemon::Pokemon()
+{
+
+}
+
 void Pokemon::setName(string input)
 {
     name = input;
@@ -64,15 +69,15 @@ void Pokemon::setCon(string con, int input)
 {
     if(con == "PAR")
     {
-        con[0] += input;
+        this->con[0] += input;
     }
     else if(con == "BRN")
     {
-        con[1] += input;
+        this->con[1] += input;
     }
     else if(con == "PSN")
     {
-        con[2] += input;
+        this->con[2] += input;
     }
 
 }
@@ -126,15 +131,15 @@ int Pokemon::getCon(string con)
 {
     if(con == "PAR")
     {
-        return con[0];
+        return this->con[0];
     }
     else if(con == "BRN")
     {
-        return con[1];
+        return this->con[1];
     }
     else if(con == "PSN")
     {
-        return con[2];
+        return this->con[2];
     }
 
     return -1;

@@ -20,9 +20,10 @@ private:
     int spDef;
     int speed;
     bool ifFainted = false;
-    int con[3] = {0};
+    int con[3] = {0,0,0};
     const int level = 50;
 public:
+    Pokemon();
     void setName(string input);
     void setHp(int input);
     void setAtk(int input);
