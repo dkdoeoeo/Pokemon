@@ -122,8 +122,6 @@ void Game::loadPokemonFile(string pokemonFile)
 
         //read in type
         iFile >> numOfType;
-        tempPokemon.resizeTypes(numOfType);
-
         for (int var = 0; var < numOfType; ++var) {
             iFile >> pokemonType;
             tempPokemon.appendTypes(pokemonType);
@@ -186,11 +184,10 @@ void Game::loadMoveFile(string moveFile)
 
         //get all the line of attributes into lineOfAttributes
         getline(iFile, lineOfAttributes);
-        iFile.ignore(1,'\n');
 
         moveAttributes.clear();
         ss.str(lineOfAttributes);
-
+        ss.clear();
         while(ss >> tempAttribute) // parse lineOfAttributes
         {
             moveAttributes.push_back(tempAttribute);
@@ -244,6 +241,10 @@ void Game::loadGameFile(string gameFile)
         human.getPokemons()[var].setSpAtk(iterPokemon->second.getSpAtk());
         human.getPokemons()[var].setSpDef(iterPokemon->second.getSpDef());
         human.getPokemons()[var].setSpeed(iterPokemon->second.getSpeed());
+        for (int typecount = 0; typecount < iterPokemon->second.getTypes().size(); ++typecount) {
+            human.getPokemons()[var].appendTypes(iterPokemon->second.getTypes().at(typecount));
+        }
+
 
         //assign pokemons' moves attributes
         for (int i = 0; i < numOfplayerPokemonMove; ++i)
@@ -287,6 +288,10 @@ void Game::loadGameFile(string gameFile)
         computer.getPokemons()[var].setSpAtk(iterPokemon->second.getSpAtk());
         computer.getPokemons()[var].setSpDef(iterPokemon->second.getSpDef());
         computer.getPokemons()[var].setSpeed(iterPokemon->second.getSpeed());
+
+        for (int typecount = 0; typecount < iterPokemon->second.getTypes().size(); ++typecount) {
+            computer.getPokemons()[var].appendTypes(iterPokemon->second.getTypes().at(typecount));
+        }
 
         //assign pokemons' moves attributes
         for (int i = 0; i < numOfCompPokemonMove; ++i)
@@ -359,7 +364,6 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
 
         if(potion == "Potion" && human.ifHavePotion("Potion"))
         {
-            human.usePotion();
             cout << "You used a Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             if(selectedPokemon.getHp() + 20 > pokemonMaxHp)
@@ -373,7 +377,6 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
         }
         else if(potion == "SuperPotion" && human.ifHavePotion("SuperPotion"))
         {
-            human.useSuperPotion();
             cout << "You used a Super Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             if(selectedPokemon.getHp() + 60 > pokemonMaxHp)
@@ -387,7 +390,6 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
         }
         else if(potion == "HyperPotion" && human.ifHavePotion("HyperPotion"))
         {
-            human.useHyperPotion();
             cout << "You used a Hyper Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             if(selectedPokemon.getHp() + 120 > pokemonMaxHp)
@@ -401,7 +403,6 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
         }
         else if(potion == "MaxPotion" && human.ifHavePotion("MaxPotion"))
         {
-            human.useMaxPotion();
             cout << "You used a Max Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             selectedPokemon.setHp(pokemonMaxHp);
@@ -493,6 +494,7 @@ void Game::pokemon(string ownPokemon, string computerMove, int playType)
         if(human.getPokemons().at(var).getName() == ownPokemon)
         {
             pokemonToSwapIndex = var;
+            break;
         }
     }
     Pokemon& pokemonToSwap = human.getPokemons().at(pokemonToSwapIndex);
@@ -628,6 +630,10 @@ void Game::attackPokemon(string move, string target,int playType)
     //for attacking human
     if(target == "human")
     {
+        if(humanSelectedPokemon.getIfFainted())
+        {
+            return;
+        }
         //check if paralyzed
         bool ifPara = false;
 
@@ -635,8 +641,7 @@ void Game::attackPokemon(string move, string target,int playType)
         {
             ifPara = rand() % 100 < 25;
         }
-
-        if(ifPara)
+        if(ifPara || playType == testMode)
         {
             cout << "Opposing " << computerSelectedPokemon.getName() << " is paralyzed!" << endl;
             cout << "It can't move!" << endl;
@@ -667,7 +672,7 @@ void Game::attackPokemon(string move, string target,int playType)
             double critical = 1; // critical damage
             double atkDefRatio = 0; // attack defense ratio
             double stab = 1; //STAB
-            double totalTypeEffectiveness = 0; //total type effectiveness
+            double totalTypeEffectiveness = 1; //total type effectiveness
 
 
             //calculate type Effectiveness
@@ -730,7 +735,6 @@ void Game::attackPokemon(string move, string target,int playType)
                 }
             }
 
-
             damage = ((110/250) * selectedMove.getPower() * atkDefRatio + 2) * critical * stab * totalTypeEffectiveness;
 
             //check if fainted
@@ -739,6 +743,7 @@ void Game::attackPokemon(string move, string target,int playType)
                 cout << humanSelectedPokemon.getName() << " has fainted!" << endl;
                 humanSelectedPokemon.setHp(0);
                 humanSelectedPokemon.setIfFainted(true);
+
                 if(checkIfAllFainted())
                 {
                     return;
@@ -791,13 +796,17 @@ void Game::attackPokemon(string move, string target,int playType)
     }
     else if(target == "computer") // for attacking computer
     {
+        if(computerSelectedPokemon.getIfFainted())
+        {
+            return;
+        }
         //check if paralyzed
         bool ifPara = false;
         if(humanSelectedPokemon.getCon("PAR") > 0)
         {
             ifPara = rand() % 100 < 25;
         }
-        if(ifPara)
+        if(ifPara || playType == testMode)
         {
             cout << humanSelectedPokemon.getName() << " is paralyzed!" << endl;
             cout << "It can't move!" << endl;
@@ -826,7 +835,7 @@ void Game::attackPokemon(string move, string target,int playType)
             double critical = 1; // critical damage
             double atkDefRatio = 0; // attack defense ratio
             double stab = 1; //STAB
-            double totalTypeEffectiveness = 0; //total type effectiveness
+            double totalTypeEffectiveness = 1; //total type effectiveness
 
 
             //calculate type Effectiveness
@@ -883,8 +892,7 @@ void Game::attackPokemon(string move, string target,int playType)
                 }
             }
 
-
-            damage = ((110/250) * selectedMove.getPower() * atkDefRatio + 2) * critical * stab * totalTypeEffectiveness;
+            damage = (((double)110/250) * selectedMove.getPower() * atkDefRatio + (double)2) * critical * stab * totalTypeEffectiveness;
 
             //check if fainted
             if(computerSelectedPokemon.getHp() - damage <= 0)
@@ -892,6 +900,7 @@ void Game::attackPokemon(string move, string target,int playType)
                 cout << "Opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
                 computerSelectedPokemon.setHp(0);
                 computerSelectedPokemon.setIfFainted(true);
+
                 if(checkIfAllFainted())
                 {
                     return;
@@ -954,6 +963,28 @@ void Game::bAndP()
     Pokemon& computerSelectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
     int damage = 0;
 
+    if(humanSelectedPokemon.getIfFainted())
+    {
+        for (int num = 0; num < human.getPokemons().size(); ++num) {
+            if(!human.getPokemons().at(num).getIfFainted())
+            {
+                human.setSelectPokemon(num);
+                break;
+            }
+        }
+
+    }
+    if(computerSelectedPokemon.getIfFainted())
+    {
+        for (int num = 0; num < computer.getPokemons().size(); ++num) {
+            if(!computer.getPokemons().at(num).getIfFainted())
+            {
+                computer.setSelectPokemon(num);
+                break;
+            }
+        }
+    }
+
     //human
     //burn
     if(human.getPokemons().at(human.getSelectPokemon()).getCon("BRN") > 0)
@@ -965,6 +996,13 @@ void Game::bAndP()
         {
             cout << humanSelectedPokemon.getName() << " has fainted!" << endl;
             humanSelectedPokemon.setHp(0);
+            for (int num = 0; num < human.getPokemons().size(); ++num) {
+                if(!human.getPokemons().at(num).getIfFainted())
+                {
+                    human.setSelectPokemon(num);
+                    break;
+                }
+            }
             if(checkIfAllFainted())
             {
                 return;
@@ -986,6 +1024,13 @@ void Game::bAndP()
         {
             cout << humanSelectedPokemon.getName() << " has fainted!" << endl;
             humanSelectedPokemon.setHp(0);
+            for (int num = 0; num < human.getPokemons().size(); ++num) {
+                if(!human.getPokemons().at(num).getIfFainted())
+                {
+                    human.setSelectPokemon(num);
+                    break;
+                }
+            }
             if(checkIfAllFainted())
             {
                 return;
@@ -1021,6 +1066,18 @@ void Game::bAndP()
         {
             cout << "Opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
             computerSelectedPokemon.setHp(0);
+            for (int num = 0; num < computer.getPokemons().size(); ++num) {
+                if(!computer.getPokemons().at(num).getIfFainted())
+                {
+                    computer.setSelectPokemon(num);
+                    break;
+                }
+            }
+            if(checkIfAllFainted())
+            {
+                return;
+            }
+
 
         }
         else
@@ -1038,6 +1095,17 @@ void Game::bAndP()
         {
             cout << "Opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
             computerSelectedPokemon.setHp(0);
+            for (int num = 0; num < computer.getPokemons().size(); ++num) {
+                if(!computer.getPokemons().at(num).getIfFainted())
+                {
+                    computer.setSelectPokemon(num);
+                    break;
+                }
+            }
+            if(checkIfAllFainted())
+            {
+                return;
+            }
 
         }
         else
