@@ -313,7 +313,7 @@ void MainWindow::on_Bag_clicked()
 {
     QDialog *dialog = new QDialog(this);
     dialog->setWindowFlags(dialog->windowFlags() & ~Qt::WindowCloseButtonHint);
-    dialog->setWindowTitle("Pokemon");
+    dialog->setWindowTitle("Bag");
     QHBoxLayout *layout = new QHBoxLayout(dialog);
 
     //set Potion
@@ -321,21 +321,146 @@ void MainWindow::on_Bag_clicked()
 
     connect(buttonPotion, &QPushButton::clicked, [=]()
             {
-                if(game.human.getPokemons()[0].getIfFainted() != 0)
+                if(game.human.potion != 0)
                 {
                     dialog->close();//close window
                     clickSound->play();
-                    game.pokemon("Venusaur",getComputeRandomMove(),playMode);
-                    update();
+                    chooseHealPokemon("Potion");
                 }
             });
 
     layout->addWidget(buttonPotion);
+
+    //set SuperPotion
+    QPushButton *buttonSuperPotion = new QPushButton(dialog);
+
+    connect(buttonSuperPotion, &QPushButton::clicked, [=]()
+            {
+                if(game.human.potion != 0)
+                {
+                    dialog->close();//close window
+                    clickSound->play();
+                    chooseHealPokemon("SuperPotion");
+                }
+            });
+
+    layout->addWidget(buttonSuperPotion);
+
+    //set hyperPotion
+    QPushButton *buttonHyperPotion = new QPushButton(dialog);
+
+    connect(buttonHyperPotion, &QPushButton::clicked, [=]()
+            {
+                if(game.human.potion != 0)
+                {
+                    dialog->close();//close window
+                    clickSound->play();
+                    chooseHealPokemon("HyperPotion");
+                }
+            });
+
+    layout->addWidget(buttonHyperPotion);
+
+    //set maxPotion
+    QPushButton *buttonMaxPotion = new QPushButton(dialog);
+
+    connect(buttonMaxPotion, &QPushButton::clicked, [=]()
+            {
+                if(game.human.potion != 0)
+                {
+                    dialog->close();//close window
+                    clickSound->play();
+                    chooseHealPokemon("MaxPotion");
+                }
+            });
+
+    layout->addWidget(buttonMaxPotion);
+
+    //set icon
+    buttonPotion->setIcon(QIcon(*iconPotion));
+    buttonPotion->setIconSize(iconPotion->size());
+    buttonPotion->setFixedSize(70, 70);
+    buttonSuperPotion->setIcon(QIcon(*iconSuperPotion));
+    buttonSuperPotion->setIconSize(iconSuperPotion->size());
+    buttonSuperPotion->setFixedSize(70, 70);
+    buttonHyperPotion->setIcon(QIcon(*iconHyperPotion));
+    buttonHyperPotion->setIconSize(iconHyperPotion->size());
+    buttonHyperPotion->setFixedSize(70, 70);
+    buttonMaxPotion->setIcon(QIcon(*iconMaxPotion));
+    buttonMaxPotion->setIconSize(iconMaxPotion->size());
+    buttonMaxPotion->setFixedSize(70, 70);
+    dialog->setLayout(layout);
+    dialog->exec();//display
 }
 
-void chooseHealPokemon()
+void MainWindow::chooseHealPokemon(string type)
 {
+    QDialog *dialog = new QDialog(this);
+    dialog->setWindowFlags(dialog->windowFlags() & ~Qt::WindowCloseButtonHint);
+    dialog->setWindowTitle("Heal");
+    QHBoxLayout *layout = new QHBoxLayout(dialog);
 
+    //set Venusaur
+    QPushButton *buttonVenusaur = new QPushButton(dialog);
+
+    connect(buttonVenusaur, &QPushButton::clicked, [=]()
+            {
+                if(game.human.getPokemons()[0].getIfFainted() == 0)
+                {
+                    dialog->close();//close window
+                    clickSound->play();
+                    game.Bag(type, "Venusaur", getComputeRandomMove(), playMode);
+                    update();
+                }
+            });
+
+    layout->addWidget(buttonVenusaur);
+
+    //set Charizard
+    QPushButton *buttonCharizard = new QPushButton(dialog);
+
+    connect(buttonCharizard, &QPushButton::clicked, [=]()
+            {
+                if(game.human.getPokemons()[1].getIfFainted() == 0)
+                {
+                    dialog->close();//close window
+                    clickSound->play();
+                    game.Bag(type, "Charizard", getComputeRandomMove(), playMode);
+                    update();
+                }
+            });
+
+    layout->addWidget(buttonCharizard);
+
+    //set Blastoise
+    QPushButton *buttonBlastoise = new QPushButton(dialog);
+
+    connect(buttonBlastoise, &QPushButton::clicked, [=]()
+            {
+                if(game.human.getPokemons()[2].getIfFainted() == 0)
+                {
+                    dialog->close();//close window
+                    clickSound->play();
+                    game.Bag(type, "Blastoise", getComputeRandomMove(), playMode);
+                    update();
+                }
+            });
+
+    layout->addWidget(buttonBlastoise);
+
+    //set icon
+    buttonVenusaur->setIcon(QIcon(*iconVenusaur));
+    buttonVenusaur->setIconSize(iconVenusaur->size());
+    buttonVenusaur->setFixedSize(150, 150);
+    buttonCharizard->setIcon(QIcon(*iconCharizard));
+    buttonCharizard->setIconSize(iconCharizard->size());
+    buttonCharizard->setFixedSize(150, 150);
+    buttonBlastoise->setIcon(QIcon(*iconBlastoise));
+    buttonBlastoise->setIconSize(iconBlastoise->size());
+    buttonBlastoise->setFixedSize(150, 150);
+    dialog->setLayout(layout);
+    dialog->resize(500, 200);
+    dialog->exec();//display
 }
 
 void MainWindow::on_Run_clicked()
