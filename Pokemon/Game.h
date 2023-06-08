@@ -6,11 +6,14 @@
 #include <map>
 #include "Player.h"
 #include <QString>
+#define testMode 1
+#define playMode 2
+
 using namespace std;
 
 class Game
 {
-private:
+public:
     Player human;
     Player computer;
     map<string, vector<string>> allMoves;

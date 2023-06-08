@@ -9,7 +9,7 @@ using namespace std;
 
 class Player
 {
-private:
+public:
     int selectPokemon = 0;//current pokemon index
     vector<Pokemon> pokemons;
     int potion = 300000;

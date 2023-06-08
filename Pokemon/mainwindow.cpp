@@ -251,7 +251,7 @@ void MainWindow::on_Pokemon_clicked()
 
     connect(buttonVenusaur, &QPushButton::clicked, [=]()
     {
-        if(game.human.getPokemons()[0].getIfFainted() != 0)
+        if(game.human.getPokemons()[0].getIfFainted() == 0)
         {
             dialog->close();//close window
             clickSound->play();
@@ -267,7 +267,7 @@ void MainWindow::on_Pokemon_clicked()
 
     connect(buttonCharizard, &QPushButton::clicked, [=]()
             {
-                if(game.human.getPokemons()[1].getIfFainted() != 0)
+                if(game.human.getPokemons()[1].getIfFainted() == 0)
                 {
                     dialog->close();//close window
                     clickSound->play();
@@ -283,7 +283,7 @@ void MainWindow::on_Pokemon_clicked()
 
     connect(buttonBlastoise, &QPushButton::clicked, [=]()
             {
-                if(game.human.getPokemons()[2].getIfFainted() != 0)
+                if(game.human.getPokemons()[2].getIfFainted() == 0)
                 {
                     dialog->close();//close window
                     clickSound->play();
