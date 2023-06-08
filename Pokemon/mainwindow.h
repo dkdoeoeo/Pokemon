@@ -35,11 +35,11 @@ public:
 
     void update();//update
 
-    string getComputeRandomMove();
+    string getComputeRandomMove();//return Compute Random Move
 
-    void chooseHealPokemon(string type);
+    void chooseHealPokemon(string type);//choose to heal whitch Pokemon
 
-    void setAvimation();
+    void setAnimation();//set Animation
 
 private slots:
     void on_Battle_clicked();
@@ -72,24 +72,24 @@ private:
     QPixmap *iconGrass;//Grass icon
     QSoundEffect *startSound;//BGM
     QSoundEffect *clickSound;//click sound
-    QProgressBar *playerHp;
-    QProgressBar *computerHp;
-    QPushButton *Battle;
-    QPushButton *Pokemon;
-    QPushButton *Bag;
-    QPushButton *Run;
-    QLabel *playerName;
-    QLabel *computerName;
-    QLabel *playerPokemon;
-    QLabel *computerPokemon;
-    QLabel *playerHpText;
-    QLabel *computerHpText;
-    QLabel *playerPSN;
-    QLabel *playerBRN;
-    QLabel *playerPAR;
-    QLabel *computerPSN;
-    QLabel *computerBRN;
-    QLabel *computerPAR;
+    QProgressBar *playerHp;//player Hp
+    QProgressBar *computerHp;//computer Hp
+    QPushButton *Battle;//battle button
+    QPushButton *Pokemon;//pokemon button
+    QPushButton *Bag;//bag button
+    QPushButton *Run;//run button
+    QLabel *playerName;//display player current pokemon name
+    QLabel *computerName;//display computer current pokemon name
+    QLabel *playerPokemon;//display player current pokemon image
+    QLabel *computerPokemon;//display computer current pokemon image
+    QLabel *playerHpText;//display player current pokemon Hp information
+    QLabel *computerHpText;//display computer current pokemon Hp information
+    QLabel *playerPSN;//display player current pokemon if PSN
+    QLabel *playerBRN;//display player current pokemon if BRN
+    QLabel *playerPAR;//display player current pokemon if PAR
+    QLabel *computerPSN;//display computer current pokemon if PSN
+    QLabel *computerBRN;//display computer current pokemon if BRN
+    QLabel *computerPAR;//display computer current pokemon if PAR
     QPropertyAnimation *animation;
 protected:
     void paintEvent(QPaintEvent *event) override {

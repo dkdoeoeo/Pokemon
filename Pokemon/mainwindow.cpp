@@ -10,11 +10,12 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    //set all things
     srand(time(NULL));
     ui->setupUi(this);
     initIcon();
     initSound();
-    setAvimation();
+    setAnimation();
     initProgressBar();
     loadFiles();
     connectItem();
@@ -26,8 +27,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// Intent: initialize all icon
+// Pre: no
+// Post: initialize all icon
 void MainWindow::initIcon()
 {
+    //set image
     iconBlastoise = new QPixmap("./images/Blastoise.png");
     iconCharizard = new QPixmap("./images/Charizard.png");
     iconVenusaur = new QPixmap("./images/Venusaur.png");
@@ -45,6 +50,7 @@ void MainWindow::initIcon()
     iconWater = new QPixmap("./images/Water.png");
     iconPoison = new QPixmap("./images/Poison.png");
     iconGrass = new QPixmap("./images/Grass.png");
+    //set size
     *iconBlastoise = iconBlastoise->scaled(150,150);
     *iconCharizard = iconCharizard->scaled(150,150);
     *iconVenusaur = iconVenusaur->scaled(150,150);
@@ -57,8 +63,12 @@ void MainWindow::initIcon()
     *iconPSN = iconPSN->scaled(60,60);
 }
 
+// Intent: initialize all sound
+// Pre: no
+// Post: initialize all sound
 void MainWindow::initSound()
 {
+    //set sound
     startSound = new QSoundEffect;
     clickSound = new QSoundEffect;
     startSound->setSource(QUrl::fromLocalFile("./sounds/Bgm.wav"));
@@ -67,8 +77,12 @@ void MainWindow::initSound()
     startSound->setLoopCount(100);//repeat play
 }
 
+// Intent: connect all item
+// Pre: no
+// Post: connect all item
 void MainWindow::connectItem()
 {
+    //connect pointer to thing on ui
     Battle = ui->Battle;
     Pokemon = ui->Pokemon;
     Bag = ui->Bag;
@@ -87,17 +101,25 @@ void MainWindow::connectItem()
     computerPAR = ui->computerPAR;
 }
 
+// Intent: load all need files
+// Pre: no
+// Post: load all need files
 void MainWindow::loadFiles()
 {
+    //load three file
     game.loadPokemonFile("PokemonLib.txt");
     game.loadMoveFile("MoveLib.txt");
     game.loadGameFile("GameData.txt");
 }
 
+// Intent: initialize all ProgressBar
+// Pre: no
+// Post: initialize all ProgressBar
 void MainWindow::initProgressBar()
 {
     playerHp = ui->playerHp;
     computerHp = ui->computerHp;
+    //set ProgressBar
     playerHp->setStyleSheet("QProgressBar {"
                       "    border: 1px solid gray;"
                       "    border-radius: 5px;"
@@ -120,12 +142,15 @@ void MainWindow::initProgressBar()
                             "}");
 }
 
+// Intent: update window
+// Pre: initialize all things
+// Post: update window
 void MainWindow::update()
 {
     QFont font;
-    font.setPointSize(12);  // 設定字體大小為 12
-    string player = game.human.getPokemons()[game.human.selectPokemon].getName();
-    string computer = game.computer.getPokemons()[game.computer.selectPokemon].getName();
+    font.setPointSize(12);  // set word size 12
+    string player = game.human.getPokemons()[game.human.selectPokemon].getName();//get player current pokemon name
+    string computer = game.computer.getPokemons()[game.computer.selectPokemon].getName();//get computer current pokemon name
     //set player pokemon hp
     playerHp->setRange(0, game.allPokemons.find(player)->second.getHp());
     playerHp->setValue(game.human.getPokemons()[game.human.selectPokemon].getHp());
@@ -197,12 +222,7 @@ void MainWindow::update()
 
     //set player pokemon PAR
     if(game.human.getPokemons()[game.human.selectPokemon].getCon("PAR") != 0)
-    {
-        cout << game.human.getPokemons()[game.human.selectPokemon].getCon("PAR")<<endl;
-        cout << game.human.getPokemons()[game.human.selectPokemon].getCon("BRN")<<endl;
-        cout << game.human.getPokemons()[game.human.selectPokemon].getCon("PSN")<<endl;
         playerPAR->setPixmap(*iconPAR);
-    }
     else
         playerPAR->clear();
 
@@ -237,13 +257,18 @@ void MainWindow::update()
         computerPSN->clear();
 }
 
+// Intent: do battle command
+// Pre: initialize all things
+// Post: do battle command
 void MainWindow::on_Battle_clicked()
 {
+    //create another window
     QDialog *dialog = new QDialog(this);
     dialog->setWindowFlags(dialog->windowFlags() & ~Qt::WindowCloseButtonHint);
     dialog->setWindowTitle("Battle");
     QHBoxLayout *layout = new QHBoxLayout(dialog);
 
+    //set move
     for(int i = 0; i < game.human.getPokemons()[game.human.selectPokemon].getMoves().size(); i++)
     {
         if(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getName() == "DragonClaw")
@@ -487,8 +512,12 @@ void MainWindow::on_Battle_clicked()
     dialog->exec();//display
 }
 
+// Intent: do Pokemon command
+// Pre: initialize all things
+// Post: do Pokemon command
 void MainWindow::on_Pokemon_clicked()
 {
+    //create another window
     QDialog *dialog = new QDialog(this);
     dialog->setWindowFlags(dialog->windowFlags() & ~Qt::WindowCloseButtonHint);
     dialog->setWindowTitle("Pokemon");
@@ -499,6 +528,7 @@ void MainWindow::on_Pokemon_clicked()
 
     connect(buttonVenusaur, &QPushButton::clicked, [=]()
     {
+        //check Pokemon not Fainted
         if(game.human.getPokemons()[0].getIfFainted() == 0)
         {
             dialog->close();//close window
@@ -516,6 +546,7 @@ void MainWindow::on_Pokemon_clicked()
 
     connect(buttonCharizard, &QPushButton::clicked, [=]()
     {
+        //check Pokemon not Fainted
         if(game.human.getPokemons()[1].getIfFainted() == 0)
         {
             dialog->close();//close window
@@ -533,6 +564,7 @@ void MainWindow::on_Pokemon_clicked()
 
     connect(buttonBlastoise, &QPushButton::clicked, [=]()
     {
+        //check Pokemon not Fainted
         if(game.human.getPokemons()[2].getIfFainted() == 0)
         {
             dialog->close();//close window
@@ -560,6 +592,9 @@ void MainWindow::on_Pokemon_clicked()
     dialog->exec();//display
 }
 
+// Intent: do Bag command
+// Pre: initialize all things
+// Post: do Bag command
 void MainWindow::on_Bag_clicked()
 {
     QDialog *dialog = new QDialog(this);
@@ -571,14 +606,14 @@ void MainWindow::on_Bag_clicked()
     QPushButton *buttonPotion = new QPushButton(dialog);
 
     connect(buttonPotion, &QPushButton::clicked, [=]()
-            {
-                if(game.human.potion != 0)
-                {
-                    dialog->close();//close window
-                    clickSound->play();
-                    chooseHealPokemon("Potion");
-                }
-            });
+    {
+        if(game.human.potion != 0)
+        {
+            dialog->close();//close window
+            clickSound->play();
+            chooseHealPokemon("Potion");
+        }
+    });
 
     layout->addWidget(buttonPotion);
 
@@ -586,14 +621,14 @@ void MainWindow::on_Bag_clicked()
     QPushButton *buttonSuperPotion = new QPushButton(dialog);
 
     connect(buttonSuperPotion, &QPushButton::clicked, [=]()
-            {
-                if(game.human.potion != 0)
-                {
-                    dialog->close();//close window
-                    clickSound->play();
-                    chooseHealPokemon("SuperPotion");
-                }
-            });
+    {
+        if(game.human.potion != 0)
+        {
+            dialog->close();//close window
+            clickSound->play();
+            chooseHealPokemon("SuperPotion");
+        }
+    });
 
     layout->addWidget(buttonSuperPotion);
 
@@ -601,14 +636,14 @@ void MainWindow::on_Bag_clicked()
     QPushButton *buttonHyperPotion = new QPushButton(dialog);
 
     connect(buttonHyperPotion, &QPushButton::clicked, [=]()
-            {
-                if(game.human.potion != 0)
-                {
-                    dialog->close();//close window
-                    clickSound->play();
-                    chooseHealPokemon("HyperPotion");
-                }
-            });
+    {
+        if(game.human.potion != 0)
+        {
+            dialog->close();//close window
+            clickSound->play();
+            chooseHealPokemon("HyperPotion");
+        }
+    });
 
     layout->addWidget(buttonHyperPotion);
 
@@ -616,14 +651,14 @@ void MainWindow::on_Bag_clicked()
     QPushButton *buttonMaxPotion = new QPushButton(dialog);
 
     connect(buttonMaxPotion, &QPushButton::clicked, [=]()
-            {
-                if(game.human.potion != 0)
-                {
-                    dialog->close();//close window
-                    clickSound->play();
-                    chooseHealPokemon("MaxPotion");
-                }
-            });
+    {
+        if(game.human.potion != 0)
+        {
+            dialog->close();//close window
+            clickSound->play();
+            chooseHealPokemon("MaxPotion");
+        }
+    });
 
     layout->addWidget(buttonMaxPotion);
 
@@ -644,6 +679,9 @@ void MainWindow::on_Bag_clicked()
     dialog->exec();//display
 }
 
+// Intent: choose to heal whitch Pokemon
+// Pre: Bag command
+// Post: heal the Pokemon
 void MainWindow::chooseHealPokemon(string type)
 {
     QDialog *dialog = new QDialog(this);
@@ -717,12 +755,18 @@ void MainWindow::chooseHealPokemon(string type)
     dialog->exec();//display
 }
 
+// Intent: do Run command
+// Pre: initialize all things
+// Post: quit game
 void MainWindow::on_Run_clicked()
 {
     clickSound->play();
     qApp->quit();
 }
 
+// Intent: return Compute Random Move
+// Pre: initialize all things
+// Post: return Compute Random Move
 string MainWindow::getComputeRandomMove()
 {
     int Max = game.computer.getPokemons()[game.computer.selectPokemon].getMoves().size();
@@ -730,13 +774,16 @@ string MainWindow::getComputeRandomMove()
     return game.computer.getPokemons()[game.computer.selectPokemon].getMoves()[random].getName();
 }
 
-void MainWindow::setAvimation()
+// Intent: set Animation
+// Pre: no
+// Post: set Animation
+void MainWindow::setAnimation()
 {
     //set up an animation for the player being attacked
     animation = new QPropertyAnimation(ui->playerPokemon, "pos");
-    animation->setDuration(100); // 动画持续时间（毫秒）
-    animation->setLoopCount(3); // 动画重复次数
-    animation->setKeyValueAt(0, ui->playerPokemon->pos()); // 初始位置
+    animation->setDuration(100); // Animation duration
+    animation->setLoopCount(3); // Number of animation repetitions
+    animation->setKeyValueAt(0, ui->playerPokemon->pos()); // Initial position
     animation->setKeyValueAt(0.1, ui->playerPokemon->pos() + QPoint(-10, -10)); // Frame 1
     animation->setKeyValueAt(0.2, ui->playerPokemon->pos() + QPoint(10, 10)); // Frame 2
     animation->setKeyValueAt(0.3, ui->playerPokemon->pos() + QPoint(-10, -10)); // Frame 3
