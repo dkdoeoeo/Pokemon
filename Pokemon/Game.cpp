@@ -223,7 +223,7 @@ void Game::loadGameFile(string gameFile)
     //input player's (i.e human) game data
     //assign the attributes to pokemons and the moves of the pokemons
     iFile >> numOfPokemons_Player;
-    human.resizePokemons(numOfPokemons_Player);
+    human.clearPokemons();
 
     std::map<string, vector<string>>::iterator iterMove; //allMoves map iterator
     std::map<string, Pokemon>::iterator iterPokemon; //allMoves map iterator
@@ -273,7 +273,7 @@ void Game::loadGameFile(string gameFile)
     //input computer's game data
     //assign the attributes to pokemons and the moves of the pokemons
     iFile >> numOfPokemons_Comp;
-    computer.resizePokemons(numOfPokemons_Comp);
+    computer.clearPokemons();
 
     for (int var = 0; var < numOfPokemons_Comp; ++var)
     {

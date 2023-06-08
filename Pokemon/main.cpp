@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 {
     if(argc == 1)
     {
+        cout << "play Mode\n";
         QApplication a(argc, argv);
         MainWindow w;
         w.show();
