@@ -13,24 +13,24 @@ Game::Game()
 {
     typeEffectiveness =
         {
-            {1,	1,	1,	1,	1,	(1/2),	1,	0,	(1/2),	1,	1,	1,	1,	1,	1,	1,	1,	1},
-            {2,	1,	(1/2),	(1/2),	1,	2,	(1/2),	0,	2,	1,	1,	1,	1,	(1/2),	2,	1,	2,	(1/2)},
-            {1,	2,	1,	1,	1,	(1/2),	2,	1,	(1/2),	1,	1,	2,	(1/2),	1,	1,	1,	1,	1},
-            {1,	1,	1,	(1/2),	(1/2),	(1/2),	1,	(1/2),	0,	1,	1,	2,	1,	1,	1,	1,	1,	2},
-            {1,	1,	0,	2,	1,	2,	(1/2),	1,	2,	2,	1,	(1/2),	2,	1,	1,	1,	1,	1},
-            {1,	(1/2),	2,	1,	(1/2),	1,	2,	1,	(1/2),	2,	1,	1,	1,	1,	2,	1,	1,	1},
-            {1,	(1/2),	(1/2),	(1/2),	1,	1,	1,	(1/2),	(1/2),	(1/2),	1,	2,	1,	2,	1,	1,	2,	(1/2)},
-            {0,	1,	1,	1,	1,	1,	1,	2,	1,	1,	1,	1,	1,	2,	1,	1,	(1/2),	1},
-            {1,	1,	1,	1,	1,	2,	1,	1,	(1/2),	(1/2),	(1/2),	1,	(1/2),	1,	2,	1,	1,	2},
-            {1,	1,	1,	1,	1,	(1/2),	2,	1,	2,	(1/2),	(1/2),	2,	1,	1,	2,	(1/2),	1,	1},
-            {1,	1,	1,	1,	2,	2,	1,	1,	1,	2,	(1/2),	(1/2),	1,	1,	1,	(1/2),	1,	1},
-            { 1,	1,	(1/2),	(1/2),	2,	2,	(1/2),	1,	(1/2),	(1/2),	2,	(1/2),	1,	1,	1,	(1/2),	1,	1},
-            {1,	1,	2,	1,	0,	1,	1,	1,	1,	1,	2,	(1/2),	(1/2),	1,	1,	(1/2),	1,	1},
-            {1,	2,	1,	2,	1,	1,	1,	1,	(1/2),	1,	1,	1,	1,	(1/2),	1,	1,	0,	1},
-            {1,	1,	2,	1,	2,	1,	1,	1,	(1/2),	(1/2),	(1/2),	2,	1,	1,	(1/2),	2,	1,	1},
-            { 1,	1,	1,	1,	1,	1,	1,	1,	(1/2),	1,	1,	1,	1,	1,	1,	2,	1,	0},
-            {1,	(1/2),	1,	1,	1,	1,	1,	2,	1,	1,	1,	1,	1,	2,	1,	1,	(1/2),	(1/2)},
-            {1,	2,	1,	(1/2),	1,	1,	1,	1,	(1/2),	(1/2),	1,	1,	1,	1,	1,	2,	2,	1}
+            {1,	1,	1,	1,	1,	((double)1/2),	1,	0,	((double)1/2),	1,	1,	1,	1,	1,	1,	1,	1,	1},
+            {2,	1,	((double)1/2),	((double)1/2),	1,	2,	((double)1/2),	0,	2,	1,	1,	1,	1,	((double)1/2),	2,	1,	2,	((double)1/2)},
+            {1,	2,	1,	1,	1,	((double)1/2),	2,	1,	((double)1/2),	1,	1,	2,	((double)1/2),	1,	1,	1,	1,	1},
+            {1,	1,	1,	((double)1/2),	((double)1/2),	((double)1/2),	1,	((double)1/2),	0,	1,	1,	2,	1,	1,	1,	1,	1,	2},
+            {1,	1,	0,	2,	1,	2,	((double)1/2),	1,	2,	2,	1,	((double)1/2),	2,	1,	1,	1,	1,	1},
+            {1,	((double)1/2),	2,	1,	((double)1/2),	1,	2,	1,	((double)1/2),	2,	1,	1,	1,	1,	2,	1,	1,	1},
+            {1,	((double)1/2),	((double)1/2),	((double)1/2),	1,	1,	1,	((double)1/2),	((double)1/2),	((double)1/2),	1,	2,	1,	2,	1,	1,	2,	((double)1/2)},
+            {0,	1,	1,	1,	1,	1,	1,	2,	1,	1,	1,	1,	1,	2,	1,	1,	((double)1/2),	1},
+            {1,	1,	1,	1,	1,	2,	1,	1,	((double)1/2),	((double)1/2),	((double)1/2),	1,	((double)1/2),	1,	2,	1,	1,	2},
+            {1,	1,	1,	1,	1,	((double)1/2),	2,	1,	2,	((double)1/2),	((double)1/2),	2,	1,	1,	2,	((double)1/2),	1,	1},
+            {1,	1,	1,	1,	2,	2,	1,	1,	1,	2,	((double)1/2),	((double)1/2),	1,	1,	1,	((double)1/2),	1,	1},
+            { 1,	1,	((double)1/2),	((double)1/2),	2,	2,	((double)1/2),	1,	((double)1/2),	((double)1/2),	2,	((double)1/2),	1,	1,	1,	((double)1/2),	1,	1},
+            {1,	1,	2,	1,	0,	1,	1,	1,	1,	1,	2,	((double)1/2),	((double)1/2),	1,	1,	((double)1/2),	1,	1},
+            {1,	2,	1,	2,	1,	1,	1,	1,	((double)1/2),	1,	1,	1,	1,	((double)1/2),	1,	1,	0,	1},
+            {1,	1,	2,	1,	2,	1,	1,	1,	((double)1/2),	((double)1/2),	((double)1/2),	2,	1,	1,	((double)1/2),	2,	1,	1},
+            { 1,	1,	1,	1,	1,	1,	1,	1,	((double)1/2),	1,	1,	1,	1,	1,	1,	2,	1,	0},
+            {1,	((double)1/2),	1,	1,	1,	1,	1,	2,	1,	1,	1,	1,	1,	2,	1,	1,	((double)1/2),	((double)1/2)},
+            {1,	2,	1,	((double)1/2),	1,	1,	1,	1,	((double)1/2),	((double)1/2),	1,	1,	1,	1,	1,	2,	2,	1}
         };
 }
 
@@ -331,9 +331,17 @@ void Game::Battle(string humanMove, string computerMove, int playType)
         return;
     }
 
-    attackPokemon(humanMove,"computer",playType);
+    if(human.getPokemons().at(human.getSelectPokemon()).getSpeed() < computer.getPokemons().at(computer.getSelectPokemon()).getSpeed())
+    {
+        attackPokemon(computerMove, "human",playType);
+        attackPokemon(humanMove,"computer",playType);
+    }
+    else
+    {
+        attackPokemon(humanMove,"computer",playType);
+        attackPokemon(computerMove, "human",playType);
+    }
 
-    attackPokemon(computerMove, "human",playType);
 
 
     bAndP();
@@ -529,7 +537,7 @@ void Game::status(ostream& oStream)
     Pokemon& humanSelectPokemon = human.getPokemons().at(human.getSelectPokemon());
     Pokemon& computerSelectPokemon = computer.getPokemons().at(computer.getSelectPokemon());
     vector<string> statuses = {"PAR","BRN","PSN"};
-    oStream << humanSelectPokemon.getName() << ' ' << humanSelectPokemon.getHp();
+    oStream << humanSelectPokemon.getName() << ' ' << (int)humanSelectPokemon.getHp();
 
     for (int var = 0; var < 3; ++var)
     {
@@ -539,7 +547,7 @@ void Game::status(ostream& oStream)
         }
     }
 
-    oStream << ' ' << computerSelectPokemon.getName() << ' ' << computerSelectPokemon.getHp();
+    oStream << ' ' << computerSelectPokemon.getName() << ' ' << (int)computerSelectPokemon.getHp();
 
     for (int var = 0; var < 3; ++var)
     {
@@ -548,6 +556,7 @@ void Game::status(ostream& oStream)
             cout << ' ' << statuses[var];
         }
     }
+
 
     oStream << endl;
 }
@@ -576,6 +585,7 @@ void Game::check(ostream& oStream)
     }
 
     oStream << endl;
+
 }
 
 
@@ -624,20 +634,24 @@ double Game::getTypeEffectiveness(string atkType, string defType)
 // Post: decrease pokemon's hp by damage, and check if fainted, and reduce pp
 void Game::attackPokemon(string move, string target,int playType)
 {
+    if(getifGameOver())
+    {
+        return;
+    }
     Pokemon& humanSelectedPokemon = human.getPokemons().at(human.getSelectPokemon());
     Pokemon& computerSelectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
 
     //for attacking human
     if(target == "human")
     {
-        if(humanSelectedPokemon.getIfFainted())
+        if(computerSelectedPokemon.getIfFainted())
         {
             return;
         }
         //check if paralyzed
         bool ifPara = false;
-
-        if(computerSelectedPokemon.getCon("PAR") != 0)
+        int pararounds = computerSelectedPokemon.getCon("PAR");
+        if(pararounds > 0)
         {
             ifPara = rand() % 100 < 25;
             if(playType == testMode){
@@ -671,9 +685,9 @@ void Game::attackPokemon(string move, string target,int playType)
         if(ifHit && selectedMove.getPP() > 0)
         {
             selectedMove.setPP(selectedMove.getPP() - 1);
-            cout << computerSelectedPokemon.getName() << " used " << move << '!' << endl;
+            cout << "The opposing " << computerSelectedPokemon.getName() << " used " << move << '!' << endl;
             int damage = 0; //total damage
-            bool ifCritical = rand() % 2; //if critical
+            bool ifCritical = rand() % 24 < 1; //if critical
             double critical = 1; // critical damage
             double atkDefRatio = 0; // attack defense ratio
             double stab = 1; //STAB
@@ -687,17 +701,20 @@ void Game::attackPokemon(string move, string target,int playType)
             }
 
             //output how effective
-            if(totalTypeEffectiveness >= 2)
-            {
-                cout << "It's super effective!" << endl;
-            }
-            else if(totalTypeEffectiveness >= 1/2 && totalTypeEffectiveness > 0)
-            {
-                cout << "It's not very effective..." << endl;
-            }
-            else // if (totalTypeEffectiveness <= 0)
-            {
-                cout << "It's not effective!" << endl;
+            if(selectedMove.getPower() != 0){
+
+                if(totalTypeEffectiveness >= 2)
+                {
+                    cout << "It's super effective!" << endl;
+                }
+                else if(totalTypeEffectiveness >= 1/2 && totalTypeEffectiveness > 0)
+                {
+                    cout << "It's not very effective..." << endl;
+                }
+                else // if (totalTypeEffectiveness <= 0)
+                {
+                    cout << "It's not effective!" << endl;
+                }
             }
 
             //calculate attack/defense ratio
@@ -739,8 +756,16 @@ void Game::attackPokemon(string move, string target,int playType)
                     break;
                 }
             }
+            if(selectedMove.getPower() == 0)
+            {
+                damage = 0;
+            }
+            else
+            {
+                damage = (((double)110/250) * selectedMove.getPower() * atkDefRatio + 2) * critical * stab * totalTypeEffectiveness;
+            }
 
-            damage = ((110/250) * selectedMove.getPower() * atkDefRatio + 2) * critical * stab * totalTypeEffectiveness;
+
 
             //check if fainted
             if(humanSelectedPokemon.getHp() - damage <= 0)
@@ -774,7 +799,7 @@ void Game::attackPokemon(string move, string target,int playType)
                     humanSelectedPokemon.setSpeed(humanSelectedPokemon.getSpeed() * (0.5));
                 }
 
-                humanSelectedPokemon.setCon(selectedMove.getCon(), 3);
+                humanSelectedPokemon.setCon(selectedMove.getCon(), 10000000);
 
                 if(selectedMove.getCon() == "PAR")
                 {
@@ -801,13 +826,14 @@ void Game::attackPokemon(string move, string target,int playType)
     }
     else if(target == "computer") // for attacking computer
     {
-        if(computerSelectedPokemon.getIfFainted())
+        if(humanSelectedPokemon.getIfFainted())
         {
             return;
         }
         //check if paralyzed
         bool ifPara = false;
-        if(humanSelectedPokemon.getCon("PAR") >= 0)
+        int pararounds = humanSelectedPokemon.getCon("PAR");
+        if(pararounds > 0)
         {
             ifPara = rand() % 100 < 25;
             if(playType == testMode){
@@ -840,7 +866,7 @@ void Game::attackPokemon(string move, string target,int playType)
             selectedMove.setPP(selectedMove.getPP() - 1);
             cout << humanSelectedPokemon.getName() << " used " << move << '!' << endl;
             int damage = 0; //total damage
-            bool ifCritical = rand() % 2; //if critical
+            bool ifCritical = rand() % 24 < 1; //if critical
             double critical = 1; // critical damage
             double atkDefRatio = 0; // attack defense ratio
             double stab = 1; //STAB
@@ -900,9 +926,14 @@ void Game::attackPokemon(string move, string target,int playType)
                     break;
                 }
             }
-
-            damage = (((double)110/250) * selectedMove.getPower() * atkDefRatio + (double)2) * critical * stab * totalTypeEffectiveness;
-
+            if(selectedMove.getPower() == 0)
+            {
+                damage = 0;
+            }
+            else
+            {
+                damage = (((double)110/250) * selectedMove.getPower() * atkDefRatio + 2) * critical * stab * totalTypeEffectiveness;
+            }
             //check if fainted
             if(computerSelectedPokemon.getHp() - damage <= 0)
             {
@@ -936,7 +967,7 @@ void Game::attackPokemon(string move, string target,int playType)
                     computerSelectedPokemon.setSpeed(computerSelectedPokemon.getSpeed() * (0.5));
                 }
 
-                computerSelectedPokemon.setCon(selectedMove.getCon(), 3);
+                computerSelectedPokemon.setCon(selectedMove.getCon(), 10000000);
 
                 if(selectedMove.getCon() == "PAR")
                 {
@@ -965,6 +996,10 @@ void Game::attackPokemon(string move, string target,int playType)
 // Post: B&P effects applied
 void Game::bAndP()
 {
+    if(getifGameOver())
+    {
+        return;
+    }
     vector<string> statuses = {"BRN", "PSN", "PAR"};
     int computerPokemonMaxHp = allPokemons.find(computer.getPokemons().at(computer.getSelectPokemon()).getName())->second.getHp();
     int humanPokemonMaxHp = allPokemons.find(human.getPokemons().at(human.getSelectPokemon()).getName())->second.getHp();
