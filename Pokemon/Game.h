@@ -10,7 +10,7 @@ using namespace std;
 
 class Game
 {
-private:
+public:
     Player human;
     Player computer;
     map<string, vector<string>> allMoves;

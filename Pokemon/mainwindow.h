@@ -5,8 +5,7 @@
 #include <QMainWindow>
 #include <QPalette>
 #include <QSoundEffect>
-
-
+#include <QtWidgets>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -27,6 +26,12 @@ public:
 
     void loadFiles();//load all file
 
+    void connectItem();//connect all Item
+
+    void initProgressBar();//initialize all ProgressBar
+
+    void update();//update
+
 private:
     Ui::MainWindow *ui;
     QPixmap *iconBlastoise;//Blastoise icon
@@ -37,8 +42,23 @@ private:
     QPixmap *iconHyperPotion;//HyperPotion icon
     QPixmap *iconMaxPotion;//MaxPotion icon
     QPixmap *iconBackground;//Background icon
+    QPixmap *iconPAR;//PAR icon
+    QPixmap *iconBRN;//BRN icon
+    QPixmap *iconPSN;//PSN icon
     QSoundEffect *startSound;//BGM
     QSoundEffect *clickSound;//click sound
+    QProgressBar *playerHp;
+    QProgressBar *computerHp;
+    QPushButton *Battle;
+    QPushButton *Pokemon;
+    QPushButton *Bag;
+    QPushButton *Run;
+    QLabel *playerName;
+    QLabel *computerName;
+    QLabel *playerPokemon;
+    QLabel *computerPokemon;
+    QLabel *playerCON;
+    QLabel *computerCON;
 };
 
 #endif // MAINWINDOW_H

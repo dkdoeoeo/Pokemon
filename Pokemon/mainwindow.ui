@@ -23,7 +23,15 @@
       <height>191</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="playerPokemon"/>
+    <layout class="QVBoxLayout" name="playerPokemonDisplay">
+     <item>
+      <widget class="QLabel" name="playerPokemon">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
    <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
@@ -34,7 +42,15 @@
       <height>201</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="computePokemon"/>
+    <layout class="QVBoxLayout" name="computePokemonDisplay">
+     <item>
+      <widget class="QLabel" name="computerPokemon">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
    <widget class="QProgressBar" name="playerHp">
     <property name="geometry">
@@ -67,22 +83,38 @@
      <rect>
       <x>80</x>
       <y>370</y>
-      <width>61</width>
+      <width>65</width>
       <height>61</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="playerCON"/>
+    <layout class="QVBoxLayout" name="playerCONDisplay">
+     <item>
+      <widget class="QLabel" name="playerCON">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
    <widget class="QWidget" name="verticalLayoutWidget_4">
     <property name="geometry">
      <rect>
       <x>680</x>
       <y>140</y>
-      <width>61</width>
+      <width>65</width>
       <height>61</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="computerCON"/>
+    <layout class="QVBoxLayout" name="computerCONDisplay">
+     <item>
+      <widget class="QLabel" name="computerCON">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
    <widget class="QLabel" name="playerName">
     <property name="geometry">
