@@ -297,14 +297,15 @@ void MainWindow::on_Pokemon_clicked()
     //set icon
     buttonVenusaur->setIcon(QIcon(*iconVenusaur));
     buttonVenusaur->setIconSize(iconVenusaur->size());
-    buttonVenusaur->setFixedSize(70, 70);
+    buttonVenusaur->setFixedSize(150, 150);
     buttonCharizard->setIcon(QIcon(*iconCharizard));
     buttonCharizard->setIconSize(iconCharizard->size());
-    buttonCharizard->setFixedSize(70, 70);
+    buttonCharizard->setFixedSize(150, 150);
     buttonBlastoise->setIcon(QIcon(*iconBlastoise));
     buttonBlastoise->setIconSize(iconBlastoise->size());
-    buttonBlastoise->setFixedSize(70, 70);
+    buttonBlastoise->setFixedSize(150, 150);
     dialog->setLayout(layout);
+    dialog->resize(500, 200);
     dialog->exec();//display
 }
 
