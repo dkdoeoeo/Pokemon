@@ -1111,7 +1111,7 @@ bool Game::getifGameOver()
 // Intent: get row and col
 // Pre: input string array, Qstring
 // Post: split Qstring
-void MainWindow::split(string Words[], QString Name)
+void Game::split(string Words[], QString Name)
 {
     string strName = Name.toStdString();
     stringstream ss(strName);
