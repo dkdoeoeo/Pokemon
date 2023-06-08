@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     initSound();
     initProgressBar();
     loadFiles();
+    update();
 }
 
 MainWindow::~MainWindow()
@@ -112,32 +113,32 @@ void MainWindow::initProgressBar()
 
 void MainWindow::update()
 {
-    string playerPokemon = game.human.getPokemons()[game.human.selectPokemon].getName();
-    string computerPokemon = game.computer.getPokemons()[game.computer.selectPokemon].getName();
+    string player = game.human.getPokemons()[game.human.selectPokemon].getName();
+    string computer = game.computer.getPokemons()[game.computer.selectPokemon].getName();
 
-    if(playerPokemon == "Venusaur")
+    if(player == "Venusaur")
     {
-
+        ui->playerPokemon->setPixmap(*iconVenusaur);
     }
-    else if(playerPokemon == "Charizard")
+    else if(player == "Charizard")
     {
-
+        ui->playerPokemon->setPixmap(*iconCharizard);
     }
-    else if(playerPokemon == "Blastoise")
+    else if(player == "Blastoise")
     {
-
+        ui->playerPokemon->setPixmap(*iconBlastoise);
     }
 
-    if(computerPokemon == "Venusaur")
+    if(computer == "Venusaur")
     {
-
+        ui->computerPokemon->setPixmap(*iconVenusaur);
     }
-    else if(computerPokemon == "Charizard")
+    else if(computer == "Charizard")
     {
-
+        ui->computerPokemon->setPixmap(*iconCharizard);
     }
-    else if(computerPokemon == "Blastoise")
+    else if(computer == "Blastoise")
     {
-
+        ui->computerPokemon->setPixmap(*iconBlastoise);
     }
 }
