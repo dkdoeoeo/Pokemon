@@ -27,3 +27,4 @@ void MainWindow::initIcon()
     //iconBackground = new QPixmap("./images/Background.png");
     this->setStyleSheet("QMainWindow {background-image: url(:./images/Background.png;}");
 }
+

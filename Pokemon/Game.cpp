@@ -637,11 +637,16 @@ void Game::attackPokemon(string move, string target,int playType)
         //check if paralyzed
         bool ifPara = false;
 
-        if(computerSelectedPokemon.getCon("PAR") > 0)
+        if(computerSelectedPokemon.getCon("PAR") != 0)
         {
             ifPara = rand() % 100 < 25;
+            if(playType == testMode){
+                ifPara = true;
+            }
+
         }
-        if(ifPara || playType == testMode)
+
+        if(ifPara)
         {
             cout << "Opposing " << computerSelectedPokemon.getName() << " is paralyzed!" << endl;
             cout << "It can't move!" << endl;
@@ -802,11 +807,15 @@ void Game::attackPokemon(string move, string target,int playType)
         }
         //check if paralyzed
         bool ifPara = false;
-        if(humanSelectedPokemon.getCon("PAR") > 0)
+        if(humanSelectedPokemon.getCon("PAR") >= 0)
         {
             ifPara = rand() % 100 < 25;
+            if(playType == testMode){
+                ifPara = true;
+            }
         }
-        if(ifPara || playType == testMode)
+
+        if(ifPara)
         {
             cout << humanSelectedPokemon.getName() << " is paralyzed!" << endl;
             cout << "It can't move!" << endl;
@@ -1174,19 +1183,4 @@ bool Game::checkIfAllFainted()
 bool Game::getifGameOver()
 {
     return ifGameOver;
-}
-
-// Intent: get row and col
-// Pre: input string array, Qstring
-// Post: split Qstring
-void MainWindow::split(string Words[], QString Name)
-{
-    string strName = Name.toStdString();
-    stringstream ss(strName);
-    string temp;
-    int N = 0;
-    while (getline(ss, temp, ' ')) {
-        Words[N] = temp;
-        N++;
-    }
 }
