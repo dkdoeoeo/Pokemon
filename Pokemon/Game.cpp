@@ -637,11 +637,16 @@ void Game::attackPokemon(string move, string target,int playType)
         //check if paralyzed
         bool ifPara = false;
 
-        if(computerSelectedPokemon.getCon("PAR") > 0)
+        if(computerSelectedPokemon.getCon("PAR") != 0)
         {
             ifPara = rand() % 100 < 25;
+            if(playType == testMode){
+                ifPara = true;
+            }
+
         }
-        if(ifPara || playType == testMode)
+
+        if(ifPara)
         {
             cout << "Opposing " << computerSelectedPokemon.getName() << " is paralyzed!" << endl;
             cout << "It can't move!" << endl;
@@ -802,11 +807,15 @@ void Game::attackPokemon(string move, string target,int playType)
         }
         //check if paralyzed
         bool ifPara = false;
-        if(humanSelectedPokemon.getCon("PAR") > 0)
+        if(humanSelectedPokemon.getCon("PAR") >= 0)
         {
             ifPara = rand() % 100 < 25;
+            if(playType == testMode){
+                ifPara = true;
+            }
         }
-        if(ifPara || playType == testMode)
+
+        if(ifPara)
         {
             cout << humanSelectedPokemon.getName() << " is paralyzed!" << endl;
             cout << "It can't move!" << endl;
