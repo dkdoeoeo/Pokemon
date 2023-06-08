@@ -184,10 +184,10 @@ void Game::loadMoveFile(string moveFile)
 
         //get all the line of attributes into lineOfAttributes
         getline(iFile, lineOfAttributes);
-        iFile.ignore(1,'\n');
 
         moveAttributes.clear();
         ss.str(lineOfAttributes);
+        ss.clear();
         while(ss >> tempAttribute) // parse lineOfAttributes
         {
             moveAttributes.push_back(tempAttribute);
@@ -239,6 +239,10 @@ void Game::loadGameFile(string gameFile)
         human.getPokemons()[var].setSpAtk(iterPokemon->second.getSpAtk());
         human.getPokemons()[var].setSpDef(iterPokemon->second.getSpDef());
         human.getPokemons()[var].setSpeed(iterPokemon->second.getSpeed());
+        for (int typecount = 0; typecount < iterPokemon->second.getTypes().size(); ++typecount) {
+            human.getPokemons()[var].appendTypes(iterPokemon->second.getTypes().at(typecount));
+        }
+
 
         //assign pokemons' moves attributes
         for (int i = 0; i < numOfplayerPokemonMove; ++i) {
@@ -280,6 +284,9 @@ void Game::loadGameFile(string gameFile)
         computer.getPokemons()[var].setSpAtk(iterPokemon->second.getSpAtk());
         computer.getPokemons()[var].setSpDef(iterPokemon->second.getSpDef());
         computer.getPokemons()[var].setSpeed(iterPokemon->second.getSpeed());
+        for (int typecount = 0; typecount < iterPokemon->second.getTypes().size(); ++typecount) {
+            human.getPokemons()[var].appendTypes(iterPokemon->second.getTypes().at(typecount));
+        }
 
         //assign pokemons' moves attributes
         for (int i = 0; i < numOfCompPokemonMove; ++i) {
@@ -350,7 +357,6 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
 
         if(potion == "Potion" && human.ifHavePotion("Potion"))
         {
-            human.usePotion();
             cout << "You used a Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             if(selectedPokemon.getHp() + 20 > pokemonMaxHp)
@@ -364,7 +370,6 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
         }
         else if(potion == "SuperPotion" && human.ifHavePotion("SuperPotion"))
         {
-            human.useSuperPotion();
             cout << "You used a Super Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             if(selectedPokemon.getHp() + 60 > pokemonMaxHp)
@@ -378,7 +383,6 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
         }
         else if(potion == "HyperPotion" && human.ifHavePotion("HyperPotion"))
         {
-            human.useHyperPotion();
             cout << "You used a Hyper Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             if(selectedPokemon.getHp() + 120 > pokemonMaxHp)
@@ -392,7 +396,6 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
         }
         else if(potion == "MaxPotion" && human.ifHavePotion("MaxPotion"))
         {
-            human.useMaxPotion();
             cout << "You used a Max Potion!" << endl;
             cout << selectedPokemon.getName() << " had its Hp restored." << endl;
             selectedPokemon.setHp(pokemonMaxHp);
