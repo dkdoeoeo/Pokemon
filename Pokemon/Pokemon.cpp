@@ -40,14 +40,14 @@ void Pokemon::setIfFainted(bool input)
     ifFainted = input;
 }
 
-void Pokemon::resizeTypes(int input)
+void Pokemon::clearTypes()
 {
-    types.resize(input);
+    types.clear();
 }
 
-void Pokemon::resizeMoves(int input)
+void Pokemon::clearMoves()
 {
-    moves.resize(input);
+    moves.clear();
 }
 
 void Pokemon::appendTypes(string input)

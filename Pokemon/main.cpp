@@ -13,17 +13,17 @@ void RunCommandFile(string testFile, string outputFile);//the game model to read
 
 int main(int argc, char *argv[])
 {
-    if (string(argv[1]) == string("testMode") && argc == 4)
-    {
-        cout << "test Mode\n";
-        RunCommandFile(argv[2], argv[3]);
-    }
-    else if(argc == 1)
+    if(argc == 1)
     {
         QApplication a(argc, argv);
         MainWindow w;
         w.show();
         return a.exec();
+    }
+    else if (string(argv[1]) == string("testMode") && argc == 4)
+    {
+        cout << "test Mode\n";
+        RunCommandFile(argv[2], argv[3]);
     }
     else
     {
@@ -37,9 +37,9 @@ int main(int argc, char *argv[])
 void RunCommandFile(string testFile, string outputFileName)
 {
     Game game;//create new game
-//    ofstream outputFile;
-//    outputFile.open(outputFileName);//create output file
-//    cout.rdbuf(outputFile.rdbuf());//write cout things into output file
+    ofstream outputFile;
+    outputFile.open(outputFileName);//create output file
+    cout.rdbuf(outputFile.rdbuf());//write cout things into output file
     game.ExecuteCommandFile(testFile);//execute commandFile
-//    outputFile.close();//close file
+    outputFile.close();//close file
 }
