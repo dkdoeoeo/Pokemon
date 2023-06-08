@@ -1175,18 +1175,3 @@ bool Game::getifGameOver()
 {
     return ifGameOver;
 }
-
-// Intent: get row and col
-// Pre: input string array, Qstring
-// Post: split Qstring
-void MainWindow::split(string Words[], QString Name)
-{
-    string strName = Name.toStdString();
-    stringstream ss(strName);
-    string temp;
-    int N = 0;
-    while (getline(ss, temp, ' ')) {
-        Words[N] = temp;
-        N++;
-    }
-}
