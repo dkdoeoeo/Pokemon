@@ -4,6 +4,7 @@
 
 #include <QMainWindow>
 #include <QPalette>
+#include <QSoundEffect>
 
 
 
@@ -22,6 +23,10 @@ public:
 
     void initIcon();//initialize all icon
 
+    void initSound();//initialize all sound
+
+    void loadFiles();//load all file
+
 private:
     Ui::MainWindow *ui;
     QPixmap *iconBlastoise;//Blastoise icon
@@ -32,6 +37,8 @@ private:
     QPixmap *iconHyperPotion;//HyperPotion icon
     QPixmap *iconMaxPotion;//MaxPotion icon
     QPixmap *iconBackground;//Background icon
+    QSoundEffect *startSound;//BGM
+    QSoundEffect *clickSound;//click sound
 };
 
 #endif // MAINWINDOW_H
