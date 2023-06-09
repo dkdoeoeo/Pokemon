@@ -661,7 +661,7 @@ void Game::attackPokemon(string move, string target,int playType)
 
         if(ifPara)
         {
-            cout << "Opposing " << computerSelectedPokemon.getName() << " is paralyzed!" << endl;
+            cout << "The opposing " << computerSelectedPokemon.getName() << " is paralyzed!" << endl;
             cout << "It can't move!" << endl;
             return;
         }
@@ -936,7 +936,7 @@ void Game::attackPokemon(string move, string target,int playType)
             //check if fainted
             if(computerSelectedPokemon.getHp() - damage <= 0)
             {
-                cout << "Opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
+                cout << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
                 computerSelectedPokemon.setHp(0);
                 computerSelectedPokemon.setIfFainted(true);
 
@@ -970,22 +970,22 @@ void Game::attackPokemon(string move, string target,int playType)
 
                 if(selectedMove.getCon() == "PAR")
                 {
-                    cout << "Opposing " << computerSelectedPokemon.getName() << " is paralyzed, so it may be unable to move!" << endl;
+                    cout << "The opposing " << computerSelectedPokemon.getName() << " is paralyzed, so it may be unable to move!" << endl;
                 }
                 else if(selectedMove.getCon() == "BRN")
                 {
-                    cout << "Opposing " << computerSelectedPokemon.getName() << " is burned!" << endl;
+                    cout << "The opposing " << computerSelectedPokemon.getName() << " is burned!" << endl;
                 }
                 else if(selectedMove.getCon() == "PSN")
                 {
-                    cout << "Opposing " << computerSelectedPokemon.getName() << " is Poisoned!" << endl;
+                    cout << "The opposing " << computerSelectedPokemon.getName() << " is Poisoned!" << endl;
                 }
             }
 
         }
         else
         {
-            cout << "Opposing " << computerSelectedPokemon.getName() << " avoided the Attack!"<< endl;
+            cout << "The opposing " << computerSelectedPokemon.getName() << " avoided the Attack!"<< endl;
         }
     }
 }
@@ -1104,10 +1104,10 @@ void Game::bAndP()
     {
         computerSelectedPokemon.setCon("BRN",computerSelectedPokemon.getCon("BRN") - 1);
         damage = computerPokemonMaxHp / 16;
-        cout << "Opposing " << computerSelectedPokemon.getName() << " is hurt by its burn!" << endl;
+        cout << "The opposing " << computerSelectedPokemon.getName() << " is hurt by its burn!" << endl;
         if(computerSelectedPokemon.getHp() - damage <= 0)
         {
-            cout << "Opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
+            cout << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
             computerSelectedPokemon.setHp(0);
             for (int num = 0; num < computer.getPokemons().size(); ++num) {
                 if(!computer.getPokemons().at(num).getIfFainted())
@@ -1133,10 +1133,10 @@ void Game::bAndP()
     {
         computerSelectedPokemon.setCon("PSN",computerSelectedPokemon.getCon("PSN") - 1);
         damage = computerPokemonMaxHp / 16;
-        cout << "Opposing " << computerSelectedPokemon.getName() << " is hurt by its poison!" << endl;
+        cout << "The opposing " << computerSelectedPokemon.getName() << " is hurt by its poison!" << endl;
         if(computerSelectedPokemon.getHp() - damage <= 0)
         {
-            cout << "Opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
+            cout << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
             computerSelectedPokemon.setHp(0);
             for (int num = 0; num < computer.getPokemons().size(); ++num) {
                 if(!computer.getPokemons().at(num).getIfFainted())
@@ -1187,7 +1187,7 @@ bool Game::checkIfAllFainted()
 
     if(ifAllFainted)
     {
-        cout << "You Lose!" << endl;
+        cout << "You lose" << endl;
         whoWin = computerWin;
         ifGameOver = true;
         return true;
@@ -1206,7 +1206,7 @@ bool Game::checkIfAllFainted()
 
     if(ifAllFainted)
     {
-        cout << "You Win!" << endl;
+        cout << "You win" << endl;
         whoWin = playerWin;
         ifGameOver = true;
         return true;
