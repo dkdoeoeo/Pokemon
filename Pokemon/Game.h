@@ -8,6 +8,8 @@
 #include <QString>
 #define testMode 1
 #define playMode 2
+#define playerWin 1
+#define computerWin 2
 
 using namespace std;
 
@@ -20,6 +22,7 @@ public:
     map<string, Pokemon> allPokemons;
     vector<std::vector<double>> typeEffectiveness;
     bool ifGameOver = false;
+    int whoWin = 0;
 public:
     Game();
     void bAndP();

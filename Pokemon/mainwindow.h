@@ -41,6 +41,8 @@ public:
 
     void setAnimation();//set Animation
 
+    void displayGameResult();//game over window
+
 private slots:
     void on_Battle_clicked();
 

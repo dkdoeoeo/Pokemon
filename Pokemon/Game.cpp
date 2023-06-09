@@ -1176,7 +1176,8 @@ void Game::bAndP()
 bool Game::checkIfAllFainted()
 {
     bool ifAllFainted = true;
-    for (Pokemon& iter : human.getPokemons()) {
+    for (Pokemon& iter : human.getPokemons())
+    {
         if(!iter.getIfFainted())
         {
             ifAllFainted = false;
@@ -1187,13 +1188,15 @@ bool Game::checkIfAllFainted()
     if(ifAllFainted)
     {
         cout << "You Lose!" << endl;
+        whoWin = computerWin;
         ifGameOver = true;
         return true;
     }
 
     ifAllFainted = true;
 
-    for (Pokemon& iter : computer.getPokemons()) {
+    for (Pokemon& iter : computer.getPokemons())
+    {
         if(!iter.getIfFainted())
         {
             ifAllFainted = false;
@@ -1204,6 +1207,7 @@ bool Game::checkIfAllFainted()
     if(ifAllFainted)
     {
         cout << "You Win!" << endl;
+        whoWin = playerWin;
         ifGameOver = true;
         return true;
     }

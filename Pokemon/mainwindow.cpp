@@ -255,6 +255,11 @@ void MainWindow::update()
         computerPSN->setPixmap(*iconPSN);
     else
         computerPSN->clear();
+
+    if(game.checkIfAllFainted())
+    {
+        displayGameResult();
+    }
 }
 
 // Intent: do battle command
@@ -820,4 +825,46 @@ void MainWindow::setAnimation()
     animation->setKeyValueAt(0.8, ui->playerPokemon->pos() + QPoint(10, 10)); // Frame 8
     animation->setKeyValueAt(0.9, ui->playerPokemon->pos() + QPoint(-10, -10)); // Frame 9
     animation->setKeyValueAt(1, ui->playerPokemon->pos()); // Final frame
+}
+
+// Intent: game over window
+// Pre: no
+// Post: game over window
+void MainWindow::displayGameResult()
+{
+    //new window
+    QDialog *dialog = new QDialog(this);
+    QLabel *label = new QLabel(dialog);
+    dialog->setWindowFlags(dialog->windowFlags() & ~Qt::WindowCloseButtonHint);
+
+    if(game.whoWin == playerWin)
+    {
+        label->setText("You Win!");
+    }
+    else if(game.whoWin == computerWin)
+    {
+        label->setText("You Lose!");
+    }
+
+    QFont ft;
+    ft.setPointSize(16);
+    label->setFont(ft);
+    label->setAlignment(Qt::AlignCenter);
+    dialog->setWindowTitle("Game Result");
+    dialog->setFixedSize(200, 150);
+    QVBoxLayout *layout = new QVBoxLayout(dialog);
+    layout->addWidget(label);
+
+    //set quit
+    QPushButton *quitBtn = new QPushButton("Quit", dialog);
+    connect(quitBtn, &QPushButton::clicked, [=](){
+        dialog->close();//close window
+        //function to execute
+        qApp->quit();
+    });
+
+    layout->addWidget(quitBtn);
+
+    dialog->setLayout(layout);
+    dialog->exec();//display
 }
