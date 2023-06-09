@@ -275,6 +275,8 @@ void MainWindow::on_Battle_clicked()
         {
             //set DragonClaw
             QPushButton *buttonDragonClaw = new QPushButton("DragonClaw",dialog);
+            QString info = "DragonClaw " + QString::number(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getPP());
+            buttonDragonClaw->setText(info);
             buttonDragonClaw->setIcon(QIcon(*iconDragon));
             buttonDragonClaw->setIconSize(QSize(32, 32));
 
@@ -293,6 +295,8 @@ void MainWindow::on_Battle_clicked()
         {
             //set Ember
             QPushButton *buttonEmber = new QPushButton("Ember",dialog);
+            QString info = "Ember " + QString::number(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getPP());
+            buttonEmber->setText(info);
             buttonEmber->setIcon(QIcon(*iconFire));
             buttonEmber->setIconSize(QSize(32, 32));
 
@@ -311,6 +315,8 @@ void MainWindow::on_Battle_clicked()
         {
             //set DragonBreath
             QPushButton *buttonDragonBreath = new QPushButton("DragonBreath",dialog);
+            QString info = "DragonBreath " + QString::number(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getPP());
+            buttonDragonBreath->setText(info);
             buttonDragonBreath->setIcon(QIcon(*iconDragon));
             buttonDragonBreath->setIconSize(QSize(32, 32));
 
@@ -329,6 +335,8 @@ void MainWindow::on_Battle_clicked()
         {
             //set AirSlash
             QPushButton *buttonAirSlash = new QPushButton("AirSlash",dialog);
+            QString info = "AirSlash " + QString::number(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getPP());
+            buttonAirSlash->setText(info);
             buttonAirSlash->setIcon(QIcon(*iconFlying));
             buttonAirSlash->setIconSize(QSize(32, 32));
 
@@ -347,6 +355,8 @@ void MainWindow::on_Battle_clicked()
         {
             //set Flamethrower
             QPushButton *buttonFlamethrower = new QPushButton("Flamethrower",dialog);
+            QString info = "Flamethrower " + QString::number(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getPP());
+            buttonFlamethrower->setText(info);
             buttonFlamethrower->setIcon(QIcon(*iconFlying));
             buttonFlamethrower->setIconSize(QSize(32, 32));
 
@@ -365,6 +375,8 @@ void MainWindow::on_Battle_clicked()
         {
             //set FlashCannon
             QPushButton *buttonFlashCannon = new QPushButton("FlashCannon",dialog);
+            QString info = "FlashCannon " + QString::number(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getPP());
+            buttonFlashCannon->setText(info);
             buttonFlashCannon->setIcon(QIcon(*iconSteel));
             buttonFlashCannon->setIconSize(QSize(32, 32));
 
@@ -383,6 +395,8 @@ void MainWindow::on_Battle_clicked()
         {
             //set WaterGun
             QPushButton *buttonWaterGun = new QPushButton("WaterGun",dialog);
+            QString info = "WaterGun " + QString::number(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getPP());
+            buttonWaterGun->setText(info);
             buttonWaterGun->setIcon(QIcon(*iconWater));
             buttonWaterGun->setIconSize(QSize(32, 32));
 
@@ -401,6 +415,8 @@ void MainWindow::on_Battle_clicked()
         {
             //set WaterPulse
             QPushButton *buttonWaterPulse = new QPushButton("WaterPulse",dialog);
+            QString info = "WaterPulse " + QString::number(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getPP());
+            buttonWaterPulse->setText(info);
             buttonWaterPulse->setIcon(QIcon(*iconWater));
             buttonWaterPulse->setIconSize(QSize(32, 32));
 
@@ -419,6 +435,8 @@ void MainWindow::on_Battle_clicked()
         {
             //set AquaTail
             QPushButton *buttonAquaTail = new QPushButton("AquaTail",dialog);
+            QString info = "AquaTail " + QString::number(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getPP());
+            buttonAquaTail->setText(info);
             buttonAquaTail->setIcon(QIcon(*iconWater));
             buttonAquaTail->setIconSize(QSize(32, 32));
 
@@ -437,6 +455,8 @@ void MainWindow::on_Battle_clicked()
         {
             //set PoisonPowder
             QPushButton *buttonPoisonPowder = new QPushButton("PoisonPowder",dialog);
+            QString info = "PoisonPowder " + QString::number(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getPP());
+            buttonPoisonPowder->setText(info);
             buttonPoisonPowder->setIcon(QIcon(*iconPoison));
             buttonPoisonPowder->setIconSize(QSize(32, 32));
 
@@ -455,6 +475,8 @@ void MainWindow::on_Battle_clicked()
         {
             //set SeedBomb
             QPushButton *buttonSeedBomb = new QPushButton("SeedBomb",dialog);
+            QString info = "SeedBomb " + QString::number(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getPP());
+            buttonSeedBomb->setText(info);
             buttonSeedBomb->setIcon(QIcon(*iconGrass));
             buttonSeedBomb->setIconSize(QSize(32, 32));
 
@@ -473,6 +495,8 @@ void MainWindow::on_Battle_clicked()
         {
             //set VineWhip
             QPushButton *buttonVineWhip = new QPushButton("VineWhip",dialog);
+            QString info = "VineWhip " + QString::number(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getPP());
+            buttonVineWhip->setText(info);
             buttonVineWhip->setIcon(QIcon(*iconGrass));
             buttonVineWhip->setIconSize(QSize(32, 32));
 
@@ -491,6 +515,8 @@ void MainWindow::on_Battle_clicked()
         {
             //set SolarBeam
             QPushButton *buttonSolarBeam = new QPushButton("SolarBeam",dialog);
+            QString info = "SolarBeam " + QString::number(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getPP());
+            buttonSolarBeam->setText(info);
             buttonSolarBeam->setIcon(QIcon(*iconGrass));
             buttonSolarBeam->setIconSize(QSize(32, 32));
 
