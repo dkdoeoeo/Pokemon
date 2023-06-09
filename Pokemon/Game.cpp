@@ -633,10 +633,12 @@ double Game::getTypeEffectiveness(string atkType, string defType)
 // Post: decrease pokemon's hp by damage, and check if fainted, and reduce pp
 void Game::attackPokemon(string move, string target,int playType)
 {
+
     if(getifGameOver())
     {
         return;
     }
+
     Pokemon& humanSelectedPokemon = human.getPokemons().at(human.getSelectPokemon());
     Pokemon& computerSelectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
 
@@ -995,18 +997,24 @@ void Game::attackPokemon(string move, string target,int playType)
 // Post: B&P effects applied
 void Game::bAndP()
 {
+
     if(getifGameOver())
+    {
+        return;
+    }
+    \
+    if(checkIfAllFainted())
     {
         return;
     }
     vector<string> statuses = {"BRN", "PSN", "PAR"};
     int computerPokemonMaxHp = allPokemons.find(computer.getPokemons().at(computer.getSelectPokemon()).getName())->second.getHp();
     int humanPokemonMaxHp = allPokemons.find(human.getPokemons().at(human.getSelectPokemon()).getName())->second.getHp();
-    Pokemon& humanSelectedPokemon = human.getPokemons().at(human.getSelectPokemon());
-    Pokemon& computerSelectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
+    Pokemon& curhumanSelectedPokemon = human.getPokemons().at(human.getSelectPokemon());
+    Pokemon& curcomputerSelectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
     int damage = 0;
 
-    if(humanSelectedPokemon.getIfFainted())
+    if(curhumanSelectedPokemon.getIfFainted())
     {
         for (int num = 0; num < human.getPokemons().size(); ++num) {
             if(!human.getPokemons().at(num).getIfFainted())
@@ -1017,7 +1025,7 @@ void Game::bAndP()
         }
 
     }
-    if(computerSelectedPokemon.getIfFainted())
+    if(curcomputerSelectedPokemon.getIfFainted())
     {
         for (int num = 0; num < computer.getPokemons().size(); ++num) {
             if(!computer.getPokemons().at(num).getIfFainted())
@@ -1028,6 +1036,8 @@ void Game::bAndP()
         }
     }
 
+    Pokemon& humanSelectedPokemon = human.getPokemons().at(human.getSelectPokemon());
+    Pokemon& computerSelectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
     //human
     //burn
     if(human.getPokemons().at(human.getSelectPokemon()).getCon("BRN") > 0)
@@ -1039,6 +1049,7 @@ void Game::bAndP()
         {
             cout << humanSelectedPokemon.getName() << " has fainted!" << endl;
             humanSelectedPokemon.setHp(0);
+            humanSelectedPokemon.setIfFainted(true);
             for (int num = 0; num < human.getPokemons().size(); ++num) {
                 if(!human.getPokemons().at(num).getIfFainted())
                 {
@@ -1067,6 +1078,7 @@ void Game::bAndP()
         {
             cout << humanSelectedPokemon.getName() << " has fainted!" << endl;
             humanSelectedPokemon.setHp(0);
+            humanSelectedPokemon.setIfFainted(true);
             for (int num = 0; num < human.getPokemons().size(); ++num) {
                 if(!human.getPokemons().at(num).getIfFainted())
                 {
@@ -1089,8 +1101,8 @@ void Game::bAndP()
     if(human.getPokemons().at(human.getSelectPokemon()).getCon("PAR") > 0)
     {
 
-        humanSelectedPokemon.setCon("PSN",humanSelectedPokemon.getCon("PSN") - 1);
-        if(humanSelectedPokemon.getCon("PSN") == 0)
+        humanSelectedPokemon.setCon("PAR",humanSelectedPokemon.getCon("PAR") - 1);
+        if(humanSelectedPokemon.getCon("PAR") == 0)
         {
             int originalSpeed = allPokemons.find(human.getPokemons().at(human.getSelectPokemon()).getName())->second.getSpeed();
             humanSelectedPokemon.setSpeed(originalSpeed);
@@ -1109,6 +1121,7 @@ void Game::bAndP()
         {
             cout << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
             computerSelectedPokemon.setHp(0);
+            computerSelectedPokemon.setIfFainted(true);
             for (int num = 0; num < computer.getPokemons().size(); ++num) {
                 if(!computer.getPokemons().at(num).getIfFainted())
                 {
@@ -1138,6 +1151,7 @@ void Game::bAndP()
         {
             cout << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
             computerSelectedPokemon.setHp(0);
+            computerSelectedPokemon.setIfFainted(true);
             for (int num = 0; num < computer.getPokemons().size(); ++num) {
                 if(!computer.getPokemons().at(num).getIfFainted())
                 {
@@ -1159,8 +1173,8 @@ void Game::bAndP()
     //Paralysis
     if(computer.getPokemons().at(computer.getSelectPokemon()).getCon("PAR") > 0)
     {
-        computerSelectedPokemon.setCon("PSN",computerSelectedPokemon.getCon("PSN") - 1);
-        if(computerSelectedPokemon.getCon("PSN") == 0)
+        computerSelectedPokemon.setCon("PAR",computerSelectedPokemon.getCon("PAR") - 1);
+        if(computerSelectedPokemon.getCon("PAR") == 0)
         {
             int originalSpeed = allPokemons.find(computer.getPokemons().at(computer.getSelectPokemon()).getName())->second.getSpeed();
             computerSelectedPokemon.setSpeed(originalSpeed);
