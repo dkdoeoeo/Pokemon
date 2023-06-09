@@ -362,7 +362,7 @@ void MainWindow::on_Battle_clicked()
             QPushButton *buttonFlamethrower = new QPushButton("Flamethrower",dialog);
             QString info = "Flamethrower " + QString::number(game.human.getPokemons()[game.human.selectPokemon].getMoves()[i].getPP());
             buttonFlamethrower->setText(info);
-            buttonFlamethrower->setIcon(QIcon(*iconFlying));
+            buttonFlamethrower->setIcon(QIcon(*iconFire));
             buttonFlamethrower->setIconSize(QSize(32, 32));
 
             connect(buttonFlamethrower, &QPushButton::clicked, [=]()
