@@ -706,11 +706,11 @@ void Game::attackPokemon(string move, string target,int playType)
                 {
                     cout << "It's super effective!" << endl;
                 }
-                else if(totalTypeEffectiveness >= 1/2 && totalTypeEffectiveness > 0)
+                else if(totalTypeEffectiveness <= (double)1/2 && totalTypeEffectiveness > 0)
                 {
                     cout << "It's not very effective..." << endl;
                 }
-                else // if (totalTypeEffectiveness <= 0)
+                else if (totalTypeEffectiveness <= 0)
                 {
                     cout << "It's not effective!" << endl;
                 }
@@ -881,11 +881,11 @@ void Game::attackPokemon(string move, string target,int playType)
             {
                 cout << "It's super effective!" << endl;
             }
-            else if(totalTypeEffectiveness >= 1/2 && totalTypeEffectiveness > 0)
+            else if(totalTypeEffectiveness <= (double)1/2 && totalTypeEffectiveness > 0)
             {
                 cout << "It's not very effective..." << endl;
             }
-            else // if (totalTypeEffectiveness <= 0)
+            else if (totalTypeEffectiveness <= 0)
             {
                 cout << "It's not effective!" << endl;
             }
