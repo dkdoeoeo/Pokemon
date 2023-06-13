@@ -776,11 +776,6 @@ void Game::attackPokemon(string move, string target,int playType)
                 humanSelectedPokemon.setHp(0);
                 humanSelectedPokemon.setIfFainted(true);
 
-                if(checkIfAllFainted())
-                {
-                    return;
-                }
-                return;
             }
             else
             {
@@ -943,12 +938,6 @@ void Game::attackPokemon(string move, string target,int playType)
                 computerSelectedPokemon.setHp(0);
                 computerSelectedPokemon.setIfFainted(true);
 
-                if(checkIfAllFainted())
-                {
-                    return;
-                }
-                return;
-
             }
             else
             {
@@ -1004,11 +993,6 @@ void Game::bAndP()
         return;
     }
     \
-    if(checkIfAllFainted())
-    {
-        return;
-    }
-
     vector<string> statuses = {"BRN", "PSN", "PAR"};
     int computerPokemonMaxHp = allPokemons.find(computer.getPokemons().at(computer.getSelectPokemon()).getName())->second.getHp();
     int humanPokemonMaxHp = allPokemons.find(human.getPokemons().at(human.getSelectPokemon()).getName())->second.getHp();
@@ -1205,7 +1189,7 @@ bool Game::checkIfAllFainted()
 
     if(ifAllFainted)
     {
-        cout << "You lose" << endl;
+        cout <<  "[Turn "<< roundCount << "]"  << "You lose" << endl;
         whoWin = computerWin;
         ifGameOver = true;
         return true;
@@ -1224,7 +1208,7 @@ bool Game::checkIfAllFainted()
 
     if(ifAllFainted)
     {
-        cout << "You win" << endl;
+        cout <<  "[Turn "<< roundCount << "]"  << "You win" << endl;
         whoWin = playerWin;
         ifGameOver = true;
         return true;
