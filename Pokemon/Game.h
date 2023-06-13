@@ -23,6 +23,7 @@ public:
     vector<std::vector<double>> typeEffectiveness;
     bool ifGameOver = false;
     int whoWin = 0;
+    int roundCount = 1;
 public:
     Game();
     void bAndP();
