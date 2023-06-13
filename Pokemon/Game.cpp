@@ -42,7 +42,7 @@ void Game::ExecuteCommandFile(string testFile)
     iFile.open(testFile.c_str());
     if(!iFile.is_open())
     {
-        cout << "open " << testFile << " failed\n";
+        cout <<  "[Turn "<< roundCount << "]"  << "open " << testFile << " failed\n";
         return;
     }
 
@@ -104,7 +104,7 @@ void Game::loadPokemonFile(string pokemonFile)
 
     if(!iFile.is_open())
     {
-        cout << "open " << pokemonFile << " failed\n";
+        cout <<  "[Turn "<< roundCount << "]"  << "open " << pokemonFile << " failed\n";
         return;
     }
 
@@ -168,7 +168,7 @@ void Game::loadMoveFile(string moveFile)
 
     if(!iFile.is_open())
     {
-        cout << "open " << moveFile << " failed\n";
+        cout <<  "[Turn "<< roundCount << "]"  << "open " << moveFile << " failed\n";
         return;
     }
 
@@ -208,7 +208,7 @@ void Game::loadGameFile(string gameFile)
 
     if(!iFile.is_open())
     {
-        cout << "open " << gameFile << " failed\n";
+        cout <<  "[Turn "<< roundCount << "]"  << "open " << gameFile << " failed\n";
         return;
     }
 
@@ -371,8 +371,8 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
 
         if(potion == "Potion" && human.ifHavePotion("Potion"))
         {
-            cout << "You used a Potion!" << endl;
-            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            cout <<  "[Turn "<< roundCount << "]" << "You used a Potion!" << endl;
+            cout <<  "[Turn "<< roundCount << "]" << selectedPokemon.getName() << " had its HP restored." << endl;
             if(selectedPokemon.getHp() + 20 > pokemonMaxHp)
             {
                 selectedPokemon.setHp(pokemonMaxHp);
@@ -384,8 +384,8 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
         }
         else if(potion == "SuperPotion" && human.ifHavePotion("SuperPotion"))
         {
-            cout << "You used a Super Potion!" << endl;
-            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            cout <<  "[Turn "<< roundCount << "You used a Super Potion!" << endl;
+            cout <<  "[Turn "<< roundCount <<selectedPokemon.getName() << " had its HP restored." << endl;
             if(selectedPokemon.getHp() + 60 > pokemonMaxHp)
             {
                 selectedPokemon.setHp(pokemonMaxHp);
@@ -397,8 +397,8 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
         }
         else if(potion == "HyperPotion" && human.ifHavePotion("HyperPotion"))
         {
-            cout << "You used a Hyper Potion!" << endl;
-            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << "You used a Hyper Potion!" << endl;
+            cout <<  "[Turn "<< roundCount << "]"  <<selectedPokemon.getName() << " had its HP restored." << endl;
             if(selectedPokemon.getHp() + 120 > pokemonMaxHp)
             {
                 selectedPokemon.setHp(pokemonMaxHp);
@@ -410,8 +410,8 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
         }
         else if(potion == "MaxPotion" && human.ifHavePotion("MaxPotion"))
         {
-            cout << "You used a Max Potion!" << endl;
-            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << "You used a Max Potion!" << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << selectedPokemon.getName() << " had its HP restored." << endl;
             selectedPokemon.setHp(pokemonMaxHp);
         }
     }
@@ -429,8 +429,8 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
         if(potion == "Potion" && human.ifHavePotion("Potion"))
         {
             human.usePotion();
-            cout << "You used a Potion!" << endl;
-            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << "You used a Potion!" << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << selectedPokemon.getName() << " had its HP restored." << endl;
             if(selectedPokemon.getHp() + 20 > pokemonMaxHp)
             {
                 selectedPokemon.setHp(pokemonMaxHp);
@@ -443,8 +443,8 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
         else if(potion == "SuperPotion" && human.ifHavePotion("SuperPotion"))
         {
             human.useSuperPotion();
-            cout << "You used a Super Potion!" << endl;
-            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << "You used a Super Potion!" << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << selectedPokemon.getName() << " had its HP restored." << endl;
             if(selectedPokemon.getHp() + 60 > pokemonMaxHp)
             {
                 selectedPokemon.setHp(pokemonMaxHp);
@@ -457,8 +457,8 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
         else if(potion == "HyperPotion" && human.ifHavePotion("HyperPotion"))
         {
             human.useHyperPotion();
-            cout << "You used a Hyper Potion!" << endl;
-            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << "You used a Hyper Potion!" << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << selectedPokemon.getName() << " had its HP restored." << endl;
             if(selectedPokemon.getHp() + 120 > pokemonMaxHp)
             {
                 selectedPokemon.setHp(pokemonMaxHp);
@@ -471,8 +471,8 @@ void Game::Bag(string potion, string ownPokemon, string computerMove, int playTy
         else if(potion == "MaxPotion" && human.ifHavePotion("MaxPotion"))
         {
             human.useMaxPotion();
-            cout << "You used a Max Potion!" << endl;
-            cout << selectedPokemon.getName() << " had its Hp restored." << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << "You used a Max Potion!" << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << selectedPokemon.getName() << " had its HP restored." << endl;
             selectedPokemon.setHp(pokemonMaxHp);
         }
     }
@@ -516,9 +516,9 @@ void Game::pokemon(string ownPokemon, string computerMove, int playType)
         //<Pokemon>, switch out!
         //Come back!
         //Go! <Pokemon>!
-        cout << human.getPokemons().at(human.getSelectPokemon()).getName() << " switch out!" << endl;
-        cout << "Come back!" << endl;
-        cout << "Go! " << pokemonToSwap.getName() << endl;
+        cout <<  "[Turn "<< roundCount << "]"  << human.getPokemons().at(human.getSelectPokemon()).getName() << ", switch out!" << endl;
+        cout <<  "[Turn "<< roundCount << "]"  << "Come back!" << endl;
+        cout <<  "[Turn "<< roundCount << "]"  << "Go! " << pokemonToSwap.getName() << "!"<< endl;
         human.setSelectPokemon(pokemonToSwapIndex);
     }
 
@@ -536,13 +536,13 @@ void Game::status(ostream& oStream)
     Pokemon& humanSelectPokemon = human.getPokemons().at(human.getSelectPokemon());
     Pokemon& computerSelectPokemon = computer.getPokemons().at(computer.getSelectPokemon());
     vector<string> statuses = {"PAR","BRN","PSN"};
-    oStream << humanSelectPokemon.getName() << ' ' << (int)humanSelectPokemon.getHp();
+    oStream  << "[Turn "<< roundCount << "]" << humanSelectPokemon.getName() << ' ' << (int)humanSelectPokemon.getHp();
 
     for (int var = 0; var < 3; ++var)
     {
         if(humanSelectPokemon.getCon(statuses[var]) > 0)
         {
-            cout << ' ' << statuses[var];
+            cout  << ' ' << statuses[var];
         }
     }
 
@@ -572,6 +572,7 @@ void Game::check(ostream& oStream)
     Pokemon& humanSelectPokemon = human.getPokemons().at(human.getSelectPokemon());
 
     //iterate through the moves, then output pokemon moves and pp
+    cout <<  "[Turn "<< roundCount << "]" ;
     for (int var = 0; var < numOfMoves; ++var)
     {
         oStream << humanSelectPokemon.getMoves().at(var).getName()
@@ -663,8 +664,8 @@ void Game::attackPokemon(string move, string target,int playType)
 
         if(ifPara)
         {
-            cout << "The opposing " << computerSelectedPokemon.getName() << " is paralyzed!" << endl;
-            cout << "It can't move!" << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << "The opposing " << computerSelectedPokemon.getName() << " was paralyzed!" << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << "It can't move!" << endl;
             return;
         }
 
@@ -686,7 +687,7 @@ void Game::attackPokemon(string move, string target,int playType)
         if(ifHit && selectedMove.getPP() > 0)
         {
             selectedMove.setPP(selectedMove.getPP() - 1);
-            cout << "The opposing " << computerSelectedPokemon.getName() << " used " << move << '!' << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << "The opposing " << computerSelectedPokemon.getName() << " used " << move << '!' << endl;
             int damage = 0; //total damage
             bool ifCritical = rand() % 24 < 1; //if critical
             double critical = 1; // critical damage
@@ -706,15 +707,15 @@ void Game::attackPokemon(string move, string target,int playType)
 
                 if(totalTypeEffectiveness >= 2)
                 {
-                    cout << "It's super effective!" << endl;
+                    cout <<  "[Turn "<< roundCount << "]"  << "It's super effective!" << endl;
                 }
                 else if(totalTypeEffectiveness <= (double)1/2 && totalTypeEffectiveness > 0)
                 {
-                    cout << "It's not very effective..." << endl;
+                    cout <<  "[Turn "<< roundCount << "]"  << "It's not very effective..." << endl;
                 }
                 else if (totalTypeEffectiveness <= 0)
                 {
-                    cout << "It's not effective!" << endl;
+                    cout <<  "[Turn "<< roundCount << "]"  << "It's not effective!" << endl;
                 }
             }
 
@@ -736,7 +737,7 @@ void Game::attackPokemon(string move, string target,int playType)
 
             //determine critical damage
             if(ifCritical){
-                cout << "A critical hit!" << endl;
+                cout <<  "[Turn "<< roundCount << "]"  << "A critical hit!" << endl;
 
                 if(playType == testMode)
                 {
@@ -771,7 +772,7 @@ void Game::attackPokemon(string move, string target,int playType)
             //check if fainted
             if(humanSelectedPokemon.getHp() - damage <= 0)
             {
-                cout << humanSelectedPokemon.getName() << " has fainted!" << endl;
+                cout <<  "[Turn "<< roundCount << "]"  << humanSelectedPokemon.getName() << " has fainted!" << endl;
                 humanSelectedPokemon.setHp(0);
                 humanSelectedPokemon.setIfFainted(true);
 
@@ -804,22 +805,22 @@ void Game::attackPokemon(string move, string target,int playType)
 
                 if(selectedMove.getCon() == "PAR")
                 {
-                    cout << humanSelectedPokemon.getName() << " is paralyzed, so it may be unable to move!" << endl;
+                    cout <<  "[Turn "<< roundCount << "]"  << humanSelectedPokemon.getName() << " was paralyzed, so it may be unable to move!" << endl;
                 }
                 else if(selectedMove.getCon() == "BRN")
                 {
-                    cout << humanSelectedPokemon.getName() << " is burned!" << endl;
+                    cout <<  "[Turn "<< roundCount << "]"  << humanSelectedPokemon.getName() << " was burned!" << endl;
                 }
                 else if(selectedMove.getCon() == "PSN")
                 {
-                    cout << humanSelectedPokemon.getName() << " is Poisoned!" << endl;
+                    cout <<  "[Turn "<< roundCount << "]"  << humanSelectedPokemon.getName() << " was poisoned!" << endl;
                 }
             }
 
         }
         else
         {
-            cout << humanSelectedPokemon.getName() << " avoided the Attack!"<< endl;
+            cout <<  "[Turn "<< roundCount << "]"  << humanSelectedPokemon.getName() << " avoided the Attack!"<< endl;
         }
 
 
@@ -844,8 +845,8 @@ void Game::attackPokemon(string move, string target,int playType)
 
         if(ifPara)
         {
-            cout << humanSelectedPokemon.getName() << " is paralyzed!" << endl;
-            cout << "It can't move!" << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << humanSelectedPokemon.getName() << " was paralyzed!" << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << "It can't move!" << endl;
             return;
         }
 
@@ -865,7 +866,7 @@ void Game::attackPokemon(string move, string target,int playType)
 
         if(ifHit && selectedMove.getPP() > 0){
             selectedMove.setPP(selectedMove.getPP() - 1);
-            cout << humanSelectedPokemon.getName() << " used " << move << '!' << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << humanSelectedPokemon.getName() << " used " << move << '!' << endl;
             int damage = 0; //total damage
             bool ifCritical = rand() % 24 < 1; //if critical
             double critical = 1; // critical damage
@@ -881,15 +882,15 @@ void Game::attackPokemon(string move, string target,int playType)
             //output how effective
             if(totalTypeEffectiveness >= 2)
             {
-                cout << "It's super effective!" << endl;
+                cout <<  "[Turn "<< roundCount << "]"  << "It's super effective!" << endl;
             }
             else if(totalTypeEffectiveness <= (double)1/2 && totalTypeEffectiveness > 0)
             {
-                cout << "It's not very effective..." << endl;
+                cout <<  "[Turn "<< roundCount << "]"  << "It's not very effective..." << endl;
             }
             else if (totalTypeEffectiveness <= 0)
             {
-                cout << "It's not effective!" << endl;
+                cout <<  "[Turn "<< roundCount << "]"  << "It's not effective!" << endl;
             }
 
             //calculate attack/defense ratio
@@ -909,7 +910,7 @@ void Game::attackPokemon(string move, string target,int playType)
             }
             //determine critical damage
             if(ifCritical){
-                cout << "A critical hit!" << endl;
+                cout <<  "[Turn "<< roundCount << "]"  << "A critical hit!" << endl;
                 if(playType == testMode)
                 {
                     critical = 1;
@@ -938,7 +939,7 @@ void Game::attackPokemon(string move, string target,int playType)
             //check if fainted
             if(computerSelectedPokemon.getHp() - damage <= 0)
             {
-                cout << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
+                cout <<  "[Turn "<< roundCount << "]"  << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
                 computerSelectedPokemon.setHp(0);
                 computerSelectedPokemon.setIfFainted(true);
 
@@ -972,22 +973,22 @@ void Game::attackPokemon(string move, string target,int playType)
 
                 if(selectedMove.getCon() == "PAR")
                 {
-                    cout << "The opposing " << computerSelectedPokemon.getName() << " is paralyzed, so it may be unable to move!" << endl;
+                    cout <<  "[Turn "<< roundCount << "]"  << "The opposing " << computerSelectedPokemon.getName() << " was paralyzed, so it may be unable to move!" << endl;
                 }
                 else if(selectedMove.getCon() == "BRN")
                 {
-                    cout << "The opposing " << computerSelectedPokemon.getName() << " is burned!" << endl;
+                    cout <<  "[Turn "<< roundCount << "]"  << "The opposing " << computerSelectedPokemon.getName() << " was burned!" << endl;
                 }
                 else if(selectedMove.getCon() == "PSN")
                 {
-                    cout << "The opposing " << computerSelectedPokemon.getName() << " is Poisoned!" << endl;
+                    cout <<  "[Turn "<< roundCount << "]"  << "The opposing " << computerSelectedPokemon.getName() << " was poisoned!" << endl;
                 }
             }
 
         }
         else
         {
-            cout << "The opposing " << computerSelectedPokemon.getName() << " avoided the Attack!"<< endl;
+            cout <<  "[Turn "<< roundCount << "]"  << "The opposing " << computerSelectedPokemon.getName() << " avoided the Attack!"<< endl;
         }
     }
 }
@@ -1007,6 +1008,7 @@ void Game::bAndP()
     {
         return;
     }
+
     vector<string> statuses = {"BRN", "PSN", "PAR"};
     int computerPokemonMaxHp = allPokemons.find(computer.getPokemons().at(computer.getSelectPokemon()).getName())->second.getHp();
     int humanPokemonMaxHp = allPokemons.find(human.getPokemons().at(human.getSelectPokemon()).getName())->second.getHp();
@@ -1044,10 +1046,10 @@ void Game::bAndP()
     {
         humanSelectedPokemon.setCon("BRN",humanSelectedPokemon.getCon("BRN") - 1);
         damage = humanPokemonMaxHp / 16;
-        cout << humanSelectedPokemon.getName() << " is hurt by its burn!" << endl;
+        cout <<  "[Turn "<< roundCount << "]"  << humanSelectedPokemon.getName() << " is hurt by its burn!" << endl;
         if(humanSelectedPokemon.getHp() - damage <= 0)
         {
-            cout << humanSelectedPokemon.getName() << " has fainted!" << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << humanSelectedPokemon.getName() << " has fainted!" << endl;
             humanSelectedPokemon.setHp(0);
             humanSelectedPokemon.setIfFainted(true);
             for (int num = 0; num < human.getPokemons().size(); ++num) {
@@ -1073,10 +1075,10 @@ void Game::bAndP()
     {
         humanSelectedPokemon.setCon("PSN",humanSelectedPokemon.getCon("PSN") - 1);
         damage = humanPokemonMaxHp / 16;
-        cout << humanSelectedPokemon.getName() << " is hurt by its poison!" << endl;
+        cout <<  "[Turn "<< roundCount << "]"  << humanSelectedPokemon.getName() << " is hurt by its poisoning!" << endl;
         if(humanSelectedPokemon.getHp() - damage <= 0)
         {
-            cout << humanSelectedPokemon.getName() << " has fainted!" << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << humanSelectedPokemon.getName() << " has fainted!" << endl;
             humanSelectedPokemon.setHp(0);
             humanSelectedPokemon.setIfFainted(true);
             for (int num = 0; num < human.getPokemons().size(); ++num) {
@@ -1116,10 +1118,10 @@ void Game::bAndP()
     {
         computerSelectedPokemon.setCon("BRN",computerSelectedPokemon.getCon("BRN") - 1);
         damage = computerPokemonMaxHp / 16;
-        cout << "The opposing " << computerSelectedPokemon.getName() << " is hurt by its burn!" << endl;
+        cout <<  "[Turn "<< roundCount << "]"  << "The opposing " << computerSelectedPokemon.getName() << " is hurt by its burn!" << endl;
         if(computerSelectedPokemon.getHp() - damage <= 0)
         {
-            cout << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
             computerSelectedPokemon.setHp(0);
             computerSelectedPokemon.setIfFainted(true);
             for (int num = 0; num < computer.getPokemons().size(); ++num) {
@@ -1146,10 +1148,10 @@ void Game::bAndP()
     {
         computerSelectedPokemon.setCon("PSN",computerSelectedPokemon.getCon("PSN") - 1);
         damage = computerPokemonMaxHp / 16;
-        cout << "The opposing " << computerSelectedPokemon.getName() << " is hurt by its poison!" << endl;
+        cout <<  "[Turn "<< roundCount << "]"  << "The opposing " << computerSelectedPokemon.getName() << " is hurt by its poisoning!" << endl;
         if(computerSelectedPokemon.getHp() - damage <= 0)
         {
-            cout << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
+            cout <<  "[Turn "<< roundCount << "]"  << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
             computerSelectedPokemon.setHp(0);
             computerSelectedPokemon.setIfFainted(true);
             for (int num = 0; num < computer.getPokemons().size(); ++num) {
@@ -1181,6 +1183,8 @@ void Game::bAndP()
         }
     }
 
+    //calculate round
+    roundCount++;
 
 }
 
