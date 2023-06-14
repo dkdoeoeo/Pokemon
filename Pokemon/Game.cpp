@@ -1001,7 +1001,8 @@ void Game::bAndP()
     int humanPokemonMaxHp = allPokemons.find(human.getPokemons().at(human.getSelectPokemon()).getName())->second.getHp();
 
     int damage = 0;
-
+    bool ifhumanBandp = true;
+    bool ifcomputerBandp = true;
 
     Pokemon& humanSelectedPokemon = human.getPokemons().at(human.getSelectPokemon());
     Pokemon& computerSelectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
@@ -1020,8 +1021,33 @@ void Game::bAndP()
                 break;
             }
         }
+        ifhumanBandp = false;
+        if(checkIfAllFainted())
+        {
+            return;
+        }
     }
-    else
+    if(computerSelectedPokemon.getHp() <= 0)
+    {
+        cout <<  "[Turn "<< roundCount << "] The opposing "  << computerSelectedPokemon.getName() << " fainted!" << endl;
+        computerSelectedPokemon.setHp(0);
+        computerSelectedPokemon.setIfFainted(true);
+        for (int num = 0; num < computer.getPokemons().size(); ++num) {
+            if(!computer.getPokemons().at(num).getIfFainted())
+            {
+                computer.setSelectPokemon(num);
+                break;
+            }
+
+        }
+        ifcomputerBandp = false;
+        if(checkIfAllFainted())
+        {
+            return;
+        }
+    }
+
+    if(ifhumanBandp)
     {
         if(human.getPokemons().at(human.getSelectPokemon()).getCon("BRN") > 0)
         {
@@ -1090,21 +1116,8 @@ void Game::bAndP()
 
     }
 
-    if(computerSelectedPokemon.getHp() <= 0)
-    {
-        cout <<  "[Turn "<< roundCount << "] The opposing "  << computerSelectedPokemon.getName() << " fainted!" << endl;
-        computerSelectedPokemon.setHp(0);
-        computerSelectedPokemon.setIfFainted(true);
-        for (int num = 0; num < computer.getPokemons().size(); ++num) {
-            if(!computer.getPokemons().at(num).getIfFainted())
-            {
-                computer.setSelectPokemon(num);
-                break;
-            }
 
-        }
-    }
-    else
+    if(ifcomputerBandp)
     {
         //computer
         //BURN
