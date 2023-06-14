@@ -937,7 +937,7 @@ void Game::attackPokemon(string move, string target,int playType)
 
             if(computerSelectedPokemon.getHp() - damage <= 0)
             {
-                cout <<  "[Turn "<< roundCount << "] "  << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
+
                 computerSelectedPokemon.setHp(0);
                 computerSelectedPokemon.setIfFainted(true);
 
@@ -999,12 +999,20 @@ void Game::bAndP()
     vector<string> statuses = {"BRN", "PSN", "PAR"};
     int computerPokemonMaxHp = allPokemons.find(computer.getPokemons().at(computer.getSelectPokemon()).getName())->second.getHp();
     int humanPokemonMaxHp = allPokemons.find(human.getPokemons().at(human.getSelectPokemon()).getName())->second.getHp();
-    Pokemon& curhumanSelectedPokemon = human.getPokemons().at(human.getSelectPokemon());
-    Pokemon& curcomputerSelectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
+
     int damage = 0;
 
-    if(curhumanSelectedPokemon.getIfFainted())
+
+    Pokemon& humanSelectedPokemon = human.getPokemons().at(human.getSelectPokemon());
+    Pokemon& computerSelectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
+    //human
+    //burn
+
+    if(humanSelectedPokemon.getHp() <= 0)
     {
+        cout <<  "[Turn "<< roundCount << "] "  << humanSelectedPokemon.getName() << " has fainted!" << endl;
+        humanSelectedPokemon.setHp(0);
+        humanSelectedPokemon.setIfFainted(true);
         for (int num = 0; num < human.getPokemons().size(); ++num) {
             if(!human.getPokemons().at(num).getIfFainted())
             {
@@ -1012,104 +1020,152 @@ void Game::bAndP()
                 break;
             }
         }
+    }
+    else
+    {
+        if(human.getPokemons().at(human.getSelectPokemon()).getCon("BRN") > 0)
+        {
+            humanSelectedPokemon.setCon("BRN",humanSelectedPokemon.getCon("BRN") - 1);
+            damage = humanPokemonMaxHp / 16;
+            cout <<  "[Turn "<< roundCount << "] "  << humanSelectedPokemon.getName() << " is hurt by its burn!" << endl;
+
+            if(humanSelectedPokemon.getHp() - damage <= 0)
+            {
+                humanSelectedPokemon.setHp(0);
+                humanSelectedPokemon.setIfFainted(true);
+
+
+
+            }
+            else
+            {
+                humanSelectedPokemon.setHp(humanSelectedPokemon.getHp() - damage);
+            }
+        }
+        //Poison
+        if(human.getPokemons().at(human.getSelectPokemon()).getCon("PSN") > 0)
+        {
+            humanSelectedPokemon.setCon("PSN",humanSelectedPokemon.getCon("PSN") - 1);
+            damage = humanPokemonMaxHp / 16;
+            cout <<  "[Turn "<< roundCount << "] "  << humanSelectedPokemon.getName() << " is hurt by its poisoning!" << endl;
+            if(humanSelectedPokemon.getHp() - damage <= 0)
+            {
+                humanSelectedPokemon.setHp(0);
+                humanSelectedPokemon.setIfFainted(true);
+
+
+            }
+            else
+            {
+                humanSelectedPokemon.setHp(humanSelectedPokemon.getHp() - damage);
+            }
+        }
+        //Paralysis
+        if(human.getPokemons().at(human.getSelectPokemon()).getCon("PAR") > 0)
+        {
+
+            humanSelectedPokemon.setCon("PAR",humanSelectedPokemon.getCon("PAR") - 1);
+            if(humanSelectedPokemon.getCon("PAR") == 0)
+            {
+                int originalSpeed = allPokemons.find(human.getPokemons().at(human.getSelectPokemon()).getName())->second.getSpeed();
+                humanSelectedPokemon.setSpeed(originalSpeed);
+            }
+
+
+        }
+
+        if(humanSelectedPokemon.getHp() <= 0)
+        {
+            cout <<  "[Turn "<< roundCount << "] "  << humanSelectedPokemon.getName() << " has fainted!" << endl;
+            humanSelectedPokemon.setHp(0);
+            humanSelectedPokemon.setIfFainted(true);
+            for (int num = 0; num < human.getPokemons().size(); ++num) {
+                if(!human.getPokemons().at(num).getIfFainted())
+                {
+                    human.setSelectPokemon(num);
+                    break;
+                }
+            }
+        }
 
     }
-    if(curcomputerSelectedPokemon.getIfFainted())
+
+    if(computerSelectedPokemon.getHp() <= 0)
     {
+        cout <<  "[Turn "<< roundCount << "] The opposing "  << computerSelectedPokemon.getName() << " fainted!" << endl;
+        computerSelectedPokemon.setHp(0);
+        computerSelectedPokemon.setIfFainted(true);
         for (int num = 0; num < computer.getPokemons().size(); ++num) {
             if(!computer.getPokemons().at(num).getIfFainted())
             {
                 computer.setSelectPokemon(num);
                 break;
             }
+
         }
     }
-
-    Pokemon& humanSelectedPokemon = human.getPokemons().at(human.getSelectPokemon());
-    Pokemon& computerSelectedPokemon = computer.getPokemons().at(computer.getSelectPokemon());
-    //human
-    //burn
-    if(human.getPokemons().at(human.getSelectPokemon()).getCon("BRN") > 0)
+    else
     {
-        humanSelectedPokemon.setCon("BRN",humanSelectedPokemon.getCon("BRN") - 1);
-        damage = humanPokemonMaxHp / 16;
-        cout <<  "[Turn "<< roundCount << "] "  << humanSelectedPokemon.getName() << " is hurt by its burn!" << endl;
-
-        if(humanSelectedPokemon.getHp() - damage <= 0)
+        //computer
+        //BURN
+        if(computer.getPokemons().at(computer.getSelectPokemon()).getCon("BRN") > 0)
         {
-            cout <<  "[Turn "<< roundCount << "] "  << humanSelectedPokemon.getName() << " has fainted!" << endl;
-            humanSelectedPokemon.setHp(0);
-            humanSelectedPokemon.setIfFainted(true);
-            for (int num = 0; num < human.getPokemons().size(); ++num) {
-                if(!human.getPokemons().at(num).getIfFainted())
-                {
-                    human.setSelectPokemon(num);
-                    break;
-                }
-            }
-            if(checkIfAllFainted())
+            computerSelectedPokemon.setCon("BRN",computerSelectedPokemon.getCon("BRN") - 1);
+            damage = computerPokemonMaxHp / 16;
+            cout <<  "[Turn "<< roundCount << "] "  << "The opposing " << computerSelectedPokemon.getName() << " is hurt by its burn!" << endl;
+            if(computerSelectedPokemon.getHp() - damage <= 0)
             {
-                return;
-            }
+                computerSelectedPokemon.setHp(0);
+                computerSelectedPokemon.setIfFainted(true);
 
-        }
-        else
-        {
-            humanSelectedPokemon.setHp(humanSelectedPokemon.getHp() - damage);
-        }
-    }
-    //Poison
-    if(human.getPokemons().at(human.getSelectPokemon()).getCon("PSN") > 0)
-    {
-        humanSelectedPokemon.setCon("PSN",humanSelectedPokemon.getCon("PSN") - 1);
-        damage = humanPokemonMaxHp / 16;
-        cout <<  "[Turn "<< roundCount << "] "  << humanSelectedPokemon.getName() << " is hurt by its poisoning!" << endl;
-        if(humanSelectedPokemon.getHp() - damage <= 0)
-        {
-            cout <<  "[Turn "<< roundCount << "] "  << humanSelectedPokemon.getName() << " has fainted!" << endl;
-            humanSelectedPokemon.setHp(0);
-            humanSelectedPokemon.setIfFainted(true);
-            for (int num = 0; num < human.getPokemons().size(); ++num) {
-                if(!human.getPokemons().at(num).getIfFainted())
-                {
-                    human.setSelectPokemon(num);
-                    break;
-                }
+
+
             }
-            if(checkIfAllFainted())
+            else
             {
-                return;
+                computerSelectedPokemon.setHp(computerSelectedPokemon.getHp() - damage);
+            }
+        }
+        //Poison
+        if(computer.getPokemons().at(computer.getSelectPokemon()).getCon("PSN") > 0)
+        {
+            computerSelectedPokemon.setCon("PSN",computerSelectedPokemon.getCon("PSN") - 1);
+            damage = computerPokemonMaxHp / 16;
+            cout <<  "[Turn "<< roundCount << "] "  << "The opposing " << computerSelectedPokemon.getName() << " is hurt by its poisoning!" << endl;
+            if(computerSelectedPokemon.getHp() - damage <= 0)
+            {
+                computerSelectedPokemon.setHp(0);
+                computerSelectedPokemon.setIfFainted(true);
+
+
+
+            }
+            else
+            {
+                computerSelectedPokemon.setHp(computerSelectedPokemon.getHp() - damage);
+            }
+        }
+        //Paralysis
+        if(computer.getPokemons().at(computer.getSelectPokemon()).getCon("PAR") > 0)
+        {
+            computerSelectedPokemon.setCon("PAR",computerSelectedPokemon.getCon("PAR") - 1);
+            if(computerSelectedPokemon.getCon("PAR") == 0)
+            {
+                int originalSpeed = allPokemons.find(computer.getPokemons().at(computer.getSelectPokemon()).getName())->second.getSpeed();
+                computerSelectedPokemon.setSpeed(originalSpeed);
+            }
+            if(computerSelectedPokemon.getHp() <= 0)
+            {
+                computerSelectedPokemon.setHp(0);
+                computerSelectedPokemon.setIfFainted(true);
+
             }
 
         }
-        else
-        {
-            humanSelectedPokemon.setHp(humanSelectedPokemon.getHp() - damage);
-        }
-    }
-    //Paralysis
-    if(human.getPokemons().at(human.getSelectPokemon()).getCon("PAR") > 0)
-    {
 
-        humanSelectedPokemon.setCon("PAR",humanSelectedPokemon.getCon("PAR") - 1);
-        if(humanSelectedPokemon.getCon("PAR") == 0)
+        if(computerSelectedPokemon.getHp() <= 0)
         {
-            int originalSpeed = allPokemons.find(human.getPokemons().at(human.getSelectPokemon()).getName())->second.getSpeed();
-            humanSelectedPokemon.setSpeed(originalSpeed);
-        }
-    }
-
-
-    //computer
-    //BURN
-    if(computer.getPokemons().at(computer.getSelectPokemon()).getCon("BRN") > 0)
-    {
-        computerSelectedPokemon.setCon("BRN",computerSelectedPokemon.getCon("BRN") - 1);
-        damage = computerPokemonMaxHp / 16;
-        cout <<  "[Turn "<< roundCount << "] "  << "The opposing " << computerSelectedPokemon.getName() << " is hurt by its burn!" << endl;
-        if(computerSelectedPokemon.getHp() - damage <= 0)
-        {
-            cout <<  "[Turn "<< roundCount << "] "  << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
+            cout <<  "[Turn "<< roundCount << "] The opposing "  << computerSelectedPokemon.getName() << " fainted!" << endl;
             computerSelectedPokemon.setHp(0);
             computerSelectedPokemon.setIfFainted(true);
             for (int num = 0; num < computer.getPokemons().size(); ++num) {
@@ -1118,59 +1174,16 @@ void Game::bAndP()
                     computer.setSelectPokemon(num);
                     break;
                 }
-            }
-            if(checkIfAllFainted())
-            {
-                return;
-            }
 
-
-        }
-        else
-        {
-            computerSelectedPokemon.setHp(computerSelectedPokemon.getHp() - damage);
+            }
         }
     }
-    //Poison
-    if(computer.getPokemons().at(computer.getSelectPokemon()).getCon("PSN") > 0)
+
+
+    if(checkIfAllFainted())
     {
-        computerSelectedPokemon.setCon("PSN",computerSelectedPokemon.getCon("PSN") - 1);
-        damage = computerPokemonMaxHp / 16;
-        cout <<  "[Turn "<< roundCount << "] "  << "The opposing " << computerSelectedPokemon.getName() << " is hurt by its poisoning!" << endl;
-        if(computerSelectedPokemon.getHp() - damage <= 0)
-        {
-            cout <<  "[Turn "<< roundCount << "] "  << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
-            computerSelectedPokemon.setHp(0);
-            computerSelectedPokemon.setIfFainted(true);
-            for (int num = 0; num < computer.getPokemons().size(); ++num) {
-                if(!computer.getPokemons().at(num).getIfFainted())
-                {
-                    computer.setSelectPokemon(num);
-                    break;
-                }
-            }
-            if(checkIfAllFainted())
-            {
-                return;
-            }
-
-        }
-        else
-        {
-            computerSelectedPokemon.setHp(computerSelectedPokemon.getHp() - damage);
-        }
+        return;
     }
-    //Paralysis
-    if(computer.getPokemons().at(computer.getSelectPokemon()).getCon("PAR") > 0)
-    {
-        computerSelectedPokemon.setCon("PAR",computerSelectedPokemon.getCon("PAR") - 1);
-        if(computerSelectedPokemon.getCon("PAR") == 0)
-        {
-            int originalSpeed = allPokemons.find(computer.getPokemons().at(computer.getSelectPokemon()).getName())->second.getSpeed();
-            computerSelectedPokemon.setSpeed(originalSpeed);
-        }
-    }
-
     //calculate round
     roundCount++;
 
