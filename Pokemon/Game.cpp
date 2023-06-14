@@ -736,7 +736,8 @@ void Game::attackPokemon(string move, string target,int playType)
             }
 
             //determine critical damage
-            if(ifCritical){
+            if(ifCritical)
+            {
                 cout <<  "[Turn "<< roundCount << "] "  << "A critical hit!" << endl;
 
                 if(playType == testMode)
@@ -758,6 +759,7 @@ void Game::attackPokemon(string move, string target,int playType)
                     break;
                 }
             }
+
             if(selectedMove.getPower() == 0)
             {
                 damage = 0;
@@ -784,13 +786,13 @@ void Game::attackPokemon(string move, string target,int playType)
 
             //if addtional effect
             bool ifAdditionalEffect = rand() % 100 < selectedMove.getAccuracy();
+
             if(playType == testMode)
             {
                 ifAdditionalEffect = true;
             }
             if(ifAdditionalEffect && !selectedMove.getCon().empty())
             {
-
                 if(selectedMove.getCon() == "PAR" && humanSelectedPokemon.getCon(selectedMove.getCon()) == 0)
                 {
                     humanSelectedPokemon.setSpeed(humanSelectedPokemon.getSpeed() * (0.5));
@@ -932,6 +934,7 @@ void Game::attackPokemon(string move, string target,int playType)
                 damage = (((double)110/250) * selectedMove.getPower() * atkDefRatio + 2) * critical * stab * totalTypeEffectiveness;
             }
             //check if fainted
+
             if(computerSelectedPokemon.getHp() - damage <= 0)
             {
                 cout <<  "[Turn "<< roundCount << "] "  << "The opposing " << computerSelectedPokemon.getName() << " has fainted!" << endl;
@@ -1031,6 +1034,7 @@ void Game::bAndP()
         humanSelectedPokemon.setCon("BRN",humanSelectedPokemon.getCon("BRN") - 1);
         damage = humanPokemonMaxHp / 16;
         cout <<  "[Turn "<< roundCount << "] "  << humanSelectedPokemon.getName() << " is hurt by its burn!" << endl;
+
         if(humanSelectedPokemon.getHp() - damage <= 0)
         {
             cout <<  "[Turn "<< roundCount << "] "  << humanSelectedPokemon.getName() << " has fainted!" << endl;
